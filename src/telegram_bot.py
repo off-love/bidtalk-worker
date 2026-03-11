@@ -9,6 +9,7 @@ from __future__ import annotations
 import logging
 import os
 import time
+from typing import Any
 
 import requests
 
@@ -34,6 +35,7 @@ def send_message(
     parse_mode: str = "HTML",
     disable_web_page_preview: bool = True,
     chat_id: str | None = None,
+    reply_markup: dict | None = None,
 ) -> bool:
     """텔레그램 메시지 전송
 
@@ -42,6 +44,7 @@ def send_message(
         parse_mode: 파싱 모드 (HTML 기본)
         disable_web_page_preview: 링크 미리보기 비활성화
         chat_id: 수신 채팅 ID (None이면 환경변수)
+        reply_markup: 텔레그램 reply_markup 객체 (인라인 버튼 등)
 
     Returns:
         전송 성공 여부
@@ -58,6 +61,8 @@ def send_message(
         "parse_mode": parse_mode,
         "disable_web_page_preview": disable_web_page_preview,
     }
+    if reply_markup is not None:
+        payload["reply_markup"] = reply_markup
 
     try:
         response = requests.post(url, json=payload, timeout=30)
@@ -138,19 +143,28 @@ def _split_text(text: str, max_length: int) -> list[str]:
     return chunks
 
 
-def send_bid_notifications(messages: list[str]) -> int:
+def send_bid_notifications(messages: list[dict[str, Any]] | list[str]) -> int:
     """여러 알림 메시지를 순차 전송
 
     Args:
-        messages: 포맷팅된 메시지 목록
+        messages: 포맷팅된 메시지(또는 딕셔너리) 목록
+                  딕셔너리일 경우 {"text": "...", "reply_markup": {...}} 형식
 
     Returns:
         성공적으로 전송한 메시지 수
     """
     success_count = 0
     for i, msg in enumerate(messages):
-        if send_message(msg):
+        if isinstance(msg, dict):
+            text = msg.get("text", "")
+            reply_markup = msg.get("reply_markup")
+            is_success = send_message(text, reply_markup=reply_markup)
+        else:
+            is_success = send_message(msg)
+            
+        if is_success:
             success_count += 1
+            
         if i < len(messages) - 1:
             time.sleep(1)  # 텔레그램 rate limit 방지
     return success_count

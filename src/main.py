@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import logging
 import sys
+from typing import Any
 
 from src.api.bid_client import fetch_bid_notices_multi_keywords
 from src.api.prebid_client import fetch_prebid_notices
@@ -53,8 +54,8 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple
     """
     logger.info("━━━ 프로필 처리: %s ━━━", profile.name)
 
-    bid_messages: list[str] = []
-    prebid_messages: list[str] = []
+    bid_messages: list[Any] = []
+    prebid_messages: list[Any] = []
     buffer_hours = settings.get("query_buffer_hours", 1)
     max_results = settings.get("max_results_per_page", 999)
 
@@ -86,7 +87,13 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple
                 continue
 
             msg = format_bid_notice(notice, profile.name)
-            bid_messages.append(msg)
+            reply_markup = {
+                "inline_keyboard": [[
+                    {"text": "📌 북마크", "callback_data": f"bm_bid_{notice.unique_key}"},
+                    {"text": "📤 공유", "switch_inline_query": f"share_bid_{notice.unique_key}"}
+                ]]
+            }
+            bid_messages.append({"text": msg, "reply_markup": reply_markup})
             mark_notified(state, notice.unique_key, profile.name, "bid")
 
     # ── 2. 사전규격 조회 & 필터링 ──
@@ -107,7 +114,13 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple
                     continue
 
                 msg = format_prebid_notice(prebid, profile.name)
-                prebid_messages.append(msg)
+                reply_markup = {
+                    "inline_keyboard": [[
+                        {"text": "📌 북마크", "callback_data": f"bm_prebid_{prebid.unique_key}"},
+                        {"text": "📤 공유", "switch_inline_query": f"share_prebid_{prebid.unique_key}"}
+                    ]]
+                }
+                prebid_messages.append({"text": msg, "reply_markup": reply_markup})
                 mark_notified(state, prebid.unique_key, profile.name, "prebid")
 
     # ── 3. 텔레그램 발송 ──
