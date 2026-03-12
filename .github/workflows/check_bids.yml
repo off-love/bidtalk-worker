@@ -30,6 +30,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Run Telegram Update Handler
+        run: python -m src.update_handler
+
       - name: Run bid checker
         run: python -m src.main
 
@@ -37,6 +40,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
-          git diff --cached --quiet || git commit -m "chore: update state [skip ci]"
+          git add data/ config/
+          git diff --cached --quiet || git commit -m "chore: update state and profiles [skip ci]"
           git push
