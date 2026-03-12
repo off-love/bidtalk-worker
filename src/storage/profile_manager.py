@@ -155,3 +155,86 @@ def load_profiles(config_path: Path | None = None) -> tuple[list[AlertProfile], 
     settings = _parse_settings(raw.get("settings"))
 
     return active_profiles, settings
+
+
+def get_profile_keywords(profile_name: str) -> list[str]:
+    """특정 프로필의 검색 키워드(or) 목록을 반환합니다."""
+    config_path = _find_config_path()
+    if not config_path.exists():
+        return []
+
+    with open(config_path, "r", encoding="utf-8") as f:
+        raw = yaml.safe_load(f)
+
+    profiles = raw.get("profiles", [])
+    for p in profiles:
+        if p.get("name") == profile_name:
+            return p.get("keywords", {}).get("or", [])
+    return []
+
+
+def add_profile_keyword(profile_name: str, keyword: str) -> bool:
+    """특정 프로필에 새로운 키워드를 추가합니다. 성공 시 True, 중복 시 False."""
+    config_path = _find_config_path()
+    if not config_path.exists():
+        return False
+
+    with open(config_path, "r", encoding="utf-8") as f:
+        raw = yaml.safe_load(f)
+
+    profiles = raw.get("profiles", [])
+    target_profile = None
+    for p in profiles:
+        if p.get("name") == profile_name:
+            target_profile = p
+            break
+
+    if not target_profile:
+        return False
+
+    if "keywords" not in target_profile:
+        target_profile["keywords"] = {"or": [], "and": [], "exclude": []}
+    
+    keywords_or = target_profile["keywords"].get("or", [])
+    if keyword in keywords_or:
+        return False
+
+    keywords_or.append(keyword)
+    target_profile["keywords"]["or"] = keywords_or
+
+    with open(config_path, "w", encoding="utf-8") as f:
+        yaml.dump(raw, f, allow_unicode=True, sort_keys=False)
+
+    return True
+
+
+def remove_profile_keyword(profile_name: str, keyword: str) -> bool:
+    """특정 프로필에서 키워드를 삭제합니다. 성공 시 True, 없으면 False."""
+    config_path = _find_config_path()
+    if not config_path.exists():
+        return False
+
+    with open(config_path, "r", encoding="utf-8") as f:
+        raw = yaml.safe_load(f)
+
+    profiles = raw.get("profiles", [])
+    target_profile = None
+    for p in profiles:
+        if p.get("name") == profile_name:
+            target_profile = p
+            break
+
+    if not target_profile or "keywords" not in target_profile:
+        return False
+
+    keywords_or = target_profile["keywords"].get("or", [])
+    if keyword not in keywords_or:
+        return False
+
+    keywords_or.remove(keyword)
+    target_profile["keywords"]["or"] = keywords_or
+
+    with open(config_path, "w", encoding="utf-8") as f:
+        yaml.dump(raw, f, allow_unicode=True, sort_keys=False)
+
+    return True
