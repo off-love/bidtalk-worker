@@ -11,7 +11,7 @@ import logging
 import sys
 from typing import Any
 
-from src.api.bid_client import fetch_bid_notices_multi_keywords
+from src.api.bid_client import fetch_bid_notices
 from src.api.prebid_client import fetch_prebid_notices
 from src.core.filter import filter_bid_notices, filter_prebid_notices
 from src.core.formatter import (
@@ -60,6 +60,7 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple
     max_results = settings.get("max_results_per_page", 999)
 
     # ── 1. 입찰공고 조회 & 필터링 ──
+    seen_bid_keys: set[str] = set()
     for bid_type in profile.bid_types:
         logger.info("입찰공고 조회: %s / %s", profile.name, bid_type.display_name)
 
@@ -68,60 +69,75 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple
         if profile.demand_agencies.by_code:
             dmnd_cd = profile.demand_agencies.by_code[0]
 
-        # API 호출 (OR 키워드 개별 호출 + 합침)
-        raw_notices = fetch_bid_notices_multi_keywords(
-            bid_type=bid_type,
-            keywords=profile.keywords.or_keywords,
-            dmnd_instt_cd=dmnd_cd,
-            buffer_hours=buffer_hours,  # 원래 설정으로 복구 (기본 1시간)
-            max_results=max_results,
-        )
-
-        # 코드 레벨 필터링
-        filtered = filter_bid_notices(raw_notices, profile)
-
-        # 중복 체크 & 메시지 생성
-        for notice in filtered:
-            if is_notified(state, notice.unique_key, "bid"):
-                logger.debug("이미 알림 완료: %s", notice.unique_key)
-                continue
-
-            msg = format_bid_notice(notice, profile.name)
-            reply_markup = {
-                "inline_keyboard": [[
-                    {"text": "📌 북마크", "callback_data": f"bm_bid_{notice.unique_key}"},
-                    {"text": "📤 공유", "switch_inline_query": f"share_bid_{notice.unique_key}"}
-                ]]
-            }
-            bid_messages.append({"text": msg, "reply_markup": reply_markup})
-            mark_notified(state, notice.unique_key, profile.name, "bid")
-
-    # ── 2. 사전규격 조회 & 필터링 ──
-    if profile.include_prebid:
-        for bid_type in profile.bid_types:
-            logger.info("사전규격 조회: %s / %s", profile.name, bid_type.display_name)
-
-            raw_prebids = fetch_prebid_notices(
+        # API 호출 (OR 키워드 개별 호출)
+        keywords = profile.keywords.or_keywords or [""]
+        for kw in keywords:
+            raw_notices = fetch_bid_notices(
                 bid_type=bid_type,
+                keyword=kw,
+                dmnd_instt_cd=dmnd_cd,
                 buffer_hours=buffer_hours,
                 max_results=max_results,
             )
 
-            filtered_prebids = filter_prebid_notices(raw_prebids, profile)
+            # 코드 레벨 필터링
+            filtered = filter_bid_notices(raw_notices, profile)
 
-            for prebid in filtered_prebids:
-                if is_notified(state, prebid.unique_key, "prebid"):
+            # 중복 체크 & 메시지 생성
+            for notice in filtered:
+                if notice.unique_key in seen_bid_keys:
+                    continue
+                seen_bid_keys.add(notice.unique_key)
+
+                if is_notified(state, notice.unique_key, "bid"):
+                    logger.debug("이미 알림 완료: %s", notice.unique_key)
                     continue
 
-                msg = format_prebid_notice(prebid, profile.name)
+                msg = format_bid_notice(notice, profile.name, matched_keyword=kw)
                 reply_markup = {
                     "inline_keyboard": [[
-                        {"text": "📌 북마크", "callback_data": f"bm_prebid_{prebid.unique_key}"},
-                        {"text": "📤 공유", "switch_inline_query": f"share_prebid_{prebid.unique_key}"}
+                        {"text": "📌 북마크", "callback_data": f"bm_bid_{notice.unique_key}"},
+                        {"text": "📤 공유", "switch_inline_query": f"share_bid_{notice.unique_key}"}
                     ]]
                 }
-                prebid_messages.append({"text": msg, "reply_markup": reply_markup})
-                mark_notified(state, prebid.unique_key, profile.name, "prebid")
+                bid_messages.append({"text": msg, "reply_markup": reply_markup})
+                mark_notified(state, notice.unique_key, profile.name, "bid")
+
+    # ── 2. 사전규격 조회 & 필터링 ──
+    if profile.include_prebid:
+        seen_prebid_keys: set[str] = set()
+        for bid_type in profile.bid_types:
+            logger.info("사전규격 조회: %s / %s", profile.name, bid_type.display_name)
+
+            # 키워드가 있으면 키워드별로 조회, 없으면 전체 조회
+            keywords = profile.keywords.or_keywords or [""]
+            for kw in keywords:
+                raw_prebids = fetch_prebid_notices(
+                    bid_type=bid_type,
+                    keyword=kw,
+                    buffer_hours=buffer_hours,
+                    max_results=max_results,
+                )
+
+                filtered_prebids = filter_prebid_notices(raw_prebids, profile)
+
+                for prebid in filtered_prebids:
+                    if prebid.unique_key in seen_prebid_keys:
+                        continue
+                    seen_prebid_keys.add(prebid.unique_key)
+
+                    if is_notified(state, prebid.unique_key, "prebid"):
+                        continue
+
+                    msg = format_prebid_notice(prebid, profile.name)
+                    reply_markup = {
+                        "inline_keyboard": [[
+                            {"text": "📌 북마크", "callback_data": f"bm_prebid_{prebid.unique_key}"},
+                            {"text": "📤 공유", "switch_inline_query": f"share_prebid_{prebid.unique_key}"}
+                        ]]
+                    }
+                    prebid_messages.append({"text": msg, "reply_markup": reply_markup})
+                    mark_notified(state, prebid.unique_key, profile.name, "prebid")
 
     # ── 3. 텔레그램 발송 ──
     all_messages = bid_messages + prebid_messages

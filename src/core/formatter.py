@@ -10,16 +10,20 @@ from src.core.models import BidNotice, PreBidNotice
 from src.utils.time_utils import calc_d_day, format_display_dt
 
 
-def format_bid_notice(notice: BidNotice, profile_name: str) -> str:
-    """입찰공고 알림 메시지 포맷팅 (Telegram MarkdownV2 대신 HTML 사용)"""
+def format_bid_notice(notice: BidNotice, profile_name: str, matched_keyword: str = "") -> str:
+    """입찰공고 알림 메시지 포맷팅"""
     d_day = calc_d_day(notice.bid_clse_dt)
     d_day_text = f" ({d_day})" if d_day else ""
+    
+    bid_name = _escape_html(notice.bid_ntce_nm)
+    if matched_keyword:
+        bid_name = _highlight_keyword(bid_name, matched_keyword)
 
     lines = [
         "🔔 <b>나라장터 신규 입찰공고</b>",
         "━━━━━━━━━━━━━━━━━",
         "",
-        f"📋 <b>{_escape_html(notice.bid_ntce_nm)}</b>",
+        f"📋 <b>{bid_name}</b>",
         f"📌 유형: {notice.bid_type.display_name}",
     ]
 
@@ -61,13 +65,17 @@ def format_bid_notice(notice: BidNotice, profile_name: str) -> str:
     return "\n".join(lines)
 
 
-def format_prebid_notice(notice: PreBidNotice, profile_name: str) -> str:
+def format_prebid_notice(notice: PreBidNotice, profile_name: str, matched_keyword: str = "") -> str:
     """사전규격공개 알림 메시지 포맷팅"""
+    prcure_nm = _escape_html(notice.prcure_nm)
+    if matched_keyword:
+        prcure_nm = _highlight_keyword(prcure_nm, matched_keyword)
+
     lines = [
         "📢 <b>[사전규격] 신규 공개</b>",
         "━━━━━━━━━━━━━━━━━",
         "",
-        f"📋 <b>{_escape_html(notice.prcure_nm)}</b>",
+        f"📋 <b>{prcure_nm}</b>",
         f"📌 유형: {notice.bid_type.display_name}",
         "",
         f"🏢 공고기관: {_escape_html(notice.ntce_instt_nm)}",
@@ -84,8 +92,23 @@ def format_prebid_notice(notice: PreBidNotice, profile_name: str) -> str:
     return "\n".join(lines)
 
 
+def _highlight_keyword(text: str, keyword: str) -> str:
+    """텍스트 내의 키워드에 볼드+코드 태그를 입혀 시각적 강조(음영) 효과를 줍니다."""
+    if not keyword:
+        return text
+    
+    import re
+    # 대소문자 구분 없이 매칭 (HTML 이스케이프된 텍스트 기준이므로 조심)
+    # 키워드 자체도 이스케이프해서 검색해야 안전함
+    escaped_kw = _escape_html(keyword)
+    
+    # 정규표현식으로 교체 (대소문자 보존하며 태그 감싸기)
+    pattern = re.compile(re.escape(escaped_kw), re.IGNORECASE)
+    return pattern.sub(lambda m: f"<code><b>{m.group(0)}</b></code>", text)
+
+
 def format_share_message(notice: BidNotice) -> str:
-    """공유용 텍스트 포맷"""
+    """공유용 텍스트 포맷 (강조 없이 깔끔하게)"""
     d_day = calc_d_day(notice.bid_clse_dt)
     d_day_text = f" ({d_day})" if d_day else ""
 
@@ -119,7 +142,7 @@ def format_summary(
 ) -> str:
     """실행 요약 메시지"""
     lines = [
-        f"📊 <b>나라장터 조회 결과</b> ({_escape_html(check_time)})",
+        f"📊 <b>[{_escape_html(profile_name)}] 조회 결과</b> ({_escape_html(check_time)})",
     ]
 
     if bid_count > 0:

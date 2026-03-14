@@ -122,39 +122,46 @@ def handle_search_command(chat_id: str, args: list[str]) -> None:
     prebid_messages = []
 
     try:
-        from src.api.bid_client import fetch_bid_notices_multi_keywords
+        from src.api.bid_client import fetch_bid_notices
         from src.api.prebid_client import fetch_prebid_notices
         from src.core.filter import filter_bid_notices, filter_prebid_notices
         from src.core.formatter import format_bid_notice, format_prebid_notice
         from src.telegram_bot import send_bid_notifications
 
         # 1. 입찰공고
+        seen_bid_keys: set[str] = set()
         for bid_type in temp_profile.bid_types:
             dmnd_cd = temp_profile.demand_agencies.by_code[0] if temp_profile.demand_agencies.by_code else ""
-            raw_notices = fetch_bid_notices_multi_keywords(
+            raw_notices = fetch_bid_notices(
                 bid_type=bid_type,
-                keywords=[keyword],
+                keyword=keyword,
                 dmnd_instt_cd=dmnd_cd,
                 buffer_hours=24,
                 max_results=50,
             )
             filtered = filter_bid_notices(raw_notices, temp_profile)
             for notice in filtered:
-                msg = format_bid_notice(notice, f"검색: {keyword}")
-                bid_messages.append({"text": msg})
+                if notice.unique_key not in seen_bid_keys:
+                    seen_bid_keys.add(notice.unique_key)
+                    msg = format_bid_notice(notice, f"검색: {keyword}", matched_keyword=keyword)
+                    bid_messages.append({"text": msg})
 
         # 2. 사전규격
         if temp_profile.include_prebid:
+            seen_prebid_keys: set[str] = set()
             for bid_type in temp_profile.bid_types:
                 raw_prebids = fetch_prebid_notices(
                     bid_type=bid_type,
+                    keyword=keyword,
                     buffer_hours=24,
                     max_results=50,
                 )
                 filtered_prebids = filter_prebid_notices(raw_prebids, temp_profile)
                 for prebid in filtered_prebids:
-                    msg = format_prebid_notice(prebid, f"검색: {keyword}")
-                    prebid_messages.append({"text": msg})
+                    if prebid.unique_key not in seen_prebid_keys:
+                        seen_prebid_keys.add(prebid.unique_key)
+                        msg = format_prebid_notice(prebid, f"검색: {keyword}")
+                        prebid_messages.append({"text": msg})
 
         all_messages = bid_messages + prebid_messages
         if all_messages:

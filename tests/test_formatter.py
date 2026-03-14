@@ -63,6 +63,7 @@ def test_summary_no_results():
     """결과 없을 때 요약"""
     result = format_summary("테스트", 0, 0, "14:30")
     assert "신규 공고 없음" in result
+    assert "테스트" in result
 
 
 def test_html_escape():

@@ -18,7 +18,7 @@ from src.utils.time_utils import get_query_range
 
 logger = logging.getLogger(__name__)
 
-BASE_URL = "https://apis.data.go.kr/1230000/ad/PubPrcureThngInfoService"
+BASE_URL = "https://apis.data.go.kr/1230000/BfSpecService"
 
 
 def _get_api_key() -> str:
@@ -36,7 +36,13 @@ def _get_api_key() -> str:
 
 def _build_operation_name(bid_type: BidType) -> str:
     """사전규격 API 오퍼레이션 이름"""
-    return f"getPublicPrcureThngInfo{bid_type.api_suffix}"
+    mapping = {
+        BidType.SERVICE: "getBfSpecServcList",
+        BidType.GOODS: "getBfSpecGoodList",
+        BidType.CONSTRUCTION: "getBfSpecCnstwkList",
+        BidType.FOREIGN: "getBfSpecFrgnList",
+    }
+    return mapping[bid_type]
 
 
 def _safe_str(value: Any) -> str:
@@ -47,19 +53,31 @@ def _safe_str(value: Any) -> str:
 
 def _parse_prebid_notice(item: dict[str, Any], bid_type: BidType) -> PreBidNotice:
     """API 응답 항목을 PreBidNotice 객체로 변환"""
+    # 사전규격 고유번호 우선 참조
+    prcure_no = _safe_str(
+        item.get("bfSpecRgstNo") or item.get("prcureNo") or item.get("bidNtceNo")
+    )
+    
+    # 공고명/품명 우선 참조
+    prcure_nm = _safe_str(
+        item.get("prcureNm") or item.get("bidNtceNm") or item.get("prdctClsfcNoNm")
+    )
+    
+    # 등록기관/수요기관
+    ntce_instt_nm = _safe_str(
+        item.get("ntceInsttNm") or item.get("rgstInsttNm") or item.get("insttNm") or item.get("rlDmndInsttNm")
+    )
+    
+    # 등록일시/공개일시
+    rcpt_dt = _safe_str(
+        item.get("rgstDt") or item.get("rcptDt")
+    )
+    
     return PreBidNotice(
-        prcure_no=_safe_str(
-            item.get("bfSpecRgstNo") or item.get("prcureNo") or item.get("bidNtceNo")
-        ),
-        prcure_nm=_safe_str(
-            item.get("prdctClsfcNoNm") or item.get("bidNtceNm") or item.get("prcureNm")
-        ),
-        ntce_instt_nm=_safe_str(
-            item.get("ntceInsttNm") or item.get("rlDmndInsttNm")
-        ),
-        rcpt_dt=_safe_str(
-            item.get("rcptDt") or item.get("rgstDt")
-        ),
+        prcure_no=prcure_no,
+        prcure_nm=prcure_nm,
+        ntce_instt_nm=ntce_instt_nm,
+        rcpt_dt=rcpt_dt,
         opnn_reg_clse_dt=_safe_str(
             item.get("opnnRegClseDt") or item.get("bfSpecOpnnRcptClseDt")
         ),
@@ -72,6 +90,7 @@ def _parse_prebid_notice(item: dict[str, Any], bid_type: BidType) -> PreBidNotic
 
 def fetch_prebid_notices(
     bid_type: BidType,
+    keyword: str = "",
     buffer_hours: int = 1,
     max_results: int = 999,
 ) -> list[PreBidNotice]:
@@ -79,6 +98,7 @@ def fetch_prebid_notices(
 
     Args:
         bid_type: 입찰 유형
+        keyword: 검색 키워드 (prcureNm 파라미터)
         buffer_hours: 조회 범위
         max_results: 최대 결과 수
 
@@ -86,6 +106,7 @@ def fetch_prebid_notices(
         PreBidNotice 리스트
     """
     bgn_dt, end_dt = get_query_range(buffer_hours)
+    
     operation = _build_operation_name(bid_type)
     url = f"{BASE_URL}/{operation}"
 
@@ -94,11 +115,14 @@ def fetch_prebid_notices(
         "type": "json",
         "pageNo": "1",
         "numOfRows": str(min(max_results, 999)),
-        "inqryBgnDt": bgn_dt,
-        "inqryEndDt": end_dt,
+        "rgstBgnDt": bgn_dt[:8],
+        "rgstEndDt": end_dt[:8],
     }
+    
+    if keyword:
+        params["prcureNm"] = keyword
 
-    logger.info("사전규격 API 호출: %s (기간=%s~%s)", operation, bgn_dt, end_dt)
+    logger.info("사전규격 API 호출: %s (키워드=%s, 기간=%s~%s)", operation, keyword or "전체", params["rgstBgnDt"], params["rgstEndDt"])
 
     try:
         response = requests.get(url, params=params, timeout=30)
@@ -121,7 +145,12 @@ def fetch_prebid_notices(
         return []
 
     body = resp.get("body", {})
-    total_count = int(body.get("totalCount", 0))
+    try:
+        total_count = int(body.get("totalCount", 0))
+    except (ValueError, TypeError):
+        logger.warning("사전규격 API totalCount 파싱 실패: %s", body.get("totalCount"))
+        total_count = 0
+
     if total_count == 0:
         return []
 
