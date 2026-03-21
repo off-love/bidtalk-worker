@@ -8,6 +8,7 @@
 
 from __future__ import annotations
 
+import argparse
 import logging
 import os
 from pathlib import Path
@@ -38,11 +39,11 @@ def get_active_profile_name() -> str | None:
     return profiles[0].name
 
 
-def handle_list_command(chat_id: str) -> None:
+def handle_list_command(chat_id: str, mode: str) -> None:
     """/list 명령어 처리"""
     profile_name = get_active_profile_name()
     if not profile_name:
-        send_message("활성화된 프로필(프로젝트)이 없습니다.", chat_id=chat_id)
+        send_message("활성화된 프로필(프로젝트)이 없습니다.", chat_id=chat_id, mode=mode)
         return
 
     keywords = get_profile_keywords(profile_name)
@@ -54,58 +55,58 @@ def handle_list_command(chat_id: str) -> None:
     for i, kw in enumerate(keywords, 1):
         text += f"{i}. <code>{kw}</code>\n"
 
-    send_message(text, chat_id=chat_id)
+    send_message(text, chat_id=chat_id, mode=mode)
 
 
-def handle_add_command(chat_id: str, args: list[str]) -> None:
+def handle_add_command(chat_id: str, args: list[str], mode: str) -> None:
     """/add 명령어 처리"""
     profile_name = get_active_profile_name()
     if not profile_name:
-        send_message("활성화된 프로필이 없습니다.", chat_id=chat_id)
+        send_message("활성화된 프로필이 없습니다.", chat_id=chat_id, mode=mode)
         return
 
     if not args:
-        send_message("⚠️ 사용법이 올바르지 않습니다.\n예시: /add 지적재조사", chat_id=chat_id)
+        send_message("⚠️ 사용법이 올바르지 않습니다.\n예시: /add 지적재조사", chat_id=chat_id, mode=mode)
         return
 
     keyword = " ".join(args)
     success = add_profile_keyword(profile_name, keyword)
 
     if success:
-        send_message(f"✅ '<b>{keyword}</b>' 키워드가 성공적으로 추가되었습니다!\n(다음 알림 주기부터 적용됩니다)", chat_id=chat_id)
+        send_message(f"✅ '<b>{keyword}</b>' 키워드가 성공적으로 추가되었습니다!\n(다음 알림 주기부터 적용됩니다)", chat_id=chat_id, mode=mode)
     else:
-        send_message(f"⚠️ '<b>{keyword}</b>' 키워드는 이미 존재합니다.", chat_id=chat_id)
+        send_message(f"⚠️ '<b>{keyword}</b>' 키워드는 이미 존재합니다.", chat_id=chat_id, mode=mode)
 
 
-def handle_remove_command(chat_id: str, args: list[str]) -> None:
+def handle_remove_command(chat_id: str, args: list[str], mode: str) -> None:
     """/remove 명령어 처리"""
     profile_name = get_active_profile_name()
     if not profile_name:
-        send_message("활성화된 프로필이 없습니다.", chat_id=chat_id)
+        send_message("활성화된 프로필이 없습니다.", chat_id=chat_id, mode=mode)
         return
 
     if not args:
-        send_message("⚠️ 사용법이 올바르지 않습니다.\n예시: /remove 확정측량", chat_id=chat_id)
+        send_message("⚠️ 사용법이 올바르지 않습니다.\n예시: /remove 확정측량", chat_id=chat_id, mode=mode)
         return
 
     keyword = " ".join(args)
     success = remove_profile_keyword(profile_name, keyword)
 
     if success:
-        send_message(f"🗑️ '<b>{keyword}</b>' 키워드가 성공적으로 삭제되었습니다!", chat_id=chat_id)
+        send_message(f"🗑️ '<b>{keyword}</b>' 키워드가 성공적으로 삭제되었습니다!", chat_id=chat_id, mode=mode)
     else:
-        send_message(f"⚠️ '<b>{keyword}</b>' 키워드를 찾을 수 없습니다.", chat_id=chat_id)
+        send_message(f"⚠️ '<b>{keyword}</b>' 키워드를 찾을 수 없습니다.", chat_id=chat_id, mode=mode)
 
 
-def handle_search_command(chat_id: str, args: list[str]) -> None:
+def handle_search_command(chat_id: str, args: list[str], mode: str) -> None:
     """/search 명령어 처리: 즉각(일회성) 검색"""
     profiles, _ = load_profiles()
     if not profiles:
-        send_message("활성화된 프로필이 없습니다.", chat_id=chat_id)
+        send_message("활성화된 프로필이 없습니다.", chat_id=chat_id, mode=mode)
         return
 
     if not args:
-        send_message("⚠️ 사용법이 올바르지 않습니다.\n예시: /search 지적재조사", chat_id=chat_id)
+        send_message("⚠️ 사용법이 올바르지 않습니다.\n예시: /search 지적재조사", chat_id=chat_id, mode=mode)
         return
 
     keyword = " ".join(args)
@@ -116,20 +117,18 @@ def handle_search_command(chat_id: str, args: list[str]) -> None:
     temp_profile = copy.deepcopy(profile)
     temp_profile.keywords.or_keywords = [keyword]
 
-    send_message(f"🔎 '<b>{keyword}</b>' 키워드로 최근 24시간 내 공고를 검색 중입니다... (최대 1~2분 소요)", chat_id=chat_id)
+    send_message(f"🔎 '<b>{keyword}</b>' 키워드로 최근 24시간 내 공고를 검색 중입니다... (최대 1~2분 소요)", chat_id=chat_id, mode=mode)
 
-    bid_messages = []
-    prebid_messages = []
+    from concurrent.futures import ThreadPoolExecutor
+    from src.api.bid_client import fetch_bid_notices
+    from src.api.prebid_client import fetch_prebid_notices
+    from src.core.filter import filter_bid_notices, filter_prebid_notices
+    from src.core.formatter import format_bid_notice, format_prebid_notice
+    from src.telegram_bot import send_bid_notifications
 
-    try:
-        from src.api.bid_client import fetch_bid_notices
-        from src.api.prebid_client import fetch_prebid_notices
-        from src.core.filter import filter_bid_notices, filter_prebid_notices
-        from src.core.formatter import format_bid_notice, format_prebid_notice
-        from src.telegram_bot import send_bid_notifications
-
-        # 1. 입찰공고
-        seen_bid_keys: set[str] = set()
+    def fetch_bids_parallel():
+        bids = []
+        seen_bid_keys = set()
         for bid_type in temp_profile.bid_types:
             dmnd_cd = temp_profile.demand_agencies.by_code[0] if temp_profile.demand_agencies.by_code else ""
             raw_notices = fetch_bid_notices(
@@ -144,47 +143,67 @@ def handle_search_command(chat_id: str, args: list[str]) -> None:
                 if notice.unique_key not in seen_bid_keys:
                     seen_bid_keys.add(notice.unique_key)
                     msg = format_bid_notice(notice, f"검색: {keyword}", matched_keyword=keyword)
-                    bid_messages.append({"text": msg})
+                    bids.append({"text": msg})
+        return bids
 
-        # 2. 사전규격
-        if temp_profile.include_prebid:
-            seen_prebid_keys: set[str] = set()
-            for bid_type in temp_profile.bid_types:
-                raw_prebids = fetch_prebid_notices(
-                    bid_type=bid_type,
-                    keyword=keyword,
-                    buffer_hours=24,
-                    max_results=50,
-                )
-                filtered_prebids = filter_prebid_notices(raw_prebids, temp_profile)
-                for prebid in filtered_prebids:
-                    if prebid.unique_key not in seen_prebid_keys:
-                        seen_prebid_keys.add(prebid.unique_key)
-                        msg = format_prebid_notice(prebid, f"검색: {keyword}")
-                        prebid_messages.append({"text": msg})
+    def fetch_prebids_parallel():
+        prebids = []
+        if not temp_profile.include_prebid:
+            return []
+        seen_prebid_keys = set()
+        for bid_type in temp_profile.bid_types:
+            raw_prebids = fetch_prebid_notices(
+                bid_type=bid_type,
+                keyword=keyword,
+                buffer_hours=24,
+                max_results=50,
+            )
+            filtered_prebids = filter_prebid_notices(raw_prebids, temp_profile)
+            for prebid in filtered_prebids:
+                if prebid.unique_key not in seen_prebid_keys:
+                    seen_prebid_keys.add(prebid.unique_key)
+                    msg = format_prebid_notice(prebid, f"검색: {keyword}")
+                    prebids.append({"text": msg})
+        return prebids
+
+    try:
+        bid_messages = []
+        prebid_messages = []
+        if mode == "bid":
+            bid_messages = fetch_bids_parallel()
+        elif mode == "prebid":
+            prebid_messages = fetch_prebids_parallel()
 
         all_messages = bid_messages + prebid_messages
         if all_messages:
-            send_bid_notifications(all_messages)
-            summary_text = f"✅ <b>검색 완료</b>: 입찰공고 {len(bid_messages)}건, 사전규격 {len(prebid_messages)}건이 발견되었습니다."
-            send_message(summary_text, chat_id=chat_id)
+            send_bid_notifications(all_messages, mode=mode)
+            type_name = "입찰공고" if mode == "bid" else "사전규격"
+            summary_text = f"✅ <b>검색 완료</b>: {type_name} {len(all_messages)}건이 발견되었습니다."
+            send_message(summary_text, chat_id=chat_id, mode=mode)
         else:
-            send_message(f"🤷‍♂️ '<b>{keyword}</b>' 관련하여 최근 24시간 내 올라온 신규 공고가 0건입니다.", chat_id=chat_id)
+            send_message(f"🤷‍♂️ '<b>{keyword}</b>' 관련하여 최근 24시간 내 올라온 신규 공고가 0건입니다.", chat_id=chat_id, mode=mode)
 
     except Exception as e:
         logger.error("검색 중 오류 발생: %s", e)
-        send_message(f"⚠️ 검색 중 지정된 조건에 맞는 결과를 가져오지 못했거나 오류가 발생했습니다. ({str(e)})", chat_id=chat_id)
+        send_message(f"⚠️ 검색 중 지정된 조건에 맞는 결과를 가져오지 못했거나 오류가 발생했습니다. ({str(e)})", chat_id=chat_id, mode=mode)
 
 
-def process_updates() -> None:
+def process_updates(mode: str) -> None:
     """밀린 텔레그램 업데이트를 수신하고 명령어를 처리합니다."""
-    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    env_var = "PREBID_TELEGRAM_BOT_TOKEN" if mode == "prebid" else "TELEGRAM_BOT_TOKEN"
+    token = os.environ.get(env_var)
     if not token:
-        logger.error("TELEGRAM_BOT_TOKEN 환경변수가 없습니다.")
+        logger.error("%s 환경변수가 없습니다.", env_var)
+        if mode == "prebid":
+            try:
+                send_message(f"🚨 [사전규격 봇 설정 오류]\nGitHub Secrets에 <b>{env_var}</b> 가 설정되지 않았습니다.\n토큰을 확인해 주세요!", mode="bid")
+            except Exception:
+                pass
         return
 
     state = load_state()
-    offset = state.get("telegram_offset", 0)
+    state_key = f"telegram_offset_{mode}"
+    offset = state.get(state_key, 0)
 
     url = f"https://api.telegram.org/bot{token}/getUpdates"
     params = {"offset": offset, "timeout": 5, "allowed_updates": ["message"]}
@@ -195,6 +214,11 @@ def process_updates() -> None:
         
         if not data.get("ok"):
             logger.error("업데이트 조회 실패: %s", data.get("description"))
+            if mode == "prebid":
+                try:
+                    send_message(f"🚨 [사전규격 봇 연결 오류]\n텔레그램 업데이트 조회 실패:\n<code>{data.get('description')}</code>\n토큰이 잘못되었거나 봇이 삭제되었을 수 있습니다.", mode="bid")
+                except Exception:
+                    pass
             return
 
         updates = data.get("result", [])
@@ -228,38 +252,47 @@ def process_updates() -> None:
             logger.info("명령어 수신: %s (args: %s)", command, args)
 
             if command == "/start" or command == "/help":
+                type_name = "사전규격" if mode == "prebid" else "입찰공고"
                 send_message(
-                    "안녕하세요! 나라장터 하이브리드 알림 조수입니다. 🤖\n\n"
+                    f"안녕하세요! 나라장터 {type_name} 알림 조수입니다. 🤖\n\n"
                     "아래 명령어를 통해 검색 키워드를 언제든지 실시간으로 관리하실 수 있습니다!\n"
                     "(입력 후 최대 30분 이내에 처리 완료 메시지가 도착합니다.)\n\n"
                     "🔍 /list - 현재 등록된 키워드 목록 보기\n"
                     "➕ /add [키워드] - 새 키워드 추가 (예: /add 공간정보)\n"
                     "➖ /remove [키워드] - 키워드 삭제 (예: /remove 공간정보)\n"
                     "🔎 /search [키워드] - (1회성) 지금 즉시 24시간 내 공고 검색", 
-                    chat_id=chat_id
+                    chat_id=chat_id,
+                    mode=mode
                 )
             elif command == "/list":
-                handle_list_command(chat_id)
+                handle_list_command(chat_id, mode)
             elif command == "/add":
-                handle_add_command(chat_id, args)
+                handle_add_command(chat_id, args, mode)
             elif command == "/remove":
-                handle_remove_command(chat_id, args)
+                handle_remove_command(chat_id, args, mode)
             elif command == "/search":
-                handle_search_command(chat_id, args)
+                handle_search_command(chat_id, args, mode)
             else:
-                send_message(f"알 수 없는 명령어입니다: {command}", chat_id=chat_id)
+                send_message(f"알 수 없는 명령어입니다: {command}", chat_id=chat_id, mode=mode)
 
         # 상태 오프셋 저장
-        state["telegram_offset"] = max_update_id
+        state_key = f"telegram_offset_{mode}"
+        state[state_key] = max_update_id
         save_state(state)
-        logger.info("업데이트 처리 완료 및 오프셋 업데이트: %d", max_update_id)
+        logger.info("업데이트 처리 완료 및 오프셋 업데이트: %s=%d", state_key, max_update_id)
 
     except requests.RequestException as e:
         logger.error("텔레그램 API 호출 실패: %s", e)
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="텔레그램 명령어 수집")
+    parser.add_argument("--mode", type=str, choices=["bid", "prebid"], default="bid", help="스크립트 실행 모드 (bid 또는 prebid)")
+    args = parser.parse_args()
+    
+    mode = args.mode
+
     logger.info("=" * 50)
-    logger.info("텔레그램 명령어 수집(GetUpdates) 시작")
+    logger.info("텔레그램 명령어 수집(GetUpdates) 시작 (모드: %s)", mode.upper())
     logger.info("=" * 50)
-    process_updates()
+    process_updates(mode)

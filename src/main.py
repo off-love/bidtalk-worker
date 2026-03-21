@@ -7,6 +7,7 @@ GitHub Actions cron 에 의해 30분마다 실행됩니다.
 
 from __future__ import annotations
 
+import argparse
 import logging
 import sys
 from typing import Any
@@ -41,75 +42,54 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple[int, int]:
+def process_profile(profile: AlertProfile, state: dict, settings: dict, mode: str) -> tuple[int, int]:
     """단일 프로필을 처리합니다.
 
     Args:
         profile: 알림 프로필
         state: 상태 데이터
         settings: 전역 설정
+        mode: 실행 모드 (bid 또는 prebid)
 
     Returns:
         (입찰공고 알림 수, 사전규격 알림 수)
     """
-    logger.info("━━━ 프로필 처리: %s ━━━", profile.name)
+    logger.info("━━━ 프로필 처리: %s (모드: %s) ━━━", profile.name, mode)
 
     bid_messages: list[Any] = []
     prebid_messages: list[Any] = []
     buffer_hours = settings.get("query_buffer_hours", 1)
     max_results = settings.get("max_results_per_page", 999)
 
-    # ── 1. 입찰공고 조회 & 필터링 ──
-    seen_bid_keys: set[str] = set()
-    for bid_type in profile.bid_types:
-        logger.info("입찰공고 조회: %s / %s", profile.name, bid_type.display_name)
-
-        # API 레벨: 수요기관 코드 (첫 번째만 사용)
-        dmnd_cd = ""
-        if profile.demand_agencies.by_code:
-            dmnd_cd = profile.demand_agencies.by_code[0]
-
-        # API 호출 (OR 키워드 개별 호출)
-        keywords = profile.keywords.or_keywords or [""]
-        for kw in keywords:
-            raw_notices = fetch_bid_notices(
-                bid_type=bid_type,
-                keyword=kw,
-                dmnd_instt_cd=dmnd_cd,
-                buffer_hours=buffer_hours,
-                max_results=max_results,
-            )
-
-            # 코드 레벨 필터링
-            filtered = filter_bid_notices(raw_notices, profile)
-
-            # 중복 체크 & 메시지 생성
-            for notice in filtered:
-                if notice.unique_key in seen_bid_keys:
-                    continue
-                seen_bid_keys.add(notice.unique_key)
-
-                if is_notified(state, notice.unique_key, "bid"):
-                    logger.debug("이미 알림 완료: %s", notice.unique_key)
-                    continue
-
-                msg = format_bid_notice(notice, profile.name, matched_keyword=kw)
-                reply_markup = {
-                    "inline_keyboard": [[
-                        {"text": "📌 북마크", "callback_data": f"bm_bid_{notice.unique_key}"},
-                        {"text": "📤 공유", "switch_inline_query": f"share_bid_{notice.unique_key}"}
-                    ]]
-                }
-                bid_messages.append({"text": msg, "reply_markup": reply_markup})
-                mark_notified(state, notice.unique_key, profile.name, "bid")
-
-    # ── 2. 사전규격 조회 & 필터링 ──
-    if profile.include_prebid:
-        seen_prebid_keys: set[str] = set()
+    def fetch_all_bids():
+        messages = []
+        seen_keys = set()
         for bid_type in profile.bid_types:
-            logger.info("사전규격 조회: %s / %s", profile.name, bid_type.display_name)
+            dmnd_cd = profile.demand_agencies.by_code[0] if profile.demand_agencies.by_code else ""
+            keywords = profile.keywords.or_keywords or [""]
+            for kw in keywords:
+                raw_notices = fetch_bid_notices(
+                    bid_type=bid_type,
+                    keyword=kw,
+                    dmnd_instt_cd=dmnd_cd,
+                    buffer_hours=buffer_hours,
+                    max_results=max_results,
+                )
+                filtered = filter_bid_notices(raw_notices, profile)
+                for notice in filtered:
+                    if notice.unique_key in seen_keys: continue
+                    seen_keys.add(notice.unique_key)
+                    if is_notified(state, notice.unique_key, "bid"): continue
+                    msg = format_bid_notice(notice, profile.name, matched_keyword=kw)
+                    messages.append({"text": msg})
+                    mark_notified(state, notice.unique_key, profile.name, "bid")
+        return messages
 
-            # 키워드가 있으면 키워드별로 조회, 없으면 전체 조회
+    def fetch_all_prebids():
+        messages = []
+        if not profile.include_prebid: return []
+        seen_keys = set()
+        for bid_type in profile.bid_types:
             keywords = profile.keywords.or_keywords or [""]
             for kw in keywords:
                 raw_prebids = fetch_prebid_notices(
@@ -118,26 +98,20 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple
                     buffer_hours=buffer_hours,
                     max_results=max_results,
                 )
-
-                filtered_prebids = filter_prebid_notices(raw_prebids, profile)
-
-                for prebid in filtered_prebids:
-                    if prebid.unique_key in seen_prebid_keys:
-                        continue
-                    seen_prebid_keys.add(prebid.unique_key)
-
-                    if is_notified(state, prebid.unique_key, "prebid"):
-                        continue
-
+                filtered = filter_prebid_notices(raw_prebids, profile)
+                for prebid in filtered:
+                    if prebid.unique_key in seen_keys: continue
+                    seen_keys.add(prebid.unique_key)
+                    if is_notified(state, prebid.unique_key, "prebid"): continue
                     msg = format_prebid_notice(prebid, profile.name)
-                    reply_markup = {
-                        "inline_keyboard": [[
-                            {"text": "📌 북마크", "callback_data": f"bm_prebid_{prebid.unique_key}"},
-                            {"text": "📤 공유", "switch_inline_query": f"share_prebid_{prebid.unique_key}"}
-                        ]]
-                    }
-                    prebid_messages.append({"text": msg, "reply_markup": reply_markup})
+                    messages.append({"text": msg})
                     mark_notified(state, prebid.unique_key, profile.name, "prebid")
+        return messages
+
+    if mode == "bid":
+        bid_messages = fetch_all_bids()
+    elif mode == "prebid":
+        prebid_messages = fetch_all_prebids()
 
     # ── 3. 텔레그램 발송 ──
     all_messages = bid_messages + prebid_messages
@@ -147,7 +121,7 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple
             "알림 발송: 입찰 %d건, 사전규격 %d건",
             len(bid_messages), len(prebid_messages),
         )
-        sent = send_bid_notifications(all_messages)
+        sent = send_bid_notifications(all_messages, mode=mode)
         logger.info("발송 완료: %d/%d건", sent, len(all_messages))
     else:
         logger.info("신규 알림 없음")
@@ -160,15 +134,21 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> tuple
             prebid_count=len(prebid_messages),
             check_time=now_kst().strftime("%H:%M"),
         )
-        send_message(summary)
+        send_message(summary, mode=mode)
 
     return len(bid_messages), len(prebid_messages)
 
 
 def main() -> None:
     """메인 실행"""
+    parser = argparse.ArgumentParser(description="나라장터 알림 봇 스크립트")
+    parser.add_argument("--mode", type=str, choices=["bid", "prebid"], default="bid", help="스크립트 실행 모드 (bid 또는 prebid)")
+    args = parser.parse_args()
+    
+    mode = args.mode
+    
     logger.info("=" * 50)
-    logger.info("나라장터 입찰공고 알림 서비스 시작")
+    logger.info("나라장터 알림 서비스 시작 (모드: %s)", mode.upper())
     logger.info("=" * 50)
 
     try:
@@ -197,18 +177,30 @@ def main() -> None:
         # 프로필별 처리
         for profile in profiles:
             try:
-                bid_count, prebid_count = process_profile(profile, state, settings)
+                bid_count, prebid_count = process_profile(profile, state, settings, mode)
                 total_bids += bid_count
                 total_prebids += prebid_count
             except Exception as e:
                 logger.error("프로필 '%s' 처리 오류: %s", profile.name, e, exc_info=True)
                 # 오류 알림
                 try:
-                    send_message(
-                        f"⚠️ 프로필 '{profile.name}' 처리 중 오류 발생: {e}"
+                    success = send_message(
+                        f"⚠️ 프로필 '{profile.name}' 처리 중 오류 발생 (모드: {mode}): {e}", mode=mode
                     )
+                    # 사전규격 봇으로 전송 실패 시 입찰 봇으로 폴백 알림 (chat_id 누락 등)
+                    if not success and mode == "prebid":
+                        send_message(
+                            f"🚨 [사전규격 봇 오류] 사전규격 알림 처리에 실패했습니다. 봇 토큰이나 환경변수(Chat ID)를 확인해주세요: {e}", mode="bid"
+                        )
                 except Exception:
-                    pass
+                    # send_message 내에서 에러 발생 시 (ValueError 등)
+                    if mode == "prebid":
+                        try:
+                            send_message(
+                                f"🚨 [사전규격 봇 오류] 사전규격 봇 설정에 문제가 있습니다 (토큰/채팅ID 누락 등). 설정(Secrets)을 다시 확인해주세요! ({e})", mode="bid"
+                            )
+                        except Exception:
+                            pass
 
         # 상태 저장
         update_last_check(state)
@@ -224,7 +216,7 @@ def main() -> None:
     except Exception as e:
         logger.critical("치명적 오류: %s", e, exc_info=True)
         try:
-            send_message(f"🚨 나라장터 알림 서비스 오류: {e}")
+            send_message(f"🚨 나라장터 알림 서비스 오류 (모드: {mode}): {e}", mode=mode)
         except Exception:
             pass
         sys.exit(1)
