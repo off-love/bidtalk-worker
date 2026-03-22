@@ -17,7 +17,7 @@ import requests
 
 from src.storage.admin_manager import (
     add_admin,
-    get_admins,
+    get_all_admins,
     is_admin,
     is_super_admin,
     remove_admin,
@@ -78,104 +78,64 @@ def _require_super_admin(chat_id: str, mode: str) -> bool:
 # 관리자 관리 명령어 핸들러
 # ──────────────────────────────────────────────
 
-def handle_admins_command(chat_id: str, mode: str) -> None:
-    """/admins 명령어 처리 — 관리자 목록 조회 (슈퍼관리자 전용)"""
+def handle_admin_command(chat_id: str, args: list[str], mode: str) -> None:
+    """/admin 명령어 처리 — 슈퍼 관리자 전용
+
+    사용법:
+        /admin list               — 현재 관리자 목록 출력
+        /admin add <chat_id>      — 관리자 추가
+        /admin remove <chat_id>   — 관리자 제거
+        /admin help               — 도움말
+    """
     if not _require_super_admin(chat_id, mode):
         return
 
-    admins = get_admins()
-    if not admins:
-        send_message(
-            "📋 <b>등록된 관리자가 없습니다.</b>\n"
-            "<code>/admin_add [chat_id] [이름]</code> 으로 추가하세요.",
-            chat_id=chat_id,
-            mode=mode,
-        )
-        return
+    sub = args[0].lower() if args else "help"
 
-    lines = ["📋 <b>관리자 목록</b>", "━━━━━━━━━━━━━━", ""]
-    for i, admin in enumerate(admins, 1):
-        added_date = admin.get("added_at", "")[:10]  # YYYY-MM-DD
-        lines.append(f"{i}. <b>{admin['name']}</b> (ID: <code>{admin['chat_id']}</code>)")
-        lines.append(f"   등록일: {added_date}")
-        lines.append("")
-    send_message("\n".join(lines), chat_id=chat_id, mode=mode)
+    if sub == "list":
+        admins = get_all_admins()
+        if not admins:
+            send_message("현재 등록된 관리자가 없습니다.\n(슈퍼 관리자만 존재합니다)", chat_id=chat_id, mode=mode)
+            return
 
+        super_id = os.environ.get("SUPER_ADMIN_CHAT_ID", "").strip()
+        lines = ["👑 <b>관리자 목록</b>\n━━━━━━━━━━━━━━"]
+        for i, admin_id in enumerate(admins, 1):
+            label = " (슈퍼 관리자)" if admin_id == super_id else ""
+            lines.append(f"{i}. <code>{admin_id}</code>{label}")
+        send_message("\n".join(lines), chat_id=chat_id, mode=mode)
 
-def handle_admin_add_command(chat_id: str, args: list[str], mode: str) -> None:
-    """/admin_add [chat_id] [이름] 명령어 처리 (슈퍼관리자 전용)"""
-    if not _require_super_admin(chat_id, mode):
-        return
+    elif sub == "add":
+        if len(args) < 2:
+            send_message("⚠️ 사용법: /admin add <chat_id>\n예시: /admin add 123456789", chat_id=chat_id, mode=mode)
+            return
+        target_id = args[1].strip()
+        if add_admin(target_id):
+            send_message(f"✅ <code>{target_id}</code> 를 관리자로 추가했습니다.", chat_id=chat_id, mode=mode)
+        else:
+            send_message(f"⚠️ <code>{target_id}</code> 는 이미 관리자로 등록되어 있습니다.", chat_id=chat_id, mode=mode)
 
-    if len(args) < 2:
-        send_message(
-            "⚠️ 사용법이 올바르지 않습니다.\n"
-            "예시: <code>/admin_add 123456789 홍길동</code>",
-            chat_id=chat_id,
-            mode=mode,
-        )
-        return
+    elif sub == "remove":
+        if len(args) < 2:
+            send_message("⚠️ 사용법: /admin remove <chat_id>\n예시: /admin remove 123456789", chat_id=chat_id, mode=mode)
+            return
+        target_id = args[1].strip()
+        super_id = os.environ.get("SUPER_ADMIN_CHAT_ID", "").strip()
+        if target_id == super_id:
+            send_message("⛔ 슈퍼 관리자는 이 방법으로 제거할 수 없습니다.", chat_id=chat_id, mode=mode)
+            return
+        if remove_admin(target_id):
+            send_message(f"🗑️ <code>{target_id}</code> 를 관리자에서 제거했습니다.", chat_id=chat_id, mode=mode)
+        else:
+            send_message(f"⚠️ <code>{target_id}</code> 는 관리자 목록에 없습니다.", chat_id=chat_id, mode=mode)
 
-    target_id = args[0]
-    name = " ".join(args[1:])
-
-    if is_super_admin(target_id):
-        send_message(
-            "⚠️ 슈퍼관리자는 이미 최고 권한을 가지고 있습니다.",
-            chat_id=chat_id,
-            mode=mode,
-        )
-        return
-
-    success = add_admin(target_id, name)
-    if success:
-        send_message(
-            f"✅ '<b>{name}</b>' (<code>{target_id}</code>)이 관리자로 추가되었습니다.",
-            chat_id=chat_id,
-            mode=mode,
-        )
     else:
         send_message(
-            f"⚠️ '<code>{target_id}</code>'는 이미 등록된 관리자입니다.",
-            chat_id=chat_id,
-            mode=mode,
-        )
-
-
-def handle_admin_remove_command(chat_id: str, args: list[str], mode: str) -> None:
-    """/admin_remove [chat_id] 명령어 처리 (슈퍼관리자 전용)"""
-    if not _require_super_admin(chat_id, mode):
-        return
-
-    if not args:
-        send_message(
-            "⚠️ 사용법이 올바르지 않습니다.\n"
-            "예시: <code>/admin_remove 123456789</code>",
-            chat_id=chat_id,
-            mode=mode,
-        )
-        return
-
-    target_id = args[0]
-
-    if is_super_admin(target_id):
-        send_message(
-            "⚠️ 슈퍼관리자는 삭제할 수 없습니다.",
-            chat_id=chat_id,
-            mode=mode,
-        )
-        return
-
-    success = remove_admin(target_id)
-    if success:
-        send_message(
-            f"🗑️ 관리자 (<code>{target_id}</code>)가 삭제되었습니다.",
-            chat_id=chat_id,
-            mode=mode,
-        )
-    else:
-        send_message(
-            f"⚠️ '<code>{target_id}</code>'는 등록된 관리자가 아닙니다.",
+            "👑 <b>/admin 명령어 도움말</b> (슈퍼 관리자 전용)\n"
+            "━━━━━━━━━━━━━━━━━━━━\n"
+            "/admin list — 관리자 목록 보기\n"
+            "/admin add &lt;chat_id&gt; — 관리자 추가\n"
+            "/admin remove &lt;chat_id&gt; — 관리자 제거",
             chat_id=chat_id,
             mode=mode,
         )
@@ -397,21 +357,41 @@ def process_updates(mode: str) -> None:
                 continue
 
             parts = text.split()
-            command = parts[0].lower()
+            raw_command = parts[0].lower()
+            # @botname 접미사 제거 (예: /search@mybotname → /search)
+            command = raw_command.split("@")[0]
             args = parts[1:]
 
-            logger.info("명령어 수신: %s (args: %s)", command, args)
+            logger.info("명령어 수신: %s (args: %s, chat_id: %s)", command, args, chat_id)
 
-            if command == "/start" or command == "/help":
+            if command in ("/start", "/help"):
                 type_name = "사전규격" if mode == "prebid" else "입찰공고"
-                send_message(
+                
+                base = (
                     f"안녕하세요! 나라장터 {type_name} 알림 조수입니다. 🤖\n\n"
-                    "아래 명령어를 통해 검색 키워드를 언제든지 실시간으로 관리하실 수 있습니다!\n"
-                    "(입력 후 1시간 내외에 처리 완료 메시지가 도착합니다.)\n\n"
-                    "🔍 /list - 현재 등록된 키워드 목록 보기", 
-                    chat_id=chat_id,
-                    mode=mode
+                    "📋 <b>사용 가능한 명령어</b>\n"
+                    "━━━━━━━━━━━━━━━━━━\n"
+                    "🔍 /list — 현재 등록된 키워드 목록 보기\n"
                 )
+                if is_admin(chat_id):
+                    base += (
+                        "\n<b>⚙️ 관리자 명령어</b>\n"
+                        "/add &lt;키워드&gt; — 검색 키워드 추가\n"
+                        "/remove &lt;키워드&gt; — 검색 키워드 제거\n"
+                        "/search &lt;키워드&gt; — 즉시 검색 실행\n"
+                    )
+                if is_super_admin(chat_id):
+                    base += (
+                        "\n<b>👑 슈퍼 관리자 명령어</b>\n"
+                        "/admin list — 관리자 목록 보기\n"
+                        "/admin add &lt;chat_id&gt; — 관리자 추가\n"
+                        "/admin remove &lt;chat_id&gt; — 관리자 제거\n"
+                    )
+                if not is_admin(chat_id):
+                    base += "\n💡 키워드 관리 기능은 관리자에게 문의하세요."
+                
+                send_message(base, chat_id=chat_id, mode=mode)
+
             elif command == "/list":
                 handle_list_command(chat_id, mode)
             elif command == "/add":
@@ -420,12 +400,8 @@ def process_updates(mode: str) -> None:
                 handle_remove_command(chat_id, args, mode)
             elif command == "/search":
                 handle_search_command(chat_id, args, mode)
-            elif command == "/admins":
-                handle_admins_command(chat_id, mode)
-            elif command == "/admin_add":
-                handle_admin_add_command(chat_id, args, mode)
-            elif command == "/admin_remove":
-                handle_admin_remove_command(chat_id, args, mode)
+            elif command == "/admin":
+                handle_admin_command(chat_id, args, mode)
             else:
                 send_message(f"알 수 없는 명령어입니다: {command}", chat_id=chat_id, mode=mode)
 
