@@ -16,14 +16,14 @@ import requests
 logger = logging.getLogger(__name__)
 
 
-def _get_bot_token() -> str:
+def _get_bot_token(mode: str = "bid") -> str:
     token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
     if not token:
         raise ValueError("TELEGRAM_BOT_TOKEN 환경변수가 설정되지 않았습니다.")
     return token
 
 
-def _get_chat_id() -> str:
+def _get_chat_id(mode: str = "bid") -> str:
     chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
     if not chat_id:
         raise ValueError("TELEGRAM_CHAT_ID 환경변수가 설정되지 않았습니다.")
@@ -36,6 +36,7 @@ def send_message(
     disable_web_page_preview: bool = True,
     chat_id: str | None = None,
     reply_markup: dict | None = None,
+    mode: str = "bid",
 ) -> bool:
     """텔레그램 메시지 전송
 
@@ -45,13 +46,14 @@ def send_message(
         disable_web_page_preview: 링크 미리보기 비활성화
         chat_id: 수신 채팅 ID (None이면 환경변수)
         reply_markup: 텔레그램 reply_markup 객체 (인라인 버튼 등)
+        mode: 봇 실행 모드 (bid 또는 prebid)
 
     Returns:
         전송 성공 여부
     """
-    token = _get_bot_token()
+    token = _get_bot_token(mode)
     if chat_id is None:
-        chat_id = _get_chat_id()
+        chat_id = _get_chat_id(mode)
 
     url = f"https://api.telegram.org/bot{token}/sendMessage"
 
@@ -77,7 +79,7 @@ def send_message(
 
             # 메시지가 너무 길 경우 분할 재시도
             if "message is too long" in error_desc.lower():
-                return _send_long_message(text, parse_mode, chat_id)
+                return _send_long_message(text, parse_mode, chat_id, mode=mode)
 
             return False
 
@@ -91,9 +93,10 @@ def _send_long_message(
     parse_mode: str,
     chat_id: str,
     max_length: int = 4000,
+    mode: str = "bid",
 ) -> bool:
     """긴 메시지를 분할하여 전송"""
-    token = _get_bot_token()
+    token = _get_bot_token(mode)
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     chunks = _split_text(text, max_length)
     all_ok = True
@@ -143,12 +146,13 @@ def _split_text(text: str, max_length: int) -> list[str]:
     return chunks
 
 
-def send_bid_notifications(messages: list[dict[str, Any]] | list[str]) -> int:
+def send_bid_notifications(messages: list[dict[str, Any]] | list[str], mode: str = "bid") -> int:
     """여러 알림 메시지를 순차 전송
 
     Args:
         messages: 포맷팅된 메시지(또는 딕셔너리) 목록
                   딕셔너리일 경우 {"text": "...", "reply_markup": {...}} 형식
+        mode: 봇 실행 모드 (bid 또는 prebid)
 
     Returns:
         성공적으로 전송한 메시지 수
@@ -158,9 +162,9 @@ def send_bid_notifications(messages: list[dict[str, Any]] | list[str]) -> int:
         if isinstance(msg, dict):
             text = msg.get("text", "")
             reply_markup = msg.get("reply_markup")
-            is_success = send_message(text, reply_markup=reply_markup)
+            is_success = send_message(text, reply_markup=reply_markup, mode=mode)
         else:
-            is_success = send_message(msg)
+            is_success = send_message(msg, mode=mode)
             
         if is_success:
             success_count += 1
