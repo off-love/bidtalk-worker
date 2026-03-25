@@ -100,7 +100,7 @@ def handle_admin_command(chat_id: str, args: list[str], mode: str) -> None:
         if not _require_admin(chat_id, mode):
             return
         
-        subs = sorted(list(load_subscribers()))
+        subs = sorted(list(load_subscribers(mode)))
         admins = sorted(list(get_all_admins()))
         count = len(set(subs) | set(admins))
         
@@ -389,7 +389,7 @@ def process_updates(mode: str) -> None:
             
             # [추가] 메시지를 보낸 모든 사용자를 자동으로 구독자 목록에 추가
             if chat_id:
-                add_subscriber(chat_id)
+                add_subscriber(chat_id, mode=mode)
             
             if not text or not text.startswith("/"):
                 continue
@@ -442,7 +442,7 @@ def process_updates(mode: str) -> None:
             elif command == "/admin":
                 handle_admin_command(chat_id, args, mode)
             elif command == "/stop":
-                if remove_subscriber(chat_id):
+                if remove_subscriber(chat_id, mode=mode):
                     send_message("📴 알림 구독이 해제되었습니다. 다시 알림을 받으시려면 언제든 메시지를 보내주세요.", chat_id=chat_id, mode=mode)
                 else:
                     send_message("⚠️ 구독 정보를 찾을 수 없거나 이미 해지되었습니다.", chat_id=chat_id, mode=mode)

@@ -134,17 +134,16 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict, mode: st
         except Exception:
             pass
             
-        # 2. 관리자 목록
-        target_chat_ids.update(get_all_admins())
+        # 2. 모든 관리자 및 일반 구독자 Chat IDs 수집 (중복 제거)
+        admin_ids = get_all_admins()
+        subscriber_ids = load_subscribers(mode=mode)
+        all_target_ids = list(set(target_chat_ids) | set(admin_ids) | set(subscriber_ids))
         
-        # 3. 일반 구독자 목록
-        target_chat_ids.update(load_subscribers())
-        
-        logger.info("총 %d개의 채널로 알림을 전송합니다.", len(target_chat_ids))
+        logger.info("총 %d개의 채널로 알림을 전송합니다.", len(all_target_ids))
 
         # ── 각 사용자에게 전송 ──
         total_sent = 0
-        for target_id in target_chat_ids:
+        for target_id in all_target_ids:
             try:
                 sent = send_bid_notifications(all_messages, mode=mode, chat_id=target_id)
                 total_sent += sent

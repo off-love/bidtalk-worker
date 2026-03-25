@@ -14,84 +14,96 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
-# subscribers.json 경로 (프로젝트 루트/data/subscribers.json)
-_SUBSCRIBERS_PATH = Path(__file__).parent.parent.parent / "data" / "subscribers.json"
+# 베이스 경로
+_DATA_DIR = Path(__file__).parent.parent.parent / "data"
+
+def _get_path(mode: str) -> Path:
+    """모드별 구독자 파일 경로 반환"""
+    return _DATA_DIR / f"subscribers_{mode}.json"
 
 
-def load_subscribers() -> set[str]:
-    """subscribers.json에서 구독자 Chat ID 목록을 로드합니다.
+def load_subscribers(mode: str = "bid") -> set[str]:
+    """모드별 subscribers_{mode}.json에서 구독자 Chat ID 목록을 로드합니다.
+
+    Args:
+        mode: 실행 모드 (bid 또는 prebid)
 
     Returns:
         구독자 Chat ID의 집합 (str). 파일이 없으면 빈 집합 반환.
     """
-    if not _SUBSCRIBERS_PATH.exists():
+    path = _get_path(mode)
+    if not path.exists():
         return set()
 
     try:
-        with open(_SUBSCRIBERS_PATH, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
         return set(str(item) for item in data.get("subscribers", []))
     except (json.JSONDecodeError, OSError) as e:
-        logger.error("subscribers.json 로드 실패: %s", e)
+        logger.error(f"{path.name} 로드 실패: {e}")
         return set()
 
 
-def save_subscribers(subscribers: set[str]) -> None:
-    """구독자 목록을 subscribers.json에 저장합니다.
+def save_subscribers(subscribers: set[str], mode: str = "bid") -> None:
+    """구독자 목록을 subscribers_{mode}.json에 저장합니다.
 
     Args:
         subscribers: 저장할 구독자 Chat ID 집합
+        mode: 실행 모드 (bid 또는 prebid)
     """
-    _SUBSCRIBERS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    path = _get_path(mode)
+    path.parent.mkdir(parents=True, exist_ok=True)
     try:
-        with open(_SUBSCRIBERS_PATH, "w", encoding="utf-8") as f:
+        with open(path, "w", encoding="utf-8") as f:
             json.dump({"subscribers": sorted(list(subscribers))}, f, ensure_ascii=False, indent=2)
     except OSError as e:
-        logger.error("subscribers.json 저장 실패: %s", e)
+        logger.error(f"{path.name} 저장 실패: {e}")
 
 
-def add_subscriber(chat_id: str) -> bool:
+def add_subscriber(chat_id: str, mode: str = "bid") -> bool:
     """새로운 구독자를 추가합니다.
 
     Args:
         chat_id: 추가할 텔레그램 Chat ID
+        mode: 실행 모드 (bid 또는 prebid)
 
     Returns:
         추가 성공(새로 추가됨) 시 True, 이미 존재하면 False
     """
     chat_id = str(chat_id)
-    subscribers = load_subscribers()
+    subscribers = load_subscribers(mode)
 
     if chat_id in subscribers:
         return False
 
     subscribers.add(chat_id)
-    save_subscribers(subscribers)
-    logger.info("새로운 구독자 자동 등록: %s", chat_id)
+    save_subscribers(subscribers, mode)
+    logger.info(f"새로운 구독자 자동 등록 ({mode}): {chat_id}")
     return True
 
 
-def remove_subscriber(chat_id: str) -> bool:
+def remove_subscriber(chat_id: str, mode: str = "bid") -> bool:
     """구독자를 제거합니다.
 
     Args:
         chat_id: 제거할 텔레그램 Chat ID
+        mode: 실행 모드 (bid 또는 prebid)
 
     Returns:
         제거 성공 시 True, 존재하지 않으면 False
     """
     chat_id = str(chat_id)
-    subscribers = load_subscribers()
+    subscribers = load_subscribers(mode)
     
     if chat_id not in subscribers:
         return False
 
     subscribers.discard(chat_id)
-    save_subscribers(subscribers)
-    logger.info("구독 취소: %s", chat_id)
+    save_subscribers(subscribers, mode)
+    logger.info(f"구독 취소 ({mode}): {chat_id}")
     return True
 
 
-def get_subscriber_count() -> int:
+def get_subscriber_count(mode: str = "bid") -> int:
     """현재 등록된 총 구독자 수를 반환합니다."""
-    return len(load_subscribers())
+    return len(load_subscribers(mode))
