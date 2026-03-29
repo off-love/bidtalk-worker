@@ -164,3 +164,37 @@ class NotifiedRecord:
     notified_at: str              # 알림 발송 시각
     profile: str                  # 프로필명
     notice_type: str = "bid"      # 공고 종류
+
+
+@dataclass
+class BroadcastResult:
+    """브로드캐스트 발송 결과 리포트"""
+    total: int = 0                                          # 전체 대상 수
+    success_count: int = 0                                  # 발송 성공 수
+    fail_count: int = 0                                     # 발송 실패 수
+    blocked_ids: list[str] = field(default_factory=list)     # 차단/탈퇴 사용자
+    error_ids: list[str] = field(default_factory=list)       # 기타 오류 사용자
+    rate_limited_count: int = 0                             # Rate Limit 재시도 횟수
+    elapsed_seconds: float = 0.0                            # 발송 소요 시간(초)
+
+    @property
+    def blocked_count(self) -> int:
+        return len(self.blocked_ids)
+
+    @property
+    def error_count(self) -> int:
+        return len(self.error_ids)
+
+    @property
+    def invalid_ids(self) -> list[str]:
+        """차단 + 오류를 합친 전체 유효하지 않은 ID 목록"""
+        return self.blocked_ids + self.error_ids
+
+    def merge(self, other: "BroadcastResult") -> None:
+        """다른 BroadcastResult를 현재 결과에 병합"""
+        self.success_count += other.success_count
+        self.fail_count += other.fail_count
+        self.blocked_ids.extend(other.blocked_ids)
+        self.error_ids.extend(other.error_ids)
+        self.rate_limited_count += other.rate_limited_count
+        self.elapsed_seconds += other.elapsed_seconds

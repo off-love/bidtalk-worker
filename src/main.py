@@ -18,7 +18,7 @@ from src.core.formatter import (
     format_bid_notice,
     format_summary,
 )
-from src.core.models import AlertProfile
+from src.core.models import AlertProfile, BroadcastResult
 from src.storage.profile_manager import load_profiles
 from src.storage.state_manager import (
     cleanup_old_records,
@@ -29,7 +29,7 @@ from src.storage.state_manager import (
     update_last_check,
 )
 from src.storage.admin_manager import get_all_admins
-from src.storage.subscriber_manager import load_subscribers, remove_subscriber
+from src.storage.subscriber_manager import load_subscribers, remove_subscriber, get_subscriber_count
 from src.telegram_bot import (
     send_message,
     broadcast_message,
@@ -44,6 +44,48 @@ logging.basicConfig(
     datefmt="%Y-%m-%d %H:%M:%S",
 )
 logger = logging.getLogger(__name__)
+
+
+def _log_broadcast_report(result: BroadcastResult) -> None:
+    """브로드캐스트 결과를 구조화하여 로깅합니다."""
+    logger.info(
+        "📊 발송 리포트: 대상 %d명 | 성공 %d | 차단/탈퇴 %d | 오류 %d | "
+        "Rate Limit 재시도 %d회 | 소요 %.1f초",
+        result.total,
+        result.success_count,
+        result.blocked_count,
+        result.error_count,
+        result.rate_limited_count,
+        result.elapsed_seconds,
+    )
+
+
+def _format_admin_dashboard(
+    profile_name: str,
+    bid_count: int,
+    result: BroadcastResult,
+    check_time: str,
+    remaining_subscribers: int,
+) -> str:
+    """슈퍼관리자용 대시보드 메시지를 생성합니다."""
+    lines = [
+        f"📊 <b>입찰공고 알림 리포트</b> ({check_time})",
+        f"├── 프로필: {profile_name}",
+        f"├── 신규 공고: {bid_count}건",
+        f"├── 발송 대상: {result.total}명",
+        f"├── 성공: {result.success_count}명 / 실패: {result.fail_count}명",
+        f"├── 소요 시간: {result.elapsed_seconds}초",
+    ]
+
+    if result.rate_limited_count > 0:
+        lines.append(f"├── ⚠️ Rate Limit 재시도: {result.rate_limited_count}회")
+
+    if result.blocked_count > 0:
+        lines.append(f"├── 🚫 자동 정리: 차단/탈퇴 {result.blocked_count}명")
+
+    lines.append(f"└── 활성 구독자: {remaining_subscribers}명")
+
+    return "\n".join(lines)
 
 
 def process_profile(profile: AlertProfile, state: dict, settings: dict) -> int:
@@ -106,24 +148,52 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> int:
         for sub_id in subscribers:
             target_chat_ids.add(str(sub_id))
 
-        invalid_ids = broadcast_notifications(bid_messages, target_chat_ids=target_chat_ids, mode="bid")
+        # 브로드캐스트 발송 (BroadcastResult 반환)
+        result: BroadcastResult = broadcast_notifications(
+            bid_messages, target_chat_ids=target_chat_ids, mode="bid"
+        )
 
-        for inv_id in invalid_ids:
-            if inv_id in subscribers:
-                remove_subscriber(inv_id, mode="bid")
-                logger.info("차단/탈퇴한 구독자 자동 삭제 완료: %s", inv_id)
+        # ── 상세 발송 리포트 로깅 (Phase 2) ──
+        _log_broadcast_report(result)
 
-        logger.info("발송 완료: 총 %d명 대상 (유효하지 않은 사용자 %d명 제외)", len(target_chat_ids), len(invalid_ids))
+        # ── 차단/탈퇴 사용자 자동 정리 (Phase 2) ──
+        if result.blocked_ids:
+            for inv_id in result.blocked_ids:
+                if inv_id in subscribers:
+                    remove_subscriber(inv_id, mode="bid")
+                    logger.info("차단/탈퇴한 구독자 자동 삭제 완료: %s", inv_id)
 
-        # 요약 메시지
+            # 관리자에게 정리 알림
+            remaining = get_subscriber_count(mode="bid")
+            cleanup_msg = (
+                f"⚠️ <b>자동 정리된 구독자:</b> {result.blocked_count}명\n"
+                f"현재 활성 구독자: {remaining}명"
+            )
+            if super_admin:
+                send_message(cleanup_msg, chat_id=super_admin, mode="bid")
+
+        # ── 요약 메시지 ──
+        check_time = now_kst().strftime("%H:%M")
         summary = format_summary(
             profile_name=profile.name,
             bid_count=len(bid_messages),
-            check_time=now_kst().strftime("%H:%M"),
+            check_time=check_time,
         )
-        filtered_targets = target_chat_ids - set(invalid_ids)
+        filtered_targets = target_chat_ids - set(result.invalid_ids)
         if filtered_targets:
             broadcast_message(summary, target_chat_ids=filtered_targets, mode="bid")
+
+        # ── 슈퍼관리자 대시보드 메시지 (Phase 3) ──
+        if super_admin:
+            remaining = get_subscriber_count(mode="bid")
+            dashboard = _format_admin_dashboard(
+                profile_name=profile.name,
+                bid_count=len(bid_messages),
+                result=result,
+                check_time=check_time,
+                remaining_subscribers=remaining,
+            )
+            send_message(dashboard, chat_id=super_admin, mode="bid")
     else:
         logger.info("신규 알림 없음")
 
