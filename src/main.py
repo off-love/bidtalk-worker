@@ -73,7 +73,7 @@ def _format_admin_dashboard(
         f"├── 프로필: {profile_name}",
         f"├── 신규 공고: {bid_count}건",
         f"├── 발송 대상: {result.total}명",
-        f"├── 성공: {result.success_count}명 / 실패: {result.fail_count}명",
+        f"├── 성공: {result.success_count}건 / 실패: {result.fail_count}건",
         f"├── 소요 시간: {result.elapsed_seconds}초",
     ]
 
@@ -183,8 +183,9 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> int:
         if filtered_targets:
             broadcast_message(summary, target_chat_ids=filtered_targets, mode="bid")
 
-        # ── 슈퍼관리자 대시보드 메시지 (Phase 3) ──
-        if super_admin:
+        # ── 관리자 대시보드 메시지 (슈퍼관리자 + 일반관리자) ──
+        admin_ids_for_dashboard = set(str(aid) for aid in get_all_admins())
+        if admin_ids_for_dashboard:
             remaining = get_subscriber_count(mode="bid")
             dashboard = _format_admin_dashboard(
                 profile_name=profile.name,
@@ -193,7 +194,7 @@ def process_profile(profile: AlertProfile, state: dict, settings: dict) -> int:
                 check_time=check_time,
                 remaining_subscribers=remaining,
             )
-            send_message(dashboard, chat_id=super_admin, mode="bid")
+            broadcast_message(dashboard, target_chat_ids=admin_ids_for_dashboard, mode="bid")
     else:
         logger.info("신규 알림 없음")
 
