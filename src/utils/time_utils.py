@@ -2,7 +2,10 @@
 시간 관련 유틸리티
 
 KST(한국 표준시) 기준 변환, 포맷팅, D-day 계산 등
+기존 나라장터_입찰공고 프로젝트에서 검증된 코드 재활용
 """
+
+from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
 
@@ -55,17 +58,17 @@ def parse_api_dt(dt_str: str) -> datetime | None:
     return None
 
 
-def get_query_range(buffer_hours: int = 1) -> tuple[str, str]:
+def get_query_range(buffer_minutes: int = 30) -> tuple[str, str]:
     """조회 시간 범위를 반환 (시작일시, 종료일시)
 
     Args:
-        buffer_hours: 조회 범위 여유 시간 (기본 1시간)
+        buffer_minutes: 조회 범위 여유 시간 (기본 30분, 10분 cron 간격 대비 여유)
 
     Returns:
         (시작일시, 종료일시) - API 요청 형식 (yyyyMMddHHmm)
     """
     now = now_kst()
-    begin = now - timedelta(hours=buffer_hours)
+    begin = now - timedelta(minutes=buffer_minutes)
     return format_api_dt(begin), format_api_dt(now)
 
 

@@ -1,25 +1,31 @@
 """
-메인 실행 스크립트
+입찰톡 메인 실행 스크립트
 
-GitHub Actions cron 에 의해 30분마다 실행됩니다.
-프로필별로 입찰공고를 조회하고, 필터링 후 텔레그램으로 알림을 보냅니다.
+GitHub Actions에서 10분 간격으로 실행됩니다.
+
+실행 흐름:
+1. state.json 로드 + 오래된 기록 정리
+2. keywords.json 로드
+3. 키워드별 × 업종별 API 호출
+4. 2단계 필터링 (제외 키워드 + 중복 체크)
+5. 신규 공고 → FCM Topic 발송 (업무구분별 토픽)
+6. state.json 업데이트
 """
 
 from __future__ import annotations
 
+import json
 import logging
-import os
 import sys
-from typing import Any
+from pathlib import Path
 
 from src.api.bid_client import fetch_bid_notices
-from src.core.filter import filter_bid_notices
-from src.core.formatter import (
-    format_bid_notice,
-    format_summary,
-)
-from src.core.models import AlertProfile, BroadcastResult
-from src.storage.profile_manager import load_profiles
+from src.api.prebid_client import fetch_prebid_notices
+from src.core.filter import filter_bid_notices, filter_prebid_notices
+from src.core.formatter import format_bid_payload, format_prebid_payload
+from src.core.models import BidType, KeywordConfig
+from src.core.topic_hasher import keyword_hash
+from src.fcm.sender import send_bid_notification
 from src.storage.state_manager import (
     cleanup_old_records,
     is_notified,
@@ -28,236 +34,209 @@ from src.storage.state_manager import (
     save_state,
     update_last_check,
 )
-from src.storage.admin_manager import get_all_admins
-from src.storage.subscriber_manager import load_subscribers, remove_subscriber, get_subscriber_count
-from src.telegram_bot import (
-    send_message,
-    broadcast_message,
-    broadcast_notifications,
-)
-from src.utils.time_utils import now_kst
 
-# 로깅 설정
+# ─── 로깅 설정 ─────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
+    handlers=[logging.StreamHandler(sys.stdout)],
 )
 logger = logging.getLogger(__name__)
 
-
-def _log_broadcast_report(result: BroadcastResult) -> None:
-    """브로드캐스트 결과를 구조화하여 로깅합니다."""
-    logger.info(
-        "📊 발송 리포트: 대상 %d명 | 성공 %d | 차단/탈퇴 %d | 오류 %d | "
-        "Rate Limit 재시도 %d회 | 소요 %.1f초",
-        result.total,
-        result.success_count,
-        result.blocked_count,
-        result.error_count,
-        result.rate_limited_count,
-        result.elapsed_seconds,
-    )
+# ─── 상수 ──────────────────────────────────────────────────────
+KEYWORDS_PATH = Path(__file__).parent.parent / "data" / "keywords.json"
+QUERY_BUFFER_MINUTES = 30  # 10분 cron 간격 + 20분 여유
 
 
-def _format_admin_dashboard(
-    profile_name: str,
-    bid_count: int,
-    result: BroadcastResult,
-    check_time: str,
-    remaining_subscribers: int,
-) -> str:
-    """슈퍼관리자용 대시보드 메시지를 생성합니다."""
-    lines = [
-        f"📊 <b>입찰공고 알림 리포트</b> ({check_time})",
-        f"├── 프로필: {profile_name}",
-        f"├── 신규 공고: {bid_count}건",
-        f"├── 발송 대상: {result.total}명",
-        f"├── 성공: {result.success_count}건 / 실패: {result.fail_count}건",
-        f"├── 소요 시간: {result.elapsed_seconds}초",
-    ]
+def load_keywords() -> list[KeywordConfig]:
+    """keywords.json에서 키워드 목록을 로드합니다."""
+    if not KEYWORDS_PATH.exists():
+        logger.error("keywords.json 파일이 없습니다: %s", KEYWORDS_PATH)
+        return []
 
-    if result.rate_limited_count > 0:
-        lines.append(f"├── ⚠️ Rate Limit 재시도: {result.rate_limited_count}회")
+    with open(KEYWORDS_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-    if result.blocked_count > 0:
-        lines.append(f"├── 🚫 자동 정리: 차단/탈퇴 {result.blocked_count}명")
+    keywords = []
+    for kw_data in data.get("keywords", []):
+        # keyword_hash가 없으면 동적으로 생성
+        kw_hash = kw_data.get("keyword_hash", "")
+        if not kw_hash:
+            kw_hash = keyword_hash(kw_data["original"])
 
-    lines.append(f"└── 활성 구독자: {remaining_subscribers}명")
+        kw = KeywordConfig(
+            original=kw_data["original"],
+            keyword_hash=kw_hash,
+            exclude=kw_data.get("exclude", []),
+            bid_types=kw_data.get("bid_types", ["service", "goods", "construction"]),
+        )
+        keywords.append(kw)
 
-    return "\n".join(lines)
+    # 전역 제외 키워드를 각 키워드에 추가
+    global_exclude = data.get("global_exclude", [])
+    for kw in keywords:
+        kw.exclude = list(set(kw.exclude + global_exclude))
+
+    logger.info("키워드 %d개 로드 완료", len(keywords))
+    return keywords
 
 
-def process_profile(profile: AlertProfile, state: dict, settings: dict) -> int:
-    """단일 프로필을 처리합니다.
-
-    Args:
-        profile: 알림 프로필
-        state: 상태 데이터
-        settings: 전역 설정
+def process_bid_notices(kw: KeywordConfig, state: dict) -> int:
+    """입찰공고 수집 + 필터링 + FCM 발송 (업무구분별 토픽)
 
     Returns:
-        입찰공고 알림 수
+        발송 성공 건수
     """
-    logger.info("━━━ 프로필 처리: %s ━━━", profile.name)
+    sent_count = 0
 
-    bid_messages: list[Any] = []
-    buffer_hours = settings.get("query_buffer_hours", 1)
-    max_results = settings.get("max_results_per_page", 999)
+    for bid_type in kw.bid_type_enums:
+        # 1. API 호출 (1단계 필터)
+        notices = fetch_bid_notices(
+            bid_type=bid_type,
+            keyword=kw.original,
+            buffer_minutes=QUERY_BUFFER_MINUTES,
+        )
 
-    def fetch_all_bids():
-        messages = []
-        seen_keys = set()
-        for bid_type in profile.bid_types:
-            dmnd_cd = profile.demand_agencies.by_code[0] if profile.demand_agencies.by_code else ""
-            keywords = profile.keywords.or_keywords or [""]
-            for kw in keywords:
-                raw_notices = fetch_bid_notices(
-                    bid_type=bid_type,
-                    keyword=kw,
-                    dmnd_instt_cd=dmnd_cd,
-                    buffer_hours=buffer_hours,
-                    max_results=max_results,
+        if not notices:
+            continue
+
+        # 2. 코드 레벨 필터링 (2단계)
+        filtered = filter_bid_notices(
+            notices,
+            keyword=kw.original,
+            exclude_keywords=kw.exclude,
+        )
+
+        # 3. 업무구분별 FCM 토픽으로 발송
+        topic = kw.get_topic("bid", bid_type)
+
+        for notice in filtered:
+            if is_notified(state, notice.unique_key, "bid"):
+                continue
+
+            # FCM 페이로드 생성
+            payload = format_bid_payload(notice, kw.original)
+
+            # FCM Topic 발송 (업무구분별 토픽)
+            success = send_bid_notification(topic, payload)
+
+            if success:
+                mark_notified(state, notice.unique_key, kw.original, "bid")
+                sent_count += 1
+                logger.info(
+                    "📱 입찰 알림 발송: [%s/%s] %s → %s",
+                    kw.original, bid_type.display_name, notice.bid_ntce_nm, topic,
                 )
-                filtered = filter_bid_notices(raw_notices, profile)
-                for notice in filtered:
-                    if notice.unique_key in seen_keys: continue
-                    seen_keys.add(notice.unique_key)
-                    if is_notified(state, notice.unique_key, "bid"): continue
-                    msg = format_bid_notice(notice, profile.name, matched_keyword=kw)
-                    messages.append({"text": msg})
-                    mark_notified(state, notice.unique_key, profile.name, "bid")
-        return messages
+            else:
+                logger.warning(
+                    "❌ 입찰 알림 실패: [%s/%s] %s",
+                    kw.original, bid_type.display_name, notice.bid_ntce_nm,
+                )
 
-    bid_messages = fetch_all_bids()
+    return sent_count
 
-    # ── 텔레그램 발송 ──
-    if bid_messages:
-        logger.info("알림 발송: 입찰 %d건", len(bid_messages))
 
-        # 전송 대상 수집: 슈퍼관리자 + 일반관리자 + 구독자 (중복 제거)
-        super_admin = os.environ.get("SUPER_ADMIN_CHAT_ID", "")
-        admin_ids = get_all_admins()
-        subscribers = load_subscribers(mode="bid")
+def process_prebid_notices(kw: KeywordConfig, state: dict) -> int:
+    """사전규격 수집 + 필터링 + FCM 발송 (업무구분별 토픽)
 
-        target_chat_ids = set()
-        if super_admin:
-            target_chat_ids.add(str(super_admin))
-        for aid in admin_ids:
-            target_chat_ids.add(str(aid))
-        for sub_id in subscribers:
-            target_chat_ids.add(str(sub_id))
+    Returns:
+        발송 성공 건수
+    """
+    sent_count = 0
 
-        # 브로드캐스트 발송 (BroadcastResult 반환)
-        result: BroadcastResult = broadcast_notifications(
-            bid_messages, target_chat_ids=target_chat_ids, mode="bid"
+    for bid_type in kw.bid_type_enums:
+        # 1. API 호출
+        notices = fetch_prebid_notices(
+            bid_type=bid_type,
+            keyword=kw.original,
+            buffer_minutes=QUERY_BUFFER_MINUTES,
         )
 
-        # ── 상세 발송 리포트 로깅 (Phase 2) ──
-        _log_broadcast_report(result)
+        if not notices:
+            continue
 
-        # ── 차단/탈퇴 사용자 자동 정리 (Phase 2) ──
-        if result.blocked_ids:
-            for inv_id in result.blocked_ids:
-                if inv_id in subscribers:
-                    remove_subscriber(inv_id, mode="bid")
-                    logger.info("차단/탈퇴한 구독자 자동 삭제 완료: %s", inv_id)
-
-            # 관리자에게 정리 알림
-            remaining = get_subscriber_count(mode="bid")
-            cleanup_msg = (
-                f"⚠️ <b>자동 정리된 구독자:</b> {result.blocked_count}명\n"
-                f"현재 활성 구독자: {remaining}명"
-            )
-            if super_admin:
-                send_message(cleanup_msg, chat_id=super_admin, mode="bid")
-
-        # ── 요약 메시지 ──
-        check_time = now_kst().strftime("%H:%M")
-        summary = format_summary(
-            profile_name=profile.name,
-            bid_count=len(bid_messages),
-            check_time=check_time,
+        # 2. 코드 레벨 필터링
+        filtered = filter_prebid_notices(
+            notices,
+            keyword=kw.original,
+            exclude_keywords=kw.exclude,
         )
-        filtered_targets = target_chat_ids - set(result.invalid_ids)
-        if filtered_targets:
-            broadcast_message(summary, target_chat_ids=filtered_targets, mode="bid")
 
-        # ── 관리자 대시보드 메시지 (슈퍼관리자 + 일반관리자) ──
-        admin_ids_for_dashboard = set(str(aid) for aid in get_all_admins())
-        if admin_ids_for_dashboard:
-            remaining = get_subscriber_count(mode="bid")
-            dashboard = _format_admin_dashboard(
-                profile_name=profile.name,
-                bid_count=len(bid_messages),
-                result=result,
-                check_time=check_time,
-                remaining_subscribers=remaining,
-            )
-            broadcast_message(dashboard, target_chat_ids=admin_ids_for_dashboard, mode="bid")
-    else:
-        logger.info("신규 알림 없음")
+        # 3. 업무구분별 FCM 토픽으로 발송
+        topic = kw.get_topic("pre", bid_type)
 
-    return len(bid_messages)
+        for notice in filtered:
+            if is_notified(state, notice.unique_key, "prebid"):
+                continue
+
+            payload = format_prebid_payload(notice, kw.original)
+            success = send_bid_notification(topic, payload)
+
+            if success:
+                mark_notified(state, notice.unique_key, kw.original, "prebid")
+                sent_count += 1
+                logger.info(
+                    "📱 사전규격 알림 발송: [%s/%s] %s → %s",
+                    kw.original, bid_type.display_name, notice.prcure_nm, topic,
+                )
+            else:
+                logger.warning(
+                    "❌ 사전규격 알림 실패: [%s/%s] %s",
+                    kw.original, bid_type.display_name, notice.prcure_nm,
+                )
+
+    return sent_count
 
 
 def main() -> None:
-    """메인 실행"""
-    logger.info("=" * 50)
-    logger.info("나라장터 입찰공고 알림 서비스 시작")
-    logger.info("=" * 50)
+    """메인 실행 함수"""
+    logger.info("=" * 60)
+    logger.info("🚀 입찰톡 공고 체크 시작")
+    logger.info("=" * 60)
 
-    try:
-        # 프로필 로드
-        profiles, settings_obj = load_profiles()
-        settings = {
-            "query_buffer_hours": settings_obj.query_buffer_hours,
-            "max_results_per_page": settings_obj.max_results_per_page,
-        }
+    # 1. 상태 로드 + 정리
+    state = load_state()
+    removed = cleanup_old_records(state)
+    if removed > 0:
+        logger.info("오래된 기록 %d건 정리", removed)
 
-        if not profiles:
-            logger.warning("활성 프로필이 없습니다. profiles.yaml을 확인하세요.")
-            return
+    # 2. 키워드 로드
+    keywords = load_keywords()
+    if not keywords:
+        logger.warning("처리할 키워드가 없습니다. 종료합니다.")
+        return
 
-        logger.info("활성 프로필 %d개 로드 완료", len(profiles))
+    # 3. 키워드별 처리
+    total_bid_sent = 0
+    total_prebid_sent = 0
 
-        # 상태 로드
-        state = load_state()
+    for i, kw in enumerate(keywords, 1):
+        logger.info(
+            "━━━ [%d/%d] 키워드: %s (업종: %s) ━━━",
+            i, len(keywords), kw.original,
+            ", ".join(bt.display_name for bt in kw.bid_type_enums),
+        )
 
-        # 오래된 기록 정리
-        cleanup_old_records(state)
+        # 입찰공고 처리
+        bid_sent = process_bid_notices(kw, state)
+        total_bid_sent += bid_sent
 
-        total_bids = 0
+        # 사전규격 처리
+        prebid_sent = process_prebid_notices(kw, state)
+        total_prebid_sent += prebid_sent
 
-        # 프로필별 처리
-        for profile in profiles:
-            try:
-                bid_count = process_profile(profile, state, settings)
-                total_bids += bid_count
-            except Exception as e:
-                logger.error("프로필 '%s' 처리 오류: %s", profile.name, e, exc_info=True)
-                try:
-                    send_message(
-                        f"⚠️ 프로필 '{profile.name}' 처리 중 오류 발생: {e}", mode="bid"
-                    )
-                except Exception:
-                    pass
+    # 4. 상태 저장
+    update_last_check(state)
+    save_state(state)
 
-        # 상태 저장
-        update_last_check(state)
-        save_state(state)
-
-        logger.info("=" * 50)
-        logger.info("전체 완료: 입찰공고 %d건 알림", total_bids)
-        logger.info("=" * 50)
-
-    except Exception as e:
-        logger.critical("치명적 오류: %s", e, exc_info=True)
-        try:
-            send_message(f"🚨 나라장터 알림 서비스 오류: {e}", mode="bid")
-        except Exception:
-            pass
-        sys.exit(1)
+    # 5. 요약 로그
+    logger.info("=" * 60)
+    logger.info("✅ 공고 체크 완료")
+    logger.info("   키워드 수: %d", len(keywords))
+    logger.info("   입찰공고 알림: %d건", total_bid_sent)
+    logger.info("   사전규격 알림: %d건", total_prebid_sent)
+    logger.info("=" * 60)
 
 
 if __name__ == "__main__":

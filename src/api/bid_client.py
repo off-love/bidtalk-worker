@@ -1,8 +1,8 @@
 """
-입찰공고정보서비스 API 클라이언트 (data.go.kr/15000766)
+입찰공고정보서비스 API 클라이언트 (data.go.kr)
 
 나라장터 입찰공고를 업종별(물품/용역/공사/외자)로 조회합니다.
-키워드(bidNtceNm) 및 수요기관(dmndInsttCd)으로 API 레벨 필터링을 지원합니다.
+기존 나라장터_입찰공고 프로젝트에서 검증된 코드 재활용.
 """
 
 from __future__ import annotations
@@ -34,10 +34,7 @@ def _get_api_key() -> str:
 
 
 def _build_operation_name(bid_type: BidType) -> str:
-    """업종별 API 오퍼레이션 이름 생성
-
-    예: BidType.SERVICE → 'getBidPblancListInfoServc'
-    """
+    """업종별 API 오퍼레이션 이름 생성"""
     return f"getBidPblancListInfo{bid_type.api_suffix}"
 
 
@@ -46,7 +43,6 @@ def _parse_price(value: Any) -> int:
     if value is None:
         return 0
     try:
-        # '150000000' 또는 '150,000,000' 형태 지원
         return int(str(value).replace(",", "").strip() or "0")
     except (ValueError, TypeError):
         return 0
@@ -90,74 +86,8 @@ def _parse_bid_notice(item: dict[str, Any], bid_type: BidType) -> BidNotice:
     )
 
 
-def _fetch_page(
-    bid_type: BidType,
-    page_no: int = 1,
-    num_of_rows: int = 999,
-    inqry_bgn_dt: str = "",
-    inqry_end_dt: str = "",
-    bid_ntce_nm: str = "",
-    dmnd_instt_cd: str = "",
-) -> dict[str, Any]:
-    """API 한 페이지 호출
-
-    Returns:
-        API 응답 JSON (dict)
-
-    Raises:
-        requests.RequestException: HTTP 오류 시
-        ValueError: 응답 파싱 오류 시
-    """
-    operation = _build_operation_name(bid_type)
-    url = f"{BASE_URL}/{operation}"
-
-    params: dict[str, Any] = {
-        "ServiceKey": _get_api_key(),
-        "type": "json",
-        "pageNo": str(page_no),
-        "numOfRows": str(num_of_rows),
-        "inqryDiv": "1",  # 공고일시 기준
-    }
-
-    if inqry_bgn_dt:
-        params["inqryBgnDt"] = inqry_bgn_dt
-    if inqry_end_dt:
-        params["inqryEndDt"] = inqry_end_dt
-    if bid_ntce_nm:
-        params["bidNtceNm"] = bid_ntce_nm
-    if dmnd_instt_cd:
-        params["dmndInsttCd"] = dmnd_instt_cd
-
-    logger.info(
-        "API 호출: %s (키워드=%s, 기관=%s, 기간=%s~%s, page=%d)",
-        operation, bid_ntce_nm or "전체", dmnd_instt_cd or "전체",
-        inqry_bgn_dt, inqry_end_dt, page_no,
-    )
-
-    response = requests.get(url, params=params, timeout=30)
-    response.raise_for_status()
-
-    data = response.json()
-    return data
-
-
 def _extract_items(response_data: dict[str, Any]) -> tuple[list[dict], int]:
-    """API 응답에서 아이템 목록과 전체 건수를 추출
-
-    나라장터 API 응답 구조:
-    {
-      "response": {
-        "body": {
-          "items": [...],
-          "totalCount": N
-        },
-        "header": {
-          "resultCode": "00",
-          "resultMsg": "NORMAL SERVICE."
-        }
-      }
-    }
-    """
+    """API 응답에서 아이템 목록과 전체 건수를 추출"""
     response = response_data.get("response", {})
     header = response.get("header", {})
     result_code = str(header.get("resultCode", ""))
@@ -185,8 +115,7 @@ def _extract_items(response_data: dict[str, Any]) -> tuple[list[dict], int]:
 def fetch_bid_notices(
     bid_type: BidType,
     keyword: str = "",
-    dmnd_instt_cd: str = "",
-    buffer_hours: int = 1,
+    buffer_minutes: int = 30,
     max_results: int = 999,
 ) -> list[BidNotice]:
     """입찰공고 목록을 조회합니다.
@@ -194,29 +123,43 @@ def fetch_bid_notices(
     Args:
         bid_type: 입찰 유형 (용역/물품/공사/외자)
         keyword: 공고명 키워드 (bidNtceNm 파라미터)
-        dmnd_instt_cd: 수요기관 코드 (API 레벨 필터)
-        buffer_hours: 조회 범위 (최근 N시간)
+        buffer_minutes: 조회 범위 (최근 N분)
         max_results: 최대 결과 수
 
     Returns:
         BidNotice 리스트
     """
-    bgn_dt, end_dt = get_query_range(buffer_hours)
+    bgn_dt, end_dt = get_query_range(buffer_minutes)
     all_notices: list[BidNotice] = []
     page_no = 1
 
     while True:
         try:
-            data = _fetch_page(
-                bid_type=bid_type,
-                page_no=page_no,
-                num_of_rows=min(max_results, 999),
-                inqry_bgn_dt=bgn_dt,
-                inqry_end_dt=end_dt,
-                bid_ntce_nm=keyword,
-                dmnd_instt_cd=dmnd_instt_cd,
+            operation = _build_operation_name(bid_type)
+            url = f"{BASE_URL}/{operation}"
+
+            params: dict[str, Any] = {
+                "ServiceKey": _get_api_key(),
+                "type": "json",
+                "pageNo": str(page_no),
+                "numOfRows": str(min(max_results, 999)),
+                "inqryDiv": "1",  # 공고일시 기준
+                "inqryBgnDt": bgn_dt,
+                "inqryEndDt": end_dt,
+            }
+
+            if keyword:
+                params["bidNtceNm"] = keyword
+
+            logger.info(
+                "입찰 API 호출: %s (키워드=%s, 기간=%s~%s, page=%d)",
+                operation, keyword or "전체", bgn_dt, end_dt, page_no,
             )
 
+            response = requests.get(url, params=params, timeout=30)
+            response.raise_for_status()
+
+            data = response.json()
             items, total_count = _extract_items(data)
 
             if not items:
@@ -231,7 +174,6 @@ def fetch_bid_notices(
                 len(items), page_no, total_count,
             )
 
-            # 다음 페이지가 있는지 확인
             if len(all_notices) >= total_count or len(all_notices) >= max_results:
                 break
 
@@ -239,69 +181,14 @@ def fetch_bid_notices(
             time.sleep(0.3)  # API 부하 방지
 
         except requests.RequestException as e:
-            logger.error("API 호출 실패 (page=%d): %s", page_no, e)
+            logger.error("입찰 API 호출 실패 (page=%d): %s", page_no, e)
             break
         except (ValueError, KeyError) as e:
-            logger.error("API 응답 파싱 오류 (page=%d): %s", page_no, e)
+            logger.error("입찰 API 응답 파싱 오류 (page=%d): %s", page_no, e)
             break
 
     logger.info(
-        "조회 완료: %s %s → %d건",
+        "입찰 조회 완료: %s %s → %d건",
         bid_type.display_name, keyword or "(전체)", len(all_notices),
     )
     return all_notices
-
-
-def fetch_bid_notices_multi_keywords(
-    bid_type: BidType,
-    keywords: list[str],
-    dmnd_instt_cd: str = "",
-    buffer_hours: int = 1,
-    max_results: int = 999,
-) -> list[BidNotice]:
-    """여러 키워드로 OR 조건 조회 후 결과를 합칩니다.
-
-    각 키워드로 개별 API 호출 → 결과 합침 → 중복 제거 (bidNtceNo+bidNtceOrd 기준)
-
-    Args:
-        bid_type: 입찰 유형
-        keywords: OR 조건 키워드 목록
-        dmnd_instt_cd: 수요기관 코드
-        buffer_hours: 조회 범위
-        max_results: 키워드당 최대 결과 수
-
-    Returns:
-        중복 제거된 BidNotice 리스트
-    """
-    if not keywords:
-        # 키워드 없으면 전체 조회
-        return fetch_bid_notices(
-            bid_type=bid_type,
-            dmnd_instt_cd=dmnd_instt_cd,
-            buffer_hours=buffer_hours,
-            max_results=max_results,
-        )
-
-    seen_keys: set[str] = set()
-    merged: list[BidNotice] = []
-
-    for keyword in keywords:
-        notices = fetch_bid_notices(
-            bid_type=bid_type,
-            keyword=keyword,
-            dmnd_instt_cd=dmnd_instt_cd,
-            buffer_hours=buffer_hours,
-            max_results=max_results,
-        )
-        for notice in notices:
-            if notice.unique_key not in seen_keys:
-                seen_keys.add(notice.unique_key)
-                merged.append(notice)
-
-        time.sleep(0.3)  # 키워드 간 간격
-
-    logger.info(
-        "OR 조건 통합: %s 키워드 %d개 → 중복 제거 후 %d건",
-        bid_type.display_name, len(keywords), len(merged),
-    )
-    return merged

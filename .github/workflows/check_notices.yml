@@ -1,26 +1,25 @@
-name: 나라장터 입찰공고 체크
+name: 입찰알리미 공고 체크
 
 on:
   schedule:
-    - cron: '*/30 * * * *'  # 매 30분
+    - cron: '*/10 * * * *'  # 10분마다 실행
   workflow_dispatch:          # 수동 실행
 
 permissions:
-  contents: write             # state.json 커밋
+  contents: write             # state.json 커밋 권한
 
 concurrency:
-  group: bid-check
+  group: notice-check
   cancel-in-progress: false   # 진행 중인 작업은 완료 대기
 
 env:
   G2B_API_KEY: ${{ secrets.G2B_API_KEY }}
-  TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-  TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-  SUPER_ADMIN_CHAT_ID: ${{ secrets.SUPER_ADMIN_CHAT_ID }}
+  G2B_PREBID_API_KEY: ${{ secrets.G2B_PREBID_API_KEY }}
+  FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
   TZ: Asia/Seoul
 
 jobs:
-  check-bids:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,17 +33,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Telegram Update Handler
-        run: python -m src.update_handler
-
-      - name: Run bid checker
+      - name: Run notice checker
         run: python -m src.main
 
       - name: Commit state changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ config/
-          git diff --cached --quiet || git commit -m "chore: update state and profiles [skip ci]"
+          git add data/
+          git diff --cached --quiet || git commit -m "chore: update state [skip ci]"
           git pull --rebase origin main || git rebase --abort
           git push || echo "Push failed, will retry next run"

@@ -2,6 +2,7 @@
 상태 관리자 — 알림 이력 (중복 방지)
 
 data/state.json 파일을 읽고 쓰며 이미 알림을 보낸 공고를 추적합니다.
+기존 나라장터_입찰공고 프로젝트에서 검증된 코드 재활용.
 """
 
 from __future__ import annotations
@@ -11,7 +12,6 @@ import logging
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from src.core.models import NotifiedRecord
 from src.utils.time_utils import KST, now_iso
 
 logger = logging.getLogger(__name__)
@@ -30,6 +30,7 @@ def _ensure_file(path: Path) -> None:
             json.dump({
                 "last_check": "",
                 "notified_bids": {},
+                "notified_prebids": {},
             }, f, ensure_ascii=False, indent=2)
 
 
@@ -39,7 +40,13 @@ def load_state(path: Path | None = None) -> dict:
         path = DEFAULT_STATE_PATH
     _ensure_file(path)
     with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        state = json.load(f)
+    # 필드 기본값 보장
+    if "notified_bids" not in state:
+        state["notified_bids"] = {}
+    if "notified_prebids" not in state:
+        state["notified_prebids"] = {}
+    return state
 
 
 def save_state(state: dict, path: Path | None = None) -> None:
@@ -53,21 +60,23 @@ def save_state(state: dict, path: Path | None = None) -> None:
 
 def is_notified(state: dict, unique_key: str, notice_type: str = "bid") -> bool:
     """이미 알림을 보낸 공고인지 확인"""
-    return unique_key in state.get("notified_bids", {})
+    section = "notified_bids" if notice_type == "bid" else "notified_prebids"
+    return unique_key in state.get(section, {})
 
 
 def mark_notified(
     state: dict,
     unique_key: str,
-    profile_name: str,
+    keyword: str,
     notice_type: str = "bid",
 ) -> None:
     """알림 발송 기록 추가"""
-    if "notified_bids" not in state:
-        state["notified_bids"] = {}
-    state["notified_bids"][unique_key] = {
+    section = "notified_bids" if notice_type == "bid" else "notified_prebids"
+    if section not in state:
+        state[section] = {}
+    state[section][unique_key] = {
         "notified_at": now_iso(),
-        "profile": profile_name,
+        "keyword": keyword,
         "notice_type": notice_type,
     }
 
@@ -86,7 +95,7 @@ def cleanup_old_records(state: dict, days: int = CLEANUP_DAYS) -> int:
     cutoff = datetime.now(KST) - timedelta(days=days)
     removed = 0
 
-    for section in ("notified_bids",):
+    for section in ("notified_bids", "notified_prebids"):
         records = state.get(section, {})
         keys_to_remove = []
 
