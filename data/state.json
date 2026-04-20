@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-04-20T22:20:56.790545+09:00",
+  "last_check": "2026-04-21T00:06:11.399209+09:00",
   "notified_bids": {
     "R26BK01472635-000": {
       "notified_at": "2026-04-19T16:42:19.465911+09:00",
@@ -1225,6 +1225,16 @@
       "notified_at": "2026-04-20T22:19:59.261997+09:00",
       "keyword": "전기",
       "notice_type": "bid"
+    },
+    "R26BK01477770-000": {
+      "notified_at": "2026-04-21T00:01:11.362891+09:00",
+      "keyword": "건축",
+      "notice_type": "bid"
+    },
+    "R26BK01477782-000": {
+      "notified_at": "2026-04-21T00:03:29.530691+09:00",
+      "keyword": "유지보수",
+      "notice_type": "bid"
     }
   },
   "notified_prebids": {
@@ -1321,6 +1331,46 @@
     "R26BD00216596": {
       "notified_at": "2026-04-20T17:37:22.032234+09:00",
       "keyword": "의료",
+      "notice_type": "prebid"
+    },
+    "R26BD00216711": {
+      "notified_at": "2026-04-21T00:00:56.219793+09:00",
+      "keyword": "시설물",
+      "notice_type": "prebid"
+    },
+    "R26BD00216709": {
+      "notified_at": "2026-04-21T00:01:21.026093+09:00",
+      "keyword": "설계",
+      "notice_type": "prebid"
+    },
+    "R26BD00216719": {
+      "notified_at": "2026-04-21T00:01:48.040380+09:00",
+      "keyword": "출입통제",
+      "notice_type": "prebid"
+    },
+    "R26BD00216708": {
+      "notified_at": "2026-04-21T00:02:10.749887+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid"
+    },
+    "R26BD00216714": {
+      "notified_at": "2026-04-21T00:02:10.980177+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid"
+    },
+    "R26BD00216718": {
+      "notified_at": "2026-04-21T00:02:11.415258+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid"
+    },
+    "R26BD00216710": {
+      "notified_at": "2026-04-21T00:05:16.725701+09:00",
+      "keyword": "전기",
+      "notice_type": "prebid"
+    },
+    "R26BD00216721": {
+      "notified_at": "2026-04-21T00:05:16.977698+09:00",
+      "keyword": "전기",
       "notice_type": "prebid"
     }
   }
