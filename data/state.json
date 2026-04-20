@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-04-20T08:59:27.537993+09:00",
+  "last_check": "2026-04-20T12:47:39.205698+09:00",
   "notified_bids": {
     "R26BK01472635-000": {
       "notified_at": "2026-04-19T16:42:19.465911+09:00",
@@ -50,6 +50,41 @@
       "notified_at": "2026-04-20T08:58:23.357125+09:00",
       "keyword": "소방",
       "notice_type": "bid"
+    },
+    "R26BK01475448-000": {
+      "notified_at": "2026-04-20T12:42:40.318169+09:00",
+      "keyword": "건축",
+      "notice_type": "bid"
+    },
+    "R26BK01475463-000": {
+      "notified_at": "2026-04-20T12:42:45.675702+09:00",
+      "keyword": "설계",
+      "notice_type": "bid"
+    },
+    "R26BK01475503-000": {
+      "notified_at": "2026-04-20T12:43:31.407772+09:00",
+      "keyword": "용역",
+      "notice_type": "bid"
+    },
+    "R26BK01475474-000": {
+      "notified_at": "2026-04-20T12:43:31.626639+09:00",
+      "keyword": "용역",
+      "notice_type": "bid"
+    },
+    "R26BK01475569-000": {
+      "notified_at": "2026-04-20T12:43:45.423324+09:00",
+      "keyword": "교육",
+      "notice_type": "bid"
+    },
+    "R26BK01474275-000": {
+      "notified_at": "2026-04-20T12:45:27.929743+09:00",
+      "keyword": "조사",
+      "notice_type": "bid"
+    },
+    "R26BK01474933-001": {
+      "notified_at": "2026-04-20T12:46:15.449097+09:00",
+      "keyword": "방수",
+      "notice_type": "bid"
     }
   },
   "notified_prebids": {
@@ -96,6 +131,11 @@
     "R26BD00216008": {
       "notified_at": "2026-04-20T08:59:07.161721+09:00",
       "keyword": "차량",
+      "notice_type": "prebid"
+    },
+    "R26BD00216199": {
+      "notified_at": "2026-04-20T12:46:19.998199+09:00",
+      "keyword": "방수",
       "notice_type": "prebid"
     }
   }
