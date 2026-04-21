@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -46,7 +47,26 @@ logger = logging.getLogger(__name__)
 
 # ─── 상수 ──────────────────────────────────────────────────────
 KEYWORDS_PATH = Path(__file__).parent.parent / "data" / "keywords.json"
+FIREBASE_CREDENTIALS_PATH = Path(__file__).parent.parent / "firebase-credentials.json"
 QUERY_BUFFER_MINUTES = 30  # 10분 cron 간격 + 20분 여유
+
+
+def validate_runtime_config() -> None:
+    """운영 실행에 필요한 필수 설정을 검증합니다."""
+    missing: list[str] = []
+
+    if not os.environ.get("G2B_API_KEY", "").strip():
+        missing.append("G2B_API_KEY")
+
+    has_firebase_env = bool(os.environ.get("FIREBASE_CREDENTIALS", "").strip())
+    has_firebase_file = FIREBASE_CREDENTIALS_PATH.exists()
+    if not has_firebase_env and not has_firebase_file:
+        missing.append("FIREBASE_CREDENTIALS or server/firebase-credentials.json")
+
+    if missing:
+        raise RuntimeError(
+            "필수 런타임 설정이 누락되었습니다: " + ", ".join(missing)
+        )
 
 
 def load_keywords() -> list[KeywordConfig]:
@@ -194,6 +214,8 @@ def main() -> None:
     logger.info("=" * 60)
     logger.info("🚀 입찰톡 공고 체크 시작")
     logger.info("=" * 60)
+
+    validate_runtime_config()
 
     # 1. 상태 로드 + 정리
     state = load_state()

@@ -130,6 +130,7 @@ def fetch_bid_notices(
         BidNotice 리스트
     """
     bgn_dt, end_dt = get_query_range(buffer_minutes)
+    api_key = _get_api_key()
     all_notices: list[BidNotice] = []
     page_no = 1
 
@@ -139,7 +140,7 @@ def fetch_bid_notices(
             url = f"{BASE_URL}/{operation}"
 
             params: dict[str, Any] = {
-                "ServiceKey": _get_api_key(),
+                "ServiceKey": api_key,
                 "type": "json",
                 "pageNo": str(page_no),
                 "numOfRows": str(min(max_results, 999)),

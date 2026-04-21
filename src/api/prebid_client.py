@@ -110,6 +110,7 @@ def fetch_prebid_notices(
         PreBidNotice 리스트
     """
     bgn_dt, end_dt = get_query_range(buffer_minutes)
+    api_key = _get_api_key()
     all_notices: list[PreBidNotice] = []
     page_no = 1
 
@@ -119,7 +120,7 @@ def fetch_prebid_notices(
             url = f"{BASE_URL}/{operation}"
 
             params = {
-                "ServiceKey": _get_api_key(),
+                "ServiceKey": api_key,
                 "type": "json",
                 "pageNo": str(page_no),
                 "numOfRows": str(min(max_results, 999)),
@@ -179,8 +180,11 @@ def fetch_prebid_notices(
             page_no += 1
             time.sleep(0.3)
 
-        except Exception as e:
-            logger.error("사전규격 API 호출 중 오류 발생: %s", e)
+        except requests.RequestException as e:
+            logger.error("사전규격 API 호출 실패 (page=%d): %s", page_no, e)
+            break
+        except (ValueError, KeyError, TypeError) as e:
+            logger.error("사전규격 API 응답 파싱 오류 (page=%d): %s", page_no, e)
             break
 
     logger.info("사전규격 조회 완료: %s %s → %d건", bid_type.display_name, keyword or "(전체)", len(all_notices))

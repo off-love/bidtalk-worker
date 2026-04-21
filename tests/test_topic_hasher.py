@@ -22,49 +22,51 @@ from src.core.topic_hasher import get_all_topic_names, topic_name
 
 def test_basic_keyword():
     """기본 한글 키워드 해시"""
-    result = topic_name("CCTV", "bid")
+    result = topic_name("CCTV", "bid", "s")
     assert result.startswith("bid_"), f"접두사 오류: {result}"
-    assert len(result) == 4 + 16, f"길이 오류: {len(result)} (expected 20)"
+    assert len(result) == 6 + 16, f"길이 오류: {len(result)} (expected 22)"
     # CCTV는 대소문자 무관하게 동일해야 함
-    assert topic_name("CCTV", "bid") == topic_name("cctv", "bid")
+    assert topic_name("CCTV", "bid", "s") == topic_name("cctv", "bid", "s")
 
 
 def test_korean_keyword():
     """한글 키워드 해시"""
-    result = topic_name("소프트웨어", "bid")
+    result = topic_name("소프트웨어", "bid", "s")
     assert result.startswith("bid_")
-    assert len(result) == 20
+    assert len(result) == 22
 
 
 def test_prebid_prefix():
     """사전규격 접두사"""
-    bid = topic_name("CCTV", "bid")
-    pre = topic_name("CCTV", "pre")
+    bid = topic_name("CCTV", "bid", "s")
+    pre = topic_name("CCTV", "pre", "s")
     assert bid.startswith("bid_")
     assert pre.startswith("pre_")
     # 해시 부분은 동일해야 함
-    assert bid[4:] == pre[4:]
+    assert bid.split("_", 2)[2] == pre.split("_", 2)[2]
 
 
 def test_whitespace_normalization():
     """앞뒤 공백 제거 후 동일 해시"""
-    assert topic_name("CCTV", "bid") == topic_name("  CCTV  ", "bid")
-    assert topic_name("소프트웨어", "bid") == topic_name(" 소프트웨어 ", "bid")
+    assert topic_name("CCTV", "bid", "s") == topic_name("  CCTV  ", "bid", "s")
+    assert topic_name("소프트웨어", "bid", "s") == topic_name(" 소프트웨어 ", "bid", "s")
 
 
 def test_case_normalization():
     """대소문자 무관 동일 해시"""
-    assert topic_name("AI", "bid") == topic_name("ai", "bid")
-    assert topic_name("Cctv", "bid") == topic_name("cctv", "bid")
+    assert topic_name("AI", "bid", "s") == topic_name("ai", "bid", "s")
+    assert topic_name("Cctv", "bid", "s") == topic_name("cctv", "bid", "s")
 
 
 def test_get_all_topic_names():
     """bid + pre 동시 조회"""
     result = get_all_topic_names("CCTV")
-    assert "bid_topic" in result
-    assert "pre_topic" in result
-    assert result["bid_topic"].startswith("bid_")
-    assert result["pre_topic"].startswith("pre_")
+    assert "bid_s" in result
+    assert "bid_c" in result
+    assert "bid_g" in result
+    assert "pre_s" in result
+    assert result["bid_s"].startswith("bid_s_")
+    assert result["pre_s"].startswith("pre_s_")
 
 
 def test_fcm_topic_safe_characters():
@@ -78,8 +80,8 @@ def test_fcm_topic_safe_characters():
     ]
 
     for kw in test_keywords:
-        bid = topic_name(kw, "bid")
-        pre = topic_name(kw, "pre")
+        bid = topic_name(kw, "bid", "s")
+        pre = topic_name(kw, "pre", "s")
         assert fcm_pattern.match(bid), f"FCM 규칙 위반: {bid} (keyword: {kw})"
         assert fcm_pattern.match(pre), f"FCM 규칙 위반: {pre} (keyword: {kw})"
 
@@ -98,10 +100,10 @@ def test_known_hashes():
     }
 
     for keyword, expected_hash in known.items():
-        result = topic_name(keyword, "bid")
-        assert result == f"bid_{expected_hash}", (
+        result = topic_name(keyword, "bid", "s")
+        assert result == f"bid_s_{expected_hash}", (
             f"해시 불일치! keyword={keyword}, "
-            f"expected=bid_{expected_hash}, got={result}"
+            f"expected=bid_s_{expected_hash}, got={result}"
         )
 
 

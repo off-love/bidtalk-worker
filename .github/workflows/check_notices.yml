@@ -25,6 +25,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate required secrets
+        run: |
+          test -n "${G2B_API_KEY}" || { echo "G2B_API_KEY secret is missing"; exit 1; }
+          test -n "${FIREBASE_CREDENTIALS}" || { echo "FIREBASE_CREDENTIALS secret is missing"; exit 1; }
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:

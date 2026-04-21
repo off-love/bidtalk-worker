@@ -38,12 +38,15 @@ def test_topic_hasher():
         ("ai", "32e83e92d45d71f6"),
     ]
     for kw, expected in tests:
-        result = topic_name(kw, "bid")
-        status = "✅" if result == f"bid_{expected}" else "❌"
+        result = topic_name(kw, "bid", "s")
+        status = "✅" if result == f"bid_s_{expected}" else "❌"
         logger.info(f"  {status} {kw:12s} → {result}")
 
     topics = get_all_topic_names("CCTV")
-    logger.info(f"  ✅ allTopics: bid={topics['bid_topic']}, pre={topics['pre_topic']}")
+    logger.info(
+        "  ✅ allTopics: bid_s=%s, bid_c=%s, bid_g=%s, pre_s=%s",
+        topics["bid_s"], topics["bid_c"], topics["bid_g"], topics["pre_s"],
+    )
     return True
 
 
@@ -68,6 +71,8 @@ def test_time_utils():
 
 def test_keywords_json():
     """3. keywords.json 로드 테스트"""
+    from src.core.topic_hasher import topic_name
+
     logger.info("━━━ 3. keywords.json 테스트 ━━━")
     keywords_path = project_root / "data" / "keywords.json"
 
@@ -80,10 +85,15 @@ def test_keywords_json():
 
     # 첫 3개 키워드 출력
     for kw in keywords[:3]:
-        logger.info(f"     {kw['original']:12s} → bid={kw['bid_topic']}")
+        logger.info(
+            "     %s → hash=%s, bid_s=%s",
+            f"{kw['original']:12s}",
+            kw["keyword_hash"],
+            topic_name(kw["original"], "bid", "s"),
+        )
 
     # 해시가 placeholder가 아닌지 확인
-    has_placeholder = any("placeholder" in kw["bid_topic"] for kw in keywords)
+    has_placeholder = any("placeholder" in kw.get("keyword_hash", "") for kw in keywords)
     if has_placeholder:
         logger.error("  ❌ placeholder 해시가 남아있습니다! generate_topic_hashes.py 실행 필요")
         return False
