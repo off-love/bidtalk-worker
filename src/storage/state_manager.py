@@ -58,10 +58,36 @@ def save_state(state: dict, path: Path | None = None) -> None:
         json.dump(state, f, ensure_ascii=False, indent=2)
 
 
-def is_notified(state: dict, unique_key: str, notice_type: str = "bid") -> bool:
+def _scoped_key(unique_key: str, topic: str | None = None) -> str:
+    """토픽 단위 중복 방지용 키를 생성합니다."""
+    if not topic:
+        return unique_key
+    return f"{topic}:{unique_key}"
+
+
+def is_notified(
+    state: dict,
+    unique_key: str,
+    notice_type: str = "bid",
+    topic: str | None = None,
+    keyword: str | None = None,
+) -> bool:
     """이미 알림을 보낸 공고인지 확인"""
     section = "notified_bids" if notice_type == "bid" else "notified_prebids"
-    return unique_key in state.get(section, {})
+    records = state.get(section, {})
+    scoped_key = _scoped_key(unique_key, topic)
+
+    if scoped_key in records:
+        return True
+
+    # v1 state.json은 공고번호만 키로 사용했습니다.
+    # 같은 공고가 여러 키워드에 매칭될 수 있으므로, 마이그레이션 호환은
+    # 같은 키워드로 이미 보낸 경우에만 중복으로 봅니다.
+    legacy_record = records.get(unique_key)
+    if legacy_record and keyword:
+        return legacy_record.get("keyword") == keyword
+
+    return False
 
 
 def mark_notified(
@@ -69,16 +95,20 @@ def mark_notified(
     unique_key: str,
     keyword: str,
     notice_type: str = "bid",
+    topic: str | None = None,
 ) -> None:
     """알림 발송 기록 추가"""
     section = "notified_bids" if notice_type == "bid" else "notified_prebids"
     if section not in state:
         state[section] = {}
-    state[section][unique_key] = {
+    record = {
         "notified_at": now_iso(),
         "keyword": keyword,
         "notice_type": notice_type,
     }
+    if topic:
+        record["topic"] = topic
+    state[section][_scoped_key(unique_key, topic)] = record
 
 
 def update_last_check(state: dict) -> None:

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-04-16T21:40:00+09:00",
+  "updated_at": "2026-04-28T23:56:00+09:00",
   "global_exclude": [
     "취소공고",
     "정정공고",
@@ -74,6 +74,12 @@
       "bid_types": ["service", "construction", "goods"]
     },
     {
+      "original": "신축",
+      "keyword_hash": "a0dd6366c7a962c1",
+      "exclude": [],
+      "bid_types": ["service", "construction", "goods"]
+    },
+    {
       "original": "설계",
       "keyword_hash": "4a827e33535875aa",
       "exclude": [],
@@ -106,6 +112,12 @@
     {
       "original": "지적측량",
       "keyword_hash": "a1be37278faef685",
+      "exclude": [],
+      "bid_types": ["service", "construction", "goods"]
+    },
+    {
+      "original": "확정측량",
+      "keyword_hash": "6b0c0faa08f438fd",
       "exclude": [],
       "bid_types": ["service", "construction", "goods"]
     },
@@ -280,6 +292,12 @@
     {
       "original": "가구",
       "keyword_hash": "7cd1a55d13c114f1",
+      "exclude": [],
+      "bid_types": ["service", "construction", "goods"]
+    },
+    {
+      "original": "구매",
+      "keyword_hash": "33500a787e27c740",
       "exclude": [],
       "bid_types": ["service", "construction", "goods"]
     },

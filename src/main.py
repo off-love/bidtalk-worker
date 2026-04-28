@@ -132,7 +132,13 @@ def process_bid_notices(kw: KeywordConfig, state: dict) -> int:
         topic = kw.get_topic("bid", bid_type)
 
         for notice in filtered:
-            if is_notified(state, notice.unique_key, "bid"):
+            if is_notified(
+                state,
+                notice.unique_key,
+                "bid",
+                topic=topic,
+                keyword=kw.original,
+            ):
                 continue
 
             # FCM 페이로드 생성
@@ -142,7 +148,13 @@ def process_bid_notices(kw: KeywordConfig, state: dict) -> int:
             success = send_bid_notification(topic, payload)
 
             if success:
-                mark_notified(state, notice.unique_key, kw.original, "bid")
+                mark_notified(
+                    state,
+                    notice.unique_key,
+                    kw.original,
+                    "bid",
+                    topic=topic,
+                )
                 sent_count += 1
                 logger.info(
                     "📱 입찰 알림 발송: [%s/%s] %s → %s",
@@ -187,14 +199,26 @@ def process_prebid_notices(kw: KeywordConfig, state: dict) -> int:
         topic = kw.get_topic("pre", bid_type)
 
         for notice in filtered:
-            if is_notified(state, notice.unique_key, "prebid"):
+            if is_notified(
+                state,
+                notice.unique_key,
+                "prebid",
+                topic=topic,
+                keyword=kw.original,
+            ):
                 continue
 
             payload = format_prebid_payload(notice, kw.original)
             success = send_bid_notification(topic, payload)
 
             if success:
-                mark_notified(state, notice.unique_key, kw.original, "prebid")
+                mark_notified(
+                    state,
+                    notice.unique_key,
+                    kw.original,
+                    "prebid",
+                    topic=topic,
+                )
                 sent_count += 1
                 logger.info(
                     "📱 사전규격 알림 발송: [%s/%s] %s → %s",
