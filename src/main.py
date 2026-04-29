@@ -1,7 +1,7 @@
 """
 입찰톡 메인 실행 스크립트
 
-GitHub Actions에서 10분 간격으로 실행됩니다.
+GitHub Actions에서 30분 간격으로 실행됩니다.
 
 실행 흐름:
 1. state.json 로드 + 오래된 기록 정리
@@ -49,7 +49,7 @@ logger = logging.getLogger(__name__)
 
 KEYWORDS_PATH = Path(__file__).parent.parent / "data" / "keywords.json"
 FIREBASE_CREDENTIALS_PATH = Path(__file__).parent.parent / "firebase-credentials.json"
-QUERY_BUFFER_MINUTES = 30
+QUERY_BUFFER_MINUTES = 60  # state가 없을 때 30분 cron 간격 + 30분 여유
 QUERY_OVERLAP_MINUTES = 15
 
 

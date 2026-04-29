@@ -96,7 +96,7 @@ def _parse_prebid_notice(item: dict[str, Any], bid_type: BidType) -> PreBidNotic
 def fetch_prebid_notices(
     bid_type: BidType,
     keyword: str = "",
-    buffer_minutes: int = 30,
+    buffer_minutes: int = 60,
     max_results: int = 999,
     inqry_bgn_dt: str | None = None,
     inqry_end_dt: str | None = None,

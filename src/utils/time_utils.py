@@ -58,11 +58,11 @@ def parse_api_dt(dt_str: str) -> datetime | None:
     return None
 
 
-def get_query_range(buffer_minutes: int = 30) -> tuple[str, str]:
+def get_query_range(buffer_minutes: int = 60) -> tuple[str, str]:
     """조회 시간 범위를 반환 (시작일시, 종료일시)
 
     Args:
-        buffer_minutes: 조회 범위 여유 시간 (기본 30분, 10분 cron 간격 대비 여유)
+        buffer_minutes: 조회 범위 여유 시간 (기본 60분, 30분 cron 간격 대비 여유)
 
     Returns:
         (시작일시, 종료일시) - API 요청 형식 (yyyyMMddHHmm)
@@ -74,7 +74,7 @@ def get_query_range(buffer_minutes: int = 30) -> tuple[str, str]:
 
 def get_incremental_query_range(
     last_check_iso: str = "",
-    buffer_minutes: int = 30,
+    buffer_minutes: int = 60,
     overlap_minutes: int = 15,
 ) -> tuple[str, str]:
     """마지막 성공 실행 시각을 기준으로 조회 시간 범위를 반환합니다."""

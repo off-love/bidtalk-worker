@@ -1,11 +1,11 @@
 # 입찰알리미 서버
 
-나라장터(G2B) 입찰공고 및 사전규격을 10분마다 확인하고, 키워드가 매칭되는 공고를 FCM 푸시 알림으로 발송합니다.
+나라장터(G2B) 입찰공고 및 사전규격을 30분마다 확인하고, 키워드가 매칭되는 공고를 FCM 푸시 알림으로 발송합니다.
 
 ## 아키텍처
 
 ```
-GitHub Actions (10분 cron)
+GitHub Actions (30분 cron)
     → 나라장터 OpenAPI 호출 (입찰공고 + 사전규격)
     → 키워드 매칭 + 중복 체크
     → FCM Topic 메시지 발송
@@ -17,7 +17,7 @@ GitHub Actions (10분 cron)
 ```
 server/
 ├── .github/workflows/
-│   └── check_notices.yml        # 10분 간격 cron
+│   └── check_notices.yml        # 30분 간격 cron
 ├── src/
 │   ├── main.py                  # 메인 실행 스크립트
 │   ├── api/
