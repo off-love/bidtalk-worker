@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-05-01T19:41:29.713982+09:00",
+  "last_check": "2026-05-01T20:41:32.415319+09:00",
   "notified_bids": {
     "R26BK01472635-000": {
       "notified_at": "2026-04-19T16:42:19.465911+09:00",
@@ -35050,6 +35050,18 @@
       "keyword": "용역",
       "notice_type": "bid",
       "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_45ec3425c8b02734:R26BK01480990-000": {
+      "notified_at": "2026-05-01T20:41:29.587068+09:00",
+      "keyword": "분석",
+      "notice_type": "bid",
+      "topic": "bid_s_45ec3425c8b02734"
+    },
+    "bid_s_44b99c9a1fc2e9b2:R26BK01500914-000": {
+      "notified_at": "2026-05-01T20:41:29.740625+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "bid_s_44b99c9a1fc2e9b2"
     }
   },
   "notified_prebids": {
