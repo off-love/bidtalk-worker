@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-05-01T13:38:08.595518+09:00",
+  "last_check": "2026-05-01T15:42:44.383066+09:00",
   "notified_bids": {
     "R26BK01472635-000": {
       "notified_at": "2026-04-19T16:42:19.465911+09:00",
@@ -34990,6 +34990,54 @@
       "keyword": "용역",
       "notice_type": "bid",
       "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01491087-001": {
+      "notified_at": "2026-05-01T15:42:37.187644+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01501090-000": {
+      "notified_at": "2026-05-01T15:42:37.400876+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_4da9a75910ede3ad:R26BK01501090-000": {
+      "notified_at": "2026-05-01T15:42:37.625780+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "bid_s_4da9a75910ede3ad"
+    },
+    "bid_c_8e9cd60504b1a092:R26BK01501089-000": {
+      "notified_at": "2026-05-01T15:42:40.750416+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "bid_c_8e9cd60504b1a092"
+    },
+    "bid_c_8cd58eab1de8b2f5:R26BK01501080-000": {
+      "notified_at": "2026-05-01T15:42:40.965784+09:00",
+      "keyword": "전기",
+      "notice_type": "bid",
+      "topic": "bid_c_8cd58eab1de8b2f5"
+    },
+    "bid_g_a0eadd0b05bc2eca:R26BK01501087-000": {
+      "notified_at": "2026-05-01T15:42:43.187917+09:00",
+      "keyword": "연구",
+      "notice_type": "bid",
+      "topic": "bid_g_a0eadd0b05bc2eca"
+    },
+    "bid_g_45ec3425c8b02734:R26BK01500093-000": {
+      "notified_at": "2026-05-01T15:42:43.360776+09:00",
+      "keyword": "분석",
+      "notice_type": "bid",
+      "topic": "bid_g_45ec3425c8b02734"
+    },
+    "bid_g_33500a787e27c740:R26BK01501087-000": {
+      "notified_at": "2026-05-01T15:42:43.551353+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
@@ -44425,6 +44473,12 @@
     },
     "pre_s_2ee07ef88e18cae0:R26BD00222430": {
       "notified_at": "2026-05-01T13:05:14.458325+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "pre_s_2ee07ef88e18cae0"
+    },
+    "pre_s_2ee07ef88e18cae0:R26BD00222431": {
+      "notified_at": "2026-05-01T15:42:38.554536+09:00",
       "keyword": "용역",
       "notice_type": "prebid",
       "topic": "pre_s_2ee07ef88e18cae0"
