@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-05-04T00:02:00.538334+09:00",
+  "last_check": "2026-05-04T00:57:21.842930+09:00",
   "notified_bids": {
     "R26BK01472635-000": {
       "notified_at": "2026-04-19T16:42:19.465911+09:00",
@@ -44788,6 +44788,12 @@
       "keyword": "건축",
       "notice_type": "prebid",
       "topic": "pre_g_8e9cd60504b1a092"
+    },
+    "pre_s_2ee07ef88e18cae0:R26BD00222460": {
+      "notified_at": "2026-05-04T00:57:17.438623+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "pre_s_2ee07ef88e18cae0"
     }
   }
 }
