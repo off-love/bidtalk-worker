@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-05-06T07:32:42.425455+09:00",
+  "last_check": "2026-05-06T08:27:23.127442+09:00",
   "notified_bids": {
     "R26BK01472635-000": {
       "notified_at": "2026-04-19T16:42:19.465911+09:00",
@@ -43540,6 +43540,72 @@
       "keyword": "용역",
       "notice_type": "bid",
       "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01500927-000": {
+      "notified_at": "2026-05-06T08:27:15.446098+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01503615-000": {
+      "notified_at": "2026-05-06T08:27:15.841302+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_a0eadd0b05bc2eca:R26BK01500927-000": {
+      "notified_at": "2026-05-06T08:27:16.002370+09:00",
+      "keyword": "연구",
+      "notice_type": "bid",
+      "topic": "bid_s_a0eadd0b05bc2eca"
+    },
+    "bid_g_465f222a27475e7f:R26BK01503608-000": {
+      "notified_at": "2026-05-06T08:27:20.426086+09:00",
+      "keyword": "소프트웨어",
+      "notice_type": "bid",
+      "topic": "bid_g_465f222a27475e7f"
+    },
+    "bid_g_d09e977b090b1003:R26BK01486662-000": {
+      "notified_at": "2026-05-06T08:27:20.634184+09:00",
+      "keyword": "네트워크",
+      "notice_type": "bid",
+      "topic": "bid_g_d09e977b090b1003"
+    },
+    "bid_g_7d585c3842de4e43:R26BK01503616-000": {
+      "notified_at": "2026-05-06T08:27:20.839662+09:00",
+      "keyword": "서버",
+      "notice_type": "bid",
+      "topic": "bid_g_7d585c3842de4e43"
+    },
+    "bid_g_a0eadd0b05bc2eca:R26BK01503602-000": {
+      "notified_at": "2026-05-06T08:27:21.051781+09:00",
+      "keyword": "연구",
+      "notice_type": "bid",
+      "topic": "bid_g_a0eadd0b05bc2eca"
+    },
+    "bid_g_17f9355809dcbd73:R26BK01503602-000": {
+      "notified_at": "2026-05-06T08:27:21.495847+09:00",
+      "keyword": "식품",
+      "notice_type": "bid",
+      "topic": "bid_g_17f9355809dcbd73"
+    },
+    "bid_g_33500a787e27c740:R26BK01503608-000": {
+      "notified_at": "2026-05-06T08:27:22.248923+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "bid_g_33500a787e27c740:R26BK01503602-000": {
+      "notified_at": "2026-05-06T08:27:22.663241+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "bid_g_33500a787e27c740:R26BK01503616-000": {
+      "notified_at": "2026-05-06T08:27:23.127041+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
