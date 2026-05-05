@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-05-05T15:26:55.347441+09:00",
+  "last_check": "2026-05-05T16:32:35.480337+09:00",
   "notified_bids": {
     "R26BK01472635-000": {
       "notified_at": "2026-04-19T16:42:19.465911+09:00",
@@ -43456,6 +43456,30 @@
       "keyword": "환경",
       "notice_type": "bid",
       "topic": "bid_g_5d36e09c3271e0e7"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01503539-000": {
+      "notified_at": "2026-05-05T16:32:31.658513+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01503488-000": {
+      "notified_at": "2026-05-05T16:32:31.841528+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_4da9a75910ede3ad:R26BK01503550-000": {
+      "notified_at": "2026-05-05T16:32:32.040401+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "bid_s_4da9a75910ede3ad"
+    },
+    "bid_s_a5ac2b7251f6a58b:R26BK01503550-000": {
+      "notified_at": "2026-05-05T16:32:32.208353+09:00",
+      "keyword": "개발",
+      "notice_type": "bid",
+      "topic": "bid_s_a5ac2b7251f6a58b"
     }
   },
   "notified_prebids": {
