@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-05-08T07:13:03.471840+09:00",
+  "last_check": "2026-05-08T07:37:20.113252+09:00",
   "notified_bids": {
     "R26BK01472635-000": {
       "notified_at": "2026-04-19T16:42:19.465911+09:00",
@@ -71302,6 +71302,54 @@
       "keyword": "개발",
       "notice_type": "bid",
       "topic": "bid_g_a5ac2b7251f6a58b"
+    },
+    "bid_s_8e9cd60504b1a092:R26BK01502085-000": {
+      "notified_at": "2026-05-08T07:37:15.292146+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "bid_s_8e9cd60504b1a092"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01508014-000": {
+      "notified_at": "2026-05-08T07:37:15.536118+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01508409-000": {
+      "notified_at": "2026-05-08T07:37:15.745364+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_a0eadd0b05bc2eca:R26BK01502085-000": {
+      "notified_at": "2026-05-08T07:37:16.001713+09:00",
+      "keyword": "연구",
+      "notice_type": "bid",
+      "topic": "bid_s_a0eadd0b05bc2eca"
+    },
+    "bid_s_45ec3425c8b02734:R26BK01508409-000": {
+      "notified_at": "2026-05-08T07:37:16.241945+09:00",
+      "keyword": "분석",
+      "notice_type": "bid",
+      "topic": "bid_s_45ec3425c8b02734"
+    },
+    "bid_s_8a70e8900c84a96a:R26BK01508014-000": {
+      "notified_at": "2026-05-08T07:37:16.458817+09:00",
+      "keyword": "철거",
+      "notice_type": "bid",
+      "topic": "bid_s_8a70e8900c84a96a"
+    },
+    "bid_s_182d2f97e9825c56:R26BK01508014-000": {
+      "notified_at": "2026-05-08T07:37:16.667450+09:00",
+      "keyword": "의료",
+      "notice_type": "bid",
+      "topic": "bid_s_182d2f97e9825c56"
+    },
+    "bid_c_8e9cd60504b1a092:R26BK01508417-000": {
+      "notified_at": "2026-05-08T07:37:18.549028+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "bid_c_8e9cd60504b1a092"
     }
   },
   "notified_prebids": {
