@@ -1,30 +1,6 @@
 {
-  "last_check": "2026-07-26T06:05:59.940251+09:00",
+  "last_check": "2026-07-26T08:06:52.227860+09:00",
   "notified_bids": {
-    "bid_s_2ee07ef88e18cae0:R26BK01601715-000": {
-      "notified_at": "2026-06-26T07:41:42.403849+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01601715-000": {
-      "notified_at": "2026-06-26T07:41:42.869719+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_g_32e83e92d45d71f6:R26BK01603541-000": {
-      "notified_at": "2026-06-26T07:41:49.289232+09:00",
-      "keyword": "AI",
-      "notice_type": "bid",
-      "topic": "bid_g_32e83e92d45d71f6"
-    },
-    "and_bid_g_32e83e92d45d71f6:R26BK01603541-000": {
-      "notified_at": "2026-06-26T07:41:49.498002+09:00",
-      "keyword": "AI",
-      "notice_type": "bid",
-      "topic": "and_bid_g_32e83e92d45d71f6"
-    },
     "bid_s_792fe6d190cf180b:R26BK01597568-001": {
       "notified_at": "2026-06-26T08:54:36.429829+09:00",
       "keyword": "보안",
@@ -504854,6 +504830,18 @@
       "keyword": "구매",
       "notice_type": "prebid",
       "topic": "and_pre_g_33500a787e27c740"
+    },
+    "pre_s_2ee07ef88e18cae0:R26BD00256691": {
+      "notified_at": "2026-07-26T08:06:42.856416+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "pre_s_2ee07ef88e18cae0"
+    },
+    "and_pre_s_2ee07ef88e18cae0:R26BD00256691": {
+      "notified_at": "2026-07-26T08:06:43.033617+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_2ee07ef88e18cae0"
     }
   }
 }
