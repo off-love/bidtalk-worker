@@ -1,54 +1,6 @@
 {
-  "last_check": "2026-07-29T06:18:17.864026+09:00",
+  "last_check": "2026-07-29T07:36:20.816859+09:00",
   "notified_bids": {
-    "bid_s_465f222a27475e7f:R26BK01605588-000": {
-      "notified_at": "2026-06-29T07:10:31.463477+09:00",
-      "keyword": "소프트웨어",
-      "notice_type": "bid",
-      "topic": "bid_s_465f222a27475e7f"
-    },
-    "and_bid_s_465f222a27475e7f:R26BK01605588-000": {
-      "notified_at": "2026-06-29T07:10:31.703136+09:00",
-      "keyword": "소프트웨어",
-      "notice_type": "bid",
-      "topic": "and_bid_s_465f222a27475e7f"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01605588-000": {
-      "notified_at": "2026-06-29T07:10:31.940243+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01605588-000": {
-      "notified_at": "2026-06-29T07:10:32.199081+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_a5ac2b7251f6a58b:R26BK01605588-000": {
-      "notified_at": "2026-06-29T07:10:32.428068+09:00",
-      "keyword": "개발",
-      "notice_type": "bid",
-      "topic": "bid_s_a5ac2b7251f6a58b"
-    },
-    "and_bid_s_a5ac2b7251f6a58b:R26BK01605588-000": {
-      "notified_at": "2026-06-29T07:10:32.665178+09:00",
-      "keyword": "개발",
-      "notice_type": "bid",
-      "topic": "and_bid_s_a5ac2b7251f6a58b"
-    },
-    "bid_g_33500a787e27c740:R26BK01605586-000": {
-      "notified_at": "2026-06-29T07:10:37.496172+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "bid_g_33500a787e27c740"
-    },
-    "and_bid_g_33500a787e27c740:R26BK01605586-000": {
-      "notified_at": "2026-06-29T07:10:37.717236+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "and_bid_g_33500a787e27c740"
-    },
     "bid_s_4a827e33535875aa:R26BK01605590-000": {
       "notified_at": "2026-06-29T07:40:43.216583+09:00",
       "keyword": "설계",
@@ -413556,6 +413508,66 @@
       "keyword": "이전",
       "notice_type": "bid",
       "topic": "and_bid_s_da7e61c67cc5a90f"
+    },
+    "bid_s_4a827e33535875aa:R26BK01655421-000": {
+      "notified_at": "2026-07-29T07:36:11.647274+09:00",
+      "keyword": "설계",
+      "notice_type": "bid",
+      "topic": "bid_s_4a827e33535875aa"
+    },
+    "and_bid_s_4a827e33535875aa:R26BK01655421-000": {
+      "notified_at": "2026-07-29T07:36:11.854620+09:00",
+      "keyword": "설계",
+      "notice_type": "bid",
+      "topic": "and_bid_s_4a827e33535875aa"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01655421-000": {
+      "notified_at": "2026-07-29T07:36:12.110099+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01655421-000": {
+      "notified_at": "2026-07-29T07:36:12.365204+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_a0eadd0b05bc2eca:R26BK01655418-000": {
+      "notified_at": "2026-07-29T07:36:12.695999+09:00",
+      "keyword": "연구",
+      "notice_type": "bid",
+      "topic": "bid_s_a0eadd0b05bc2eca"
+    },
+    "and_bid_s_a0eadd0b05bc2eca:R26BK01655418-000": {
+      "notified_at": "2026-07-29T07:36:12.921476+09:00",
+      "keyword": "연구",
+      "notice_type": "bid",
+      "topic": "and_bid_s_a0eadd0b05bc2eca"
+    },
+    "bid_g_33500a787e27c740:R26BK01651807-000": {
+      "notified_at": "2026-07-29T07:36:20.084516+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01651807-000": {
+      "notified_at": "2026-07-29T07:36:20.311050+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_g_33500a787e27c740:R26BK01651806-000": {
+      "notified_at": "2026-07-29T07:36:20.523083+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01651806-000": {
+      "notified_at": "2026-07-29T07:36:20.816525+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
