@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-07-29T21:13:07.776432+09:00",
+  "last_check": "2026-07-29T22:16:25.924700+09:00",
   "notified_bids": {
     "bid_s_32e83e92d45d71f6:R26BK01607991-000": {
       "notified_at": "2026-06-29T23:17:18.354284+09:00",
@@ -411528,6 +411528,42 @@
       "keyword": "소방",
       "notice_type": "bid",
       "topic": "and_bid_c_23500ebf6fdd8df1"
+    },
+    "bid_s_a0dd6366c7a962c1:R26BK01657579-000": {
+      "notified_at": "2026-07-29T22:16:20.423833+09:00",
+      "keyword": "신축",
+      "notice_type": "bid",
+      "topic": "bid_s_a0dd6366c7a962c1"
+    },
+    "and_bid_s_a0dd6366c7a962c1:R26BK01657579-000": {
+      "notified_at": "2026-07-29T22:16:20.633811+09:00",
+      "keyword": "신축",
+      "notice_type": "bid",
+      "topic": "and_bid_s_a0dd6366c7a962c1"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01657579-000": {
+      "notified_at": "2026-07-29T22:16:20.894753+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01657579-000": {
+      "notified_at": "2026-07-29T22:16:21.134939+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_c_8e9cd60504b1a092:R26BK01657584-000": {
+      "notified_at": "2026-07-29T22:16:24.372767+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "bid_c_8e9cd60504b1a092"
+    },
+    "and_bid_c_8e9cd60504b1a092:R26BK01657584-000": {
+      "notified_at": "2026-07-29T22:16:24.614113+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "and_bid_c_8e9cd60504b1a092"
     }
   },
   "notified_prebids": {
