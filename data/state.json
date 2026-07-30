@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-07-31T07:16:19.250906+09:00",
+  "last_check": "2026-07-31T07:39:00.097111+09:00",
   "notified_bids": {
     "bid_s_2ee07ef88e18cae0:R26BK01610160-000": {
       "notified_at": "2026-07-01T07:52:48.185113+09:00",
@@ -409728,6 +409728,30 @@
       "keyword": "용역",
       "notice_type": "bid",
       "topic": "and_bid_g_2ee07ef88e18cae0"
+    },
+    "bid_g_f5deb01f4f509d3a:R26BK01659511-000": {
+      "notified_at": "2026-07-31T07:38:59.484086+09:00",
+      "keyword": "클라우드",
+      "notice_type": "bid",
+      "topic": "bid_g_f5deb01f4f509d3a"
+    },
+    "and_bid_g_f5deb01f4f509d3a:R26BK01659511-000": {
+      "notified_at": "2026-07-31T07:38:59.680543+09:00",
+      "keyword": "클라우드",
+      "notice_type": "bid",
+      "topic": "and_bid_g_f5deb01f4f509d3a"
+    },
+    "bid_g_4da9a75910ede3ad:R26BK01659511-000": {
+      "notified_at": "2026-07-31T07:38:59.902749+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "bid_g_4da9a75910ede3ad"
+    },
+    "and_bid_g_4da9a75910ede3ad:R26BK01659511-000": {
+      "notified_at": "2026-07-31T07:39:00.095694+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "and_bid_g_4da9a75910ede3ad"
     }
   },
   "notified_prebids": {
