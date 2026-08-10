@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-11T00:31:28.393624+09:00",
+  "last_check": "2026-08-11T01:25:04.869056+09:00",
   "notified_bids": {
     "bid_g_182d2f97e9825c56:R26BK01623608-000": {
       "notified_at": "2026-07-12T12:49:46.313371+09:00",
@@ -364080,6 +364080,18 @@
       "keyword": "용역",
       "notice_type": "bid",
       "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_g_be562142ef48d573:R26BK01667076-000": {
+      "notified_at": "2026-08-11T01:25:04.594470+09:00",
+      "keyword": "영상",
+      "notice_type": "bid",
+      "topic": "bid_g_be562142ef48d573"
+    },
+    "and_bid_g_be562142ef48d573:R26BK01667076-000": {
+      "notified_at": "2026-08-11T01:25:04.868066+09:00",
+      "keyword": "영상",
+      "notice_type": "bid",
+      "topic": "and_bid_g_be562142ef48d573"
     }
   },
   "notified_prebids": {
