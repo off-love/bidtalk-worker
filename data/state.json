@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-12T07:21:54.566436+09:00",
+  "last_check": "2026-08-12T07:57:17.224092+09:00",
   "notified_bids": {
     "bid_s_32e83e92d45d71f6:R26BK01628550-000": {
       "notified_at": "2026-07-13T08:00:07.520441+09:00",
@@ -380184,6 +380184,90 @@
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01677995-000": {
+      "notified_at": "2026-08-12T07:57:07.737595+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01677995-000": {
+      "notified_at": "2026-08-12T07:57:07.968337+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01674723-000": {
+      "notified_at": "2026-08-12T07:57:08.237409+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01674723-000": {
+      "notified_at": "2026-08-12T07:57:08.560245+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_c_60982a61e50d3bea:R26BK01677996-000": {
+      "notified_at": "2026-08-12T07:57:11.030521+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "bid_c_60982a61e50d3bea"
+    },
+    "and_bid_c_60982a61e50d3bea:R26BK01677996-000": {
+      "notified_at": "2026-08-12T07:57:11.264611+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "and_bid_c_60982a61e50d3bea"
+    },
+    "bid_c_60982a61e50d3bea:R26BK01677999-000": {
+      "notified_at": "2026-08-12T07:57:11.664263+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "bid_c_60982a61e50d3bea"
+    },
+    "and_bid_c_60982a61e50d3bea:R26BK01677999-000": {
+      "notified_at": "2026-08-12T07:57:12.658823+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "and_bid_c_60982a61e50d3bea"
+    },
+    "bid_g_56190b5df1537d36:R26BK01676709-000": {
+      "notified_at": "2026-08-12T07:57:15.110948+09:00",
+      "keyword": "시설물",
+      "notice_type": "bid",
+      "topic": "bid_g_56190b5df1537d36"
+    },
+    "and_bid_g_56190b5df1537d36:R26BK01676709-000": {
+      "notified_at": "2026-08-12T07:57:15.315585+09:00",
+      "keyword": "시설물",
+      "notice_type": "bid",
+      "topic": "and_bid_g_56190b5df1537d36"
+    },
+    "bid_g_f1d9444fc1f85128:R26BK01676709-000": {
+      "notified_at": "2026-08-12T07:57:15.582592+09:00",
+      "keyword": "유지보수",
+      "notice_type": "bid",
+      "topic": "bid_g_f1d9444fc1f85128"
+    },
+    "and_bid_g_f1d9444fc1f85128:R26BK01676709-000": {
+      "notified_at": "2026-08-12T07:57:15.831791+09:00",
+      "keyword": "유지보수",
+      "notice_type": "bid",
+      "topic": "and_bid_g_f1d9444fc1f85128"
+    },
+    "bid_g_33500a787e27c740:R26BK01676709-000": {
+      "notified_at": "2026-08-12T07:57:16.292662+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01676709-000": {
+      "notified_at": "2026-08-12T07:57:16.502978+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
@@ -485603,6 +485687,18 @@
     },
     "and_pre_s_2ee07ef88e18cae0:R26BD00262963": {
       "notified_at": "2026-08-11T22:35:23.530220+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_2ee07ef88e18cae0"
+    },
+    "pre_s_2ee07ef88e18cae0:R26BD00262977": {
+      "notified_at": "2026-08-12T07:57:09.426928+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "pre_s_2ee07ef88e18cae0"
+    },
+    "and_pre_s_2ee07ef88e18cae0:R26BD00262977": {
+      "notified_at": "2026-08-12T07:57:09.666840+09:00",
       "keyword": "용역",
       "notice_type": "prebid",
       "topic": "and_pre_s_2ee07ef88e18cae0"
