@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-12T22:41:17.430066+09:00",
+  "last_check": "2026-08-12T22:59:26.305477+09:00",
   "notified_bids": {
     "bid_s_8e9cd60504b1a092:R26BK01631037-000": {
       "notified_at": "2026-07-14T00:07:16.099673+09:00",
@@ -369204,6 +369204,18 @@
       "keyword": "환경",
       "notice_type": "bid",
       "topic": "and_bid_c_5d36e09c3271e0e7"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01680183-000": {
+      "notified_at": "2026-08-12T22:59:23.609274+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01680183-000": {
+      "notified_at": "2026-08-12T22:59:23.871566+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
     }
   },
   "notified_prebids": {
