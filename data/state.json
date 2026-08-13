@@ -1,66 +1,6 @@
 {
-  "last_check": "2026-08-14T07:21:45.143746+09:00",
+  "last_check": "2026-08-14T07:57:03.683631+09:00",
   "notified_bids": {
-    "bid_s_4a827e33535875aa:R26BK01633650-000": {
-      "notified_at": "2026-07-15T07:32:50.671591+09:00",
-      "keyword": "설계",
-      "notice_type": "bid",
-      "topic": "bid_s_4a827e33535875aa"
-    },
-    "and_bid_s_4a827e33535875aa:R26BK01633650-000": {
-      "notified_at": "2026-07-15T07:32:50.922200+09:00",
-      "keyword": "설계",
-      "notice_type": "bid",
-      "topic": "and_bid_s_4a827e33535875aa"
-    },
-    "bid_s_ce2e154c6fcc6b11:R26BK01633649-000": {
-      "notified_at": "2026-07-15T07:32:51.139501+09:00",
-      "keyword": "감리",
-      "notice_type": "bid",
-      "topic": "bid_s_ce2e154c6fcc6b11"
-    },
-    "and_bid_s_ce2e154c6fcc6b11:R26BK01633649-000": {
-      "notified_at": "2026-07-15T07:32:51.347975+09:00",
-      "keyword": "감리",
-      "notice_type": "bid",
-      "topic": "and_bid_s_ce2e154c6fcc6b11"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01633649-000": {
-      "notified_at": "2026-07-15T07:32:51.562057+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01633649-000": {
-      "notified_at": "2026-07-15T07:32:51.856075+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01612115-000": {
-      "notified_at": "2026-07-15T07:32:52.059247+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01612115-000": {
-      "notified_at": "2026-07-15T07:32:52.276970+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01633650-000": {
-      "notified_at": "2026-07-15T07:32:52.520932+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01633650-000": {
-      "notified_at": "2026-07-15T07:32:52.724192+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
     "bid_s_4a827e33535875aa:R26BK01633651-000": {
       "notified_at": "2026-07-15T08:26:52.443531+09:00",
       "keyword": "설계",
@@ -362457,6 +362397,42 @@
     },
     "and_bid_g_33500a787e27c740:R26BK01682391-000": {
       "notified_at": "2026-08-13T23:00:31.179627+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_c_8e9cd60504b1a092:R26BK01679788-000": {
+      "notified_at": "2026-08-14T07:56:59.190419+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "bid_c_8e9cd60504b1a092"
+    },
+    "and_bid_c_8e9cd60504b1a092:R26BK01679788-000": {
+      "notified_at": "2026-08-14T07:56:59.353450+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "and_bid_c_8e9cd60504b1a092"
+    },
+    "bid_c_4fc2f5cddb8f437c:R26BK01681099-000": {
+      "notified_at": "2026-08-14T07:56:59.621789+09:00",
+      "keyword": "방수",
+      "notice_type": "bid",
+      "topic": "bid_c_4fc2f5cddb8f437c"
+    },
+    "and_bid_c_4fc2f5cddb8f437c:R26BK01681099-000": {
+      "notified_at": "2026-08-14T07:56:59.786091+09:00",
+      "keyword": "방수",
+      "notice_type": "bid",
+      "topic": "and_bid_c_4fc2f5cddb8f437c"
+    },
+    "bid_g_33500a787e27c740:R26BK01681438-000": {
+      "notified_at": "2026-08-14T07:57:02.814112+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01681438-000": {
+      "notified_at": "2026-08-14T07:57:02.990220+09:00",
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
