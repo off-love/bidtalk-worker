@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-16T10:53:39.104421+09:00",
+  "last_check": "2026-08-16T12:09:04.616015+09:00",
   "notified_bids": {
     "bid_s_2ee07ef88e18cae0:R26BK01638281-000": {
       "notified_at": "2026-07-17T12:27:16.556989+09:00",
@@ -334788,6 +334788,54 @@
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_c_8e9cd60504b1a092:R26BK01684301-000": {
+      "notified_at": "2026-08-16T12:09:00.340191+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "bid_c_8e9cd60504b1a092"
+    },
+    "and_bid_c_8e9cd60504b1a092:R26BK01684301-000": {
+      "notified_at": "2026-08-16T12:09:00.542749+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "and_bid_c_8e9cd60504b1a092"
+    },
+    "bid_c_a0dd6366c7a962c1:R26BK01684301-000": {
+      "notified_at": "2026-08-16T12:09:00.771684+09:00",
+      "keyword": "신축",
+      "notice_type": "bid",
+      "topic": "bid_c_a0dd6366c7a962c1"
+    },
+    "and_bid_c_a0dd6366c7a962c1:R26BK01684301-000": {
+      "notified_at": "2026-08-16T12:09:00.922956+09:00",
+      "keyword": "신축",
+      "notice_type": "bid",
+      "topic": "and_bid_c_a0dd6366c7a962c1"
+    },
+    "bid_c_a0dd6366c7a962c1:R26BK01684307-000": {
+      "notified_at": "2026-08-16T12:09:01.098959+09:00",
+      "keyword": "신축",
+      "notice_type": "bid",
+      "topic": "bid_c_a0dd6366c7a962c1"
+    },
+    "and_bid_c_a0dd6366c7a962c1:R26BK01684307-000": {
+      "notified_at": "2026-08-16T12:09:01.284121+09:00",
+      "keyword": "신축",
+      "notice_type": "bid",
+      "topic": "and_bid_c_a0dd6366c7a962c1"
+    },
+    "bid_c_8cd58eab1de8b2f5:R26BK01684307-000": {
+      "notified_at": "2026-08-16T12:09:01.573220+09:00",
+      "keyword": "전기",
+      "notice_type": "bid",
+      "topic": "bid_c_8cd58eab1de8b2f5"
+    },
+    "and_bid_c_8cd58eab1de8b2f5:R26BK01684307-000": {
+      "notified_at": "2026-08-16T12:09:01.809118+09:00",
+      "keyword": "전기",
+      "notice_type": "bid",
+      "topic": "and_bid_c_8cd58eab1de8b2f5"
     }
   },
   "notified_prebids": {
