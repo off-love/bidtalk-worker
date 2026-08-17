@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-18T00:37:57.826064+09:00",
+  "last_check": "2026-08-18T00:51:40.734834+09:00",
   "notified_bids": {
     "bid_s_2ee07ef88e18cae0:R26BK01638440-000": {
       "notified_at": "2026-07-19T12:45:05.548458+09:00",
@@ -334788,6 +334788,30 @@
       "keyword": "용역",
       "notice_type": "bid",
       "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_c_b0fe42fc1bd78d19:R26BK01684458-001": {
+      "notified_at": "2026-08-18T00:51:39.305422+09:00",
+      "keyword": "도장",
+      "notice_type": "bid",
+      "topic": "bid_c_b0fe42fc1bd78d19"
+    },
+    "and_bid_c_b0fe42fc1bd78d19:R26BK01684458-001": {
+      "notified_at": "2026-08-18T00:51:39.541890+09:00",
+      "keyword": "도장",
+      "notice_type": "bid",
+      "topic": "and_bid_c_b0fe42fc1bd78d19"
+    },
+    "bid_c_b0fe42fc1bd78d19:R26BK01684459-000": {
+      "notified_at": "2026-08-18T00:51:39.858171+09:00",
+      "keyword": "도장",
+      "notice_type": "bid",
+      "topic": "bid_c_b0fe42fc1bd78d19"
+    },
+    "and_bid_c_b0fe42fc1bd78d19:R26BK01684459-000": {
+      "notified_at": "2026-08-18T00:51:40.086250+09:00",
+      "keyword": "도장",
+      "notice_type": "bid",
+      "topic": "and_bid_c_b0fe42fc1bd78d19"
     }
   },
   "notified_prebids": {
