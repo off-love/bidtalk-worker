@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-17T13:22:10.798050+09:00",
+  "last_check": "2026-08-17T13:53:36.666302+09:00",
   "notified_bids": {
     "bid_s_2ee07ef88e18cae0:R26BK01623230-001": {
       "notified_at": "2026-07-18T15:14:48.469087+09:00",
@@ -334596,6 +334596,30 @@
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_c_23500ebf6fdd8df1:R26BK01684380-000": {
+      "notified_at": "2026-08-17T13:53:32.920903+09:00",
+      "keyword": "소방",
+      "notice_type": "bid",
+      "topic": "bid_c_23500ebf6fdd8df1"
+    },
+    "and_bid_c_23500ebf6fdd8df1:R26BK01684380-000": {
+      "notified_at": "2026-08-17T13:53:33.077503+09:00",
+      "keyword": "소방",
+      "notice_type": "bid",
+      "topic": "and_bid_c_23500ebf6fdd8df1"
+    },
+    "bid_c_44b99c9a1fc2e9b2:R26BK01684374-000": {
+      "notified_at": "2026-08-17T13:53:33.272662+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "bid_c_44b99c9a1fc2e9b2"
+    },
+    "and_bid_c_44b99c9a1fc2e9b2:R26BK01684374-000": {
+      "notified_at": "2026-08-17T13:53:33.433754+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "and_bid_c_44b99c9a1fc2e9b2"
     }
   },
   "notified_prebids": {
@@ -428471,6 +428495,18 @@
     },
     "and_pre_g_33500a787e27c740:R26BD00264444": {
       "notified_at": "2026-08-17T10:51:29.970520+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "and_pre_g_33500a787e27c740"
+    },
+    "pre_g_33500a787e27c740:R26BD00264454": {
+      "notified_at": "2026-08-17T13:53:36.412882+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "pre_g_33500a787e27c740"
+    },
+    "and_pre_g_33500a787e27c740:R26BD00264454": {
+      "notified_at": "2026-08-17T13:53:36.666054+09:00",
       "keyword": "구매",
       "notice_type": "prebid",
       "topic": "and_pre_g_33500a787e27c740"
