@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-18T23:47:04.688369+09:00",
+  "last_check": "2026-08-19T00:03:05.223744+09:00",
   "notified_bids": {
     "bid_s_2ee07ef88e18cae0:R26BK01638520-000": {
       "notified_at": "2026-07-20T01:03:53.961120+09:00",
@@ -349320,6 +349320,30 @@
       "keyword": "전기",
       "notice_type": "bid",
       "topic": "and_bid_c_8cd58eab1de8b2f5"
+    },
+    "bid_g_32e83e92d45d71f6:R26BK01687170-000": {
+      "notified_at": "2026-08-19T00:03:04.611449+09:00",
+      "keyword": "AI",
+      "notice_type": "bid",
+      "topic": "bid_g_32e83e92d45d71f6"
+    },
+    "and_bid_g_32e83e92d45d71f6:R26BK01687170-000": {
+      "notified_at": "2026-08-19T00:03:04.826859+09:00",
+      "keyword": "AI",
+      "notice_type": "bid",
+      "topic": "and_bid_g_32e83e92d45d71f6"
+    },
+    "bid_g_a5ac2b7251f6a58b:R26BK01687170-000": {
+      "notified_at": "2026-08-19T00:03:05.007034+09:00",
+      "keyword": "개발",
+      "notice_type": "bid",
+      "topic": "bid_g_a5ac2b7251f6a58b"
+    },
+    "and_bid_g_a5ac2b7251f6a58b:R26BK01687170-000": {
+      "notified_at": "2026-08-19T00:03:05.223168+09:00",
+      "keyword": "개발",
+      "notice_type": "bid",
+      "topic": "and_bid_g_a5ac2b7251f6a58b"
     }
   },
   "notified_prebids": {
