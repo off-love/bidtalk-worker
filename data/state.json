@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-18T22:53:19.931358+09:00",
+  "last_check": "2026-08-18T23:08:07.704347+09:00",
   "notified_bids": {
     "bid_s_2ee07ef88e18cae0:R26BK01638520-000": {
       "notified_at": "2026-07-20T01:03:53.961120+09:00",
@@ -349248,6 +349248,18 @@
       "keyword": "전기",
       "notice_type": "bid",
       "topic": "and_bid_c_8cd58eab1de8b2f5"
+    },
+    "bid_s_7d585c3842de4e43:R26BK01687163-000": {
+      "notified_at": "2026-08-18T23:08:05.559453+09:00",
+      "keyword": "서버",
+      "notice_type": "bid",
+      "topic": "bid_s_7d585c3842de4e43"
+    },
+    "and_bid_s_7d585c3842de4e43:R26BK01687163-000": {
+      "notified_at": "2026-08-18T23:08:05.782224+09:00",
+      "keyword": "서버",
+      "notice_type": "bid",
+      "topic": "and_bid_s_7d585c3842de4e43"
     }
   },
   "notified_prebids": {
