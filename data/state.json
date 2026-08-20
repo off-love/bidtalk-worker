@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-21T05:59:34.303043+09:00",
+  "last_check": "2026-08-21T06:38:01.751350+09:00",
   "notified_bids": {
     "bid_c_60982a61e50d3bea:R26BK01635884-001": {
       "notified_at": "2026-07-22T07:09:49.836180+09:00",
@@ -339576,6 +339576,42 @@
       "keyword": "설계",
       "notice_type": "bid",
       "topic": "and_bid_s_4a827e33535875aa"
+    },
+    "bid_c_8cd58eab1de8b2f5:R26BK01691618-000": {
+      "notified_at": "2026-08-21T06:37:58.666755+09:00",
+      "keyword": "전기",
+      "notice_type": "bid",
+      "topic": "bid_c_8cd58eab1de8b2f5"
+    },
+    "and_bid_c_8cd58eab1de8b2f5:R26BK01691618-000": {
+      "notified_at": "2026-08-21T06:37:58.909230+09:00",
+      "keyword": "전기",
+      "notice_type": "bid",
+      "topic": "and_bid_c_8cd58eab1de8b2f5"
+    },
+    "bid_c_23500ebf6fdd8df1:R26BK01691636-000": {
+      "notified_at": "2026-08-21T06:37:59.190131+09:00",
+      "keyword": "소방",
+      "notice_type": "bid",
+      "topic": "bid_c_23500ebf6fdd8df1"
+    },
+    "and_bid_c_23500ebf6fdd8df1:R26BK01691636-000": {
+      "notified_at": "2026-08-21T06:37:59.406718+09:00",
+      "keyword": "소방",
+      "notice_type": "bid",
+      "topic": "and_bid_c_23500ebf6fdd8df1"
+    },
+    "bid_c_44b99c9a1fc2e9b2:R26BK01691645-000": {
+      "notified_at": "2026-08-21T06:37:59.611929+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "bid_c_44b99c9a1fc2e9b2"
+    },
+    "and_bid_c_44b99c9a1fc2e9b2:R26BK01691645-000": {
+      "notified_at": "2026-08-21T06:37:59.825008+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "and_bid_c_44b99c9a1fc2e9b2"
     }
   },
   "notified_prebids": {
