@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-21T07:39:17.342484+09:00",
+  "last_check": "2026-08-21T07:56:58.562384+09:00",
   "notified_bids": {
     "bid_s_32e83e92d45d71f6:R26BK01643658-000": {
       "notified_at": "2026-07-22T08:31:53.511912+09:00",
@@ -339636,6 +339636,18 @@
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_c_8e9cd60504b1a092:R26BK01691400-000": {
+      "notified_at": "2026-08-21T07:56:56.454075+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "bid_c_8e9cd60504b1a092"
+    },
+    "and_bid_c_8e9cd60504b1a092:R26BK01691400-000": {
+      "notified_at": "2026-08-21T07:56:56.660611+09:00",
+      "keyword": "건축",
+      "notice_type": "bid",
+      "topic": "and_bid_c_8e9cd60504b1a092"
     }
   },
   "notified_prebids": {
