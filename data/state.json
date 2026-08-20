@@ -1,54 +1,6 @@
 {
-  "last_check": "2026-08-20T23:11:17.153014+09:00",
+  "last_check": "2026-08-20T23:52:00.048211+09:00",
   "notified_bids": {
-    "bid_s_ce2e154c6fcc6b11:R26BK01643642-000": {
-      "notified_at": "2026-07-21T23:17:02.344240+09:00",
-      "keyword": "감리",
-      "notice_type": "bid",
-      "topic": "bid_s_ce2e154c6fcc6b11"
-    },
-    "and_bid_s_ce2e154c6fcc6b11:R26BK01643642-000": {
-      "notified_at": "2026-07-21T23:17:02.572212+09:00",
-      "keyword": "감리",
-      "notice_type": "bid",
-      "topic": "and_bid_s_ce2e154c6fcc6b11"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01643641-000": {
-      "notified_at": "2026-07-21T23:17:02.845775+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01643641-000": {
-      "notified_at": "2026-07-21T23:17:03.087679+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01643642-000": {
-      "notified_at": "2026-07-21T23:17:03.412432+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01643642-000": {
-      "notified_at": "2026-07-21T23:17:03.800738+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_8cd58eab1de8b2f5:R26BK01643642-000": {
-      "notified_at": "2026-07-21T23:17:04.039192+09:00",
-      "keyword": "전기",
-      "notice_type": "bid",
-      "topic": "bid_s_8cd58eab1de8b2f5"
-    },
-    "and_bid_s_8cd58eab1de8b2f5:R26BK01643642-000": {
-      "notified_at": "2026-07-21T23:17:04.288026+09:00",
-      "keyword": "전기",
-      "notice_type": "bid",
-      "topic": "and_bid_s_8cd58eab1de8b2f5"
-    },
     "bid_s_4a827e33535875aa:R26BK01643643-000": {
       "notified_at": "2026-07-22T00:23:17.335858+09:00",
       "keyword": "설계",
@@ -339651,30 +339603,6 @@
     }
   },
   "notified_prebids": {
-    "pre_s_2ee07ef88e18cae0:R26BD00254791": {
-      "notified_at": "2026-07-21T23:17:05.176490+09:00",
-      "keyword": "용역",
-      "notice_type": "prebid",
-      "topic": "pre_s_2ee07ef88e18cae0"
-    },
-    "and_pre_s_2ee07ef88e18cae0:R26BD00254791": {
-      "notified_at": "2026-07-21T23:17:05.410197+09:00",
-      "keyword": "용역",
-      "notice_type": "prebid",
-      "topic": "and_pre_s_2ee07ef88e18cae0"
-    },
-    "pre_s_a0eadd0b05bc2eca:R26BD00254790": {
-      "notified_at": "2026-07-21T23:17:05.748096+09:00",
-      "keyword": "연구",
-      "notice_type": "prebid",
-      "topic": "pre_s_a0eadd0b05bc2eca"
-    },
-    "and_pre_s_a0eadd0b05bc2eca:R26BD00254790": {
-      "notified_at": "2026-07-21T23:17:05.966643+09:00",
-      "keyword": "연구",
-      "notice_type": "prebid",
-      "topic": "and_pre_s_a0eadd0b05bc2eca"
-    },
     "pre_s_4a827e33535875aa:R26BD00254809": {
       "notified_at": "2026-07-22T09:02:27.880963+09:00",
       "keyword": "설계",
