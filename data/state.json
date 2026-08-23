@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-23T10:59:06.234103+09:00",
+  "last_check": "2026-08-23T12:11:55.982539+09:00",
   "notified_bids": {
     "bid_s_f5deb01f4f509d3a:R26BK01646353-000": {
       "notified_at": "2026-07-24T12:30:53.220155+09:00",
@@ -316344,6 +316344,54 @@
       "keyword": "홍보",
       "notice_type": "bid",
       "topic": "and_bid_g_e1594a102757fad5"
+    },
+    "bid_s_a0dd6366c7a962c1:R26BK01693792-000": {
+      "notified_at": "2026-08-23T12:11:51.035208+09:00",
+      "keyword": "신축",
+      "notice_type": "bid",
+      "topic": "bid_s_a0dd6366c7a962c1"
+    },
+    "and_bid_s_a0dd6366c7a962c1:R26BK01693792-000": {
+      "notified_at": "2026-08-23T12:11:51.278378+09:00",
+      "keyword": "신축",
+      "notice_type": "bid",
+      "topic": "and_bid_s_a0dd6366c7a962c1"
+    },
+    "bid_g_17f9355809dcbd73:R26BK01693773-002": {
+      "notified_at": "2026-08-23T12:11:53.998321+09:00",
+      "keyword": "식품",
+      "notice_type": "bid",
+      "topic": "bid_g_17f9355809dcbd73"
+    },
+    "and_bid_g_17f9355809dcbd73:R26BK01693773-002": {
+      "notified_at": "2026-08-23T12:11:54.222907+09:00",
+      "keyword": "식품",
+      "notice_type": "bid",
+      "topic": "and_bid_g_17f9355809dcbd73"
+    },
+    "bid_g_17f9355809dcbd73:R26BK01693787-000": {
+      "notified_at": "2026-08-23T12:11:54.439886+09:00",
+      "keyword": "식품",
+      "notice_type": "bid",
+      "topic": "bid_g_17f9355809dcbd73"
+    },
+    "and_bid_g_17f9355809dcbd73:R26BK01693787-000": {
+      "notified_at": "2026-08-23T12:11:54.658069+09:00",
+      "keyword": "식품",
+      "notice_type": "bid",
+      "topic": "and_bid_g_17f9355809dcbd73"
+    },
+    "bid_g_17f9355809dcbd73:R26BK01693791-000": {
+      "notified_at": "2026-08-23T12:11:54.842232+09:00",
+      "keyword": "식품",
+      "notice_type": "bid",
+      "topic": "bid_g_17f9355809dcbd73"
+    },
+    "and_bid_g_17f9355809dcbd73:R26BK01693791-000": {
+      "notified_at": "2026-08-23T12:11:55.032041+09:00",
+      "keyword": "식품",
+      "notice_type": "bid",
+      "topic": "and_bid_g_17f9355809dcbd73"
     }
   },
   "notified_prebids": {
@@ -400679,6 +400727,18 @@
     },
     "and_pre_g_33500a787e27c740:R26BD00266515": {
       "notified_at": "2026-08-22T17:42:43.465682+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "and_pre_g_33500a787e27c740"
+    },
+    "pre_g_33500a787e27c740:R26BD00266519": {
+      "notified_at": "2026-08-23T12:11:55.781097+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "pre_g_33500a787e27c740"
+    },
+    "and_pre_g_33500a787e27c740:R26BD00266519": {
+      "notified_at": "2026-08-23T12:11:55.982291+09:00",
       "keyword": "구매",
       "notice_type": "prebid",
       "topic": "and_pre_g_33500a787e27c740"
