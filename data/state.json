@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-25T19:45:01.415506+09:00",
+  "last_check": "2026-08-25T20:01:25.272941+09:00",
   "notified_bids": {
     "bid_g_33500a787e27c740:R26BK01650530-000": {
       "notified_at": "2026-07-27T00:15:00.511764+09:00",
@@ -333132,6 +333132,42 @@
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01697830-000": {
+      "notified_at": "2026-08-25T20:01:20.398579+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01697830-000": {
+      "notified_at": "2026-08-25T20:01:20.629408+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01698282-000": {
+      "notified_at": "2026-08-25T20:01:20.865066+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01698282-000": {
+      "notified_at": "2026-08-25T20:01:21.128644+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_a0eadd0b05bc2eca:R26BK01698281-000": {
+      "notified_at": "2026-08-25T20:01:21.447301+09:00",
+      "keyword": "연구",
+      "notice_type": "bid",
+      "topic": "bid_s_a0eadd0b05bc2eca"
+    },
+    "and_bid_s_a0eadd0b05bc2eca:R26BK01698281-000": {
+      "notified_at": "2026-08-25T20:01:21.656119+09:00",
+      "keyword": "연구",
+      "notice_type": "bid",
+      "topic": "and_bid_s_a0eadd0b05bc2eca"
     }
   },
   "notified_prebids": {
