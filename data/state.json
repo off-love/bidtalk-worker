@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-08-26T12:15:29.693062+09:00",
+  "last_check": "2026-08-26T12:33:52.384289+09:00",
   "notified_bids": {
     "bid_s_1f592922614ca38c:R26BK01650810-000": {
       "notified_at": "2026-07-27T12:57:15.060821+09:00",
@@ -336852,6 +336852,42 @@
       "keyword": "환경",
       "notice_type": "bid",
       "topic": "and_bid_g_5d36e09c3271e0e7"
+    },
+    "bid_g_e9e7abfc765737f0:R26BK01698940-000": {
+      "notified_at": "2026-08-26T12:33:51.330309+09:00",
+      "keyword": "조사",
+      "notice_type": "bid",
+      "topic": "bid_g_e9e7abfc765737f0"
+    },
+    "and_bid_g_e9e7abfc765737f0:R26BK01698940-000": {
+      "notified_at": "2026-08-26T12:33:51.493651+09:00",
+      "keyword": "조사",
+      "notice_type": "bid",
+      "topic": "and_bid_g_e9e7abfc765737f0"
+    },
+    "bid_g_8cd58eab1de8b2f5:R26BK01699142-000": {
+      "notified_at": "2026-08-26T12:33:51.640927+09:00",
+      "keyword": "전기",
+      "notice_type": "bid",
+      "topic": "bid_g_8cd58eab1de8b2f5"
+    },
+    "and_bid_g_8cd58eab1de8b2f5:R26BK01699142-000": {
+      "notified_at": "2026-08-26T12:33:51.805834+09:00",
+      "keyword": "전기",
+      "notice_type": "bid",
+      "topic": "and_bid_g_8cd58eab1de8b2f5"
+    },
+    "bid_g_33500a787e27c740:R26BK01693288-000": {
+      "notified_at": "2026-08-26T12:33:52.220277+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01693288-000": {
+      "notified_at": "2026-08-26T12:33:52.383695+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
