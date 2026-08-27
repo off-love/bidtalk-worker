@@ -1,42 +1,6 @@
 {
-  "last_check": "2026-08-28T05:24:19.487515+09:00",
+  "last_check": "2026-08-28T07:31:32.196481+09:00",
   "notified_bids": {
-    "bid_s_4a827e33535875aa:R26BK01655251-000": {
-      "notified_at": "2026-07-29T05:45:27.865759+09:00",
-      "keyword": "설계",
-      "notice_type": "bid",
-      "topic": "bid_s_4a827e33535875aa"
-    },
-    "and_bid_s_4a827e33535875aa:R26BK01655251-000": {
-      "notified_at": "2026-07-29T05:45:28.024110+09:00",
-      "keyword": "설계",
-      "notice_type": "bid",
-      "topic": "and_bid_s_4a827e33535875aa"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01655251-000": {
-      "notified_at": "2026-07-29T05:45:28.203617+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01655251-000": {
-      "notified_at": "2026-07-29T05:45:28.377248+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_da7e61c67cc5a90f:R26BK01655251-000": {
-      "notified_at": "2026-07-29T05:45:28.626431+09:00",
-      "keyword": "이전",
-      "notice_type": "bid",
-      "topic": "bid_s_da7e61c67cc5a90f"
-    },
-    "and_bid_s_da7e61c67cc5a90f:R26BK01655251-000": {
-      "notified_at": "2026-07-29T05:45:29.046702+09:00",
-      "keyword": "이전",
-      "notice_type": "bid",
-      "topic": "and_bid_s_da7e61c67cc5a90f"
-    },
     "bid_s_4a827e33535875aa:R26BK01655421-000": {
       "notified_at": "2026-07-29T07:36:11.647274+09:00",
       "keyword": "설계",
@@ -311844,6 +311808,30 @@
       "keyword": "환경",
       "notice_type": "bid",
       "topic": "and_bid_g_5d36e09c3271e0e7"
+    },
+    "bid_c_56190b5df1537d36:R26BK01702550-000": {
+      "notified_at": "2026-08-28T07:31:30.448623+09:00",
+      "keyword": "시설물",
+      "notice_type": "bid",
+      "topic": "bid_c_56190b5df1537d36"
+    },
+    "and_bid_c_56190b5df1537d36:R26BK01702550-000": {
+      "notified_at": "2026-08-28T07:31:30.713980+09:00",
+      "keyword": "시설물",
+      "notice_type": "bid",
+      "topic": "and_bid_c_56190b5df1537d36"
+    },
+    "bid_c_60982a61e50d3bea:R26BK01702550-000": {
+      "notified_at": "2026-08-28T07:31:31.013735+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "bid_c_60982a61e50d3bea"
+    },
+    "and_bid_c_60982a61e50d3bea:R26BK01702550-000": {
+      "notified_at": "2026-08-28T07:31:31.234812+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "and_bid_c_60982a61e50d3bea"
     }
   },
   "notified_prebids": {
