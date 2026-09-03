@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-04T06:43:11.105892+09:00",
+  "last_check": "2026-09-04T06:52:05.188567+09:00",
   "notified_bids": {
     "bid_s_2ee07ef88e18cae0:R26BK01662469-001": {
       "notified_at": "2026-08-05T07:37:53.668692+09:00",
@@ -298272,6 +298272,18 @@
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01712104-001": {
+      "notified_at": "2026-09-04T06:52:02.537111+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01712104-001": {
+      "notified_at": "2026-09-04T06:52:02.778008+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
     }
   },
   "notified_prebids": {
