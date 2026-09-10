@@ -1,354 +1,6 @@
 {
-  "last_check": "2026-09-10T19:07:48.767450+09:00",
+  "last_check": "2026-09-10T20:10:59.893111+09:00",
   "notified_bids": {
-    "bid_s_a0dd6366c7a962c1:R26BK01677892-000": {
-      "notified_at": "2026-08-11T19:26:43.575495+09:00",
-      "keyword": "신축",
-      "notice_type": "bid",
-      "topic": "bid_s_a0dd6366c7a962c1"
-    },
-    "and_bid_s_a0dd6366c7a962c1:R26BK01677892-000": {
-      "notified_at": "2026-08-11T19:26:43.791015+09:00",
-      "keyword": "신축",
-      "notice_type": "bid",
-      "topic": "and_bid_s_a0dd6366c7a962c1"
-    },
-    "bid_s_a0dd6366c7a962c1:R26BK01677764-000": {
-      "notified_at": "2026-08-11T19:26:44.024904+09:00",
-      "keyword": "신축",
-      "notice_type": "bid",
-      "topic": "bid_s_a0dd6366c7a962c1"
-    },
-    "and_bid_s_a0dd6366c7a962c1:R26BK01677764-000": {
-      "notified_at": "2026-08-11T19:26:44.286207+09:00",
-      "keyword": "신축",
-      "notice_type": "bid",
-      "topic": "and_bid_s_a0dd6366c7a962c1"
-    },
-    "bid_s_4a827e33535875aa:R26BK01677828-000": {
-      "notified_at": "2026-08-11T19:26:44.557334+09:00",
-      "keyword": "설계",
-      "notice_type": "bid",
-      "topic": "bid_s_4a827e33535875aa"
-    },
-    "and_bid_s_4a827e33535875aa:R26BK01677828-000": {
-      "notified_at": "2026-08-11T19:26:44.758943+09:00",
-      "keyword": "설계",
-      "notice_type": "bid",
-      "topic": "and_bid_s_4a827e33535875aa"
-    },
-    "bid_s_4a827e33535875aa:R26BK01677764-000": {
-      "notified_at": "2026-08-11T19:26:44.966312+09:00",
-      "keyword": "설계",
-      "notice_type": "bid",
-      "topic": "bid_s_4a827e33535875aa"
-    },
-    "and_bid_s_4a827e33535875aa:R26BK01677764-000": {
-      "notified_at": "2026-08-11T19:26:45.196517+09:00",
-      "keyword": "설계",
-      "notice_type": "bid",
-      "topic": "and_bid_s_4a827e33535875aa"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01677837-000": {
-      "notified_at": "2026-08-11T19:26:45.447314+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01677837-000": {
-      "notified_at": "2026-08-11T19:26:45.702257+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01677834-000": {
-      "notified_at": "2026-08-11T19:26:45.921596+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01677834-000": {
-      "notified_at": "2026-08-11T19:26:46.141615+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01677851-000": {
-      "notified_at": "2026-08-11T19:26:46.459094+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01677851-000": {
-      "notified_at": "2026-08-11T19:26:46.651126+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01677862-000": {
-      "notified_at": "2026-08-11T19:26:46.866182+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01677862-000": {
-      "notified_at": "2026-08-11T19:26:47.111681+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01677892-000": {
-      "notified_at": "2026-08-11T19:26:47.319168+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01677892-000": {
-      "notified_at": "2026-08-11T19:26:47.540543+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01677828-000": {
-      "notified_at": "2026-08-11T19:26:47.779475+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01677828-000": {
-      "notified_at": "2026-08-11T19:26:47.984275+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_2ee07ef88e18cae0:R26BK01677764-000": {
-      "notified_at": "2026-08-11T19:26:48.221682+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "bid_s_2ee07ef88e18cae0"
-    },
-    "and_bid_s_2ee07ef88e18cae0:R26BK01677764-000": {
-      "notified_at": "2026-08-11T19:26:48.454488+09:00",
-      "keyword": "용역",
-      "notice_type": "bid",
-      "topic": "and_bid_s_2ee07ef88e18cae0"
-    },
-    "bid_s_8a70e8900c84a96a:R26BK01677834-000": {
-      "notified_at": "2026-08-11T19:26:49.214322+09:00",
-      "keyword": "철거",
-      "notice_type": "bid",
-      "topic": "bid_s_8a70e8900c84a96a"
-    },
-    "and_bid_s_8a70e8900c84a96a:R26BK01677834-000": {
-      "notified_at": "2026-08-11T19:26:49.446451+09:00",
-      "keyword": "철거",
-      "notice_type": "bid",
-      "topic": "and_bid_s_8a70e8900c84a96a"
-    },
-    "bid_s_8a70e8900c84a96a:R26BK01677851-000": {
-      "notified_at": "2026-08-11T19:26:49.641536+09:00",
-      "keyword": "철거",
-      "notice_type": "bid",
-      "topic": "bid_s_8a70e8900c84a96a"
-    },
-    "and_bid_s_8a70e8900c84a96a:R26BK01677851-000": {
-      "notified_at": "2026-08-11T19:26:49.866530+09:00",
-      "keyword": "철거",
-      "notice_type": "bid",
-      "topic": "and_bid_s_8a70e8900c84a96a"
-    },
-    "bid_c_8e9cd60504b1a092:R26BK01673350-000": {
-      "notified_at": "2026-08-11T19:26:53.360080+09:00",
-      "keyword": "건축",
-      "notice_type": "bid",
-      "topic": "bid_c_8e9cd60504b1a092"
-    },
-    "and_bid_c_8e9cd60504b1a092:R26BK01673350-000": {
-      "notified_at": "2026-08-11T19:26:53.606351+09:00",
-      "keyword": "건축",
-      "notice_type": "bid",
-      "topic": "and_bid_c_8e9cd60504b1a092"
-    },
-    "bid_c_8049e4b9139d36bf:R26BK01677850-000": {
-      "notified_at": "2026-08-11T19:26:53.871152+09:00",
-      "keyword": "청소",
-      "notice_type": "bid",
-      "topic": "bid_c_8049e4b9139d36bf"
-    },
-    "and_bid_c_8049e4b9139d36bf:R26BK01677850-000": {
-      "notified_at": "2026-08-11T19:26:54.179991+09:00",
-      "keyword": "청소",
-      "notice_type": "bid",
-      "topic": "and_bid_c_8049e4b9139d36bf"
-    },
-    "bid_c_45ec3425c8b02734:R26BK01677844-000": {
-      "notified_at": "2026-08-11T19:26:54.435481+09:00",
-      "keyword": "분석",
-      "notice_type": "bid",
-      "topic": "bid_c_45ec3425c8b02734"
-    },
-    "and_bid_c_45ec3425c8b02734:R26BK01677844-000": {
-      "notified_at": "2026-08-11T19:26:54.650095+09:00",
-      "keyword": "분석",
-      "notice_type": "bid",
-      "topic": "and_bid_c_45ec3425c8b02734"
-    },
-    "bid_c_8cd58eab1de8b2f5:R26BK01674255-000": {
-      "notified_at": "2026-08-11T19:26:54.901310+09:00",
-      "keyword": "전기",
-      "notice_type": "bid",
-      "topic": "bid_c_8cd58eab1de8b2f5"
-    },
-    "and_bid_c_8cd58eab1de8b2f5:R26BK01674255-000": {
-      "notified_at": "2026-08-11T19:26:55.144613+09:00",
-      "keyword": "전기",
-      "notice_type": "bid",
-      "topic": "and_bid_c_8cd58eab1de8b2f5"
-    },
-    "bid_c_23500ebf6fdd8df1:R26BK01677844-000": {
-      "notified_at": "2026-08-11T19:26:55.373742+09:00",
-      "keyword": "소방",
-      "notice_type": "bid",
-      "topic": "bid_c_23500ebf6fdd8df1"
-    },
-    "and_bid_c_23500ebf6fdd8df1:R26BK01677844-000": {
-      "notified_at": "2026-08-11T19:26:55.605387+09:00",
-      "keyword": "소방",
-      "notice_type": "bid",
-      "topic": "and_bid_c_23500ebf6fdd8df1"
-    },
-    "bid_c_5d36e09c3271e0e7:R26BK01677844-000": {
-      "notified_at": "2026-08-11T19:26:55.831400+09:00",
-      "keyword": "환경",
-      "notice_type": "bid",
-      "topic": "bid_c_5d36e09c3271e0e7"
-    },
-    "and_bid_c_5d36e09c3271e0e7:R26BK01677844-000": {
-      "notified_at": "2026-08-11T19:26:56.061187+09:00",
-      "keyword": "환경",
-      "notice_type": "bid",
-      "topic": "and_bid_c_5d36e09c3271e0e7"
-    },
-    "bid_g_465f222a27475e7f:R26BK01677887-000": {
-      "notified_at": "2026-08-11T19:26:57.702648+09:00",
-      "keyword": "소프트웨어",
-      "notice_type": "bid",
-      "topic": "bid_g_465f222a27475e7f"
-    },
-    "and_bid_g_465f222a27475e7f:R26BK01677887-000": {
-      "notified_at": "2026-08-11T19:26:57.914507+09:00",
-      "keyword": "소프트웨어",
-      "notice_type": "bid",
-      "topic": "and_bid_g_465f222a27475e7f"
-    },
-    "bid_g_32e83e92d45d71f6:R26BK01677823-000": {
-      "notified_at": "2026-08-11T19:26:58.997997+09:00",
-      "keyword": "AI",
-      "notice_type": "bid",
-      "topic": "bid_g_32e83e92d45d71f6"
-    },
-    "and_bid_g_32e83e92d45d71f6:R26BK01677823-000": {
-      "notified_at": "2026-08-11T19:26:59.232847+09:00",
-      "keyword": "AI",
-      "notice_type": "bid",
-      "topic": "and_bid_g_32e83e92d45d71f6"
-    },
-    "bid_g_be562142ef48d573:R26BK01677823-000": {
-      "notified_at": "2026-08-11T19:26:59.597161+09:00",
-      "keyword": "영상",
-      "notice_type": "bid",
-      "topic": "bid_g_be562142ef48d573"
-    },
-    "and_bid_g_be562142ef48d573:R26BK01677823-000": {
-      "notified_at": "2026-08-11T19:27:00.554461+09:00",
-      "keyword": "영상",
-      "notice_type": "bid",
-      "topic": "and_bid_g_be562142ef48d573"
-    },
-    "bid_g_e9e7abfc765737f0:R26BK01677712-000": {
-      "notified_at": "2026-08-11T19:27:00.903134+09:00",
-      "keyword": "조사",
-      "notice_type": "bid",
-      "topic": "bid_g_e9e7abfc765737f0"
-    },
-    "and_bid_g_e9e7abfc765737f0:R26BK01677712-000": {
-      "notified_at": "2026-08-11T19:27:01.121621+09:00",
-      "keyword": "조사",
-      "notice_type": "bid",
-      "topic": "and_bid_g_e9e7abfc765737f0"
-    },
-    "bid_g_45ec3425c8b02734:R26BK01677887-000": {
-      "notified_at": "2026-08-11T19:27:01.321303+09:00",
-      "keyword": "분석",
-      "notice_type": "bid",
-      "topic": "bid_g_45ec3425c8b02734"
-    },
-    "and_bid_g_45ec3425c8b02734:R26BK01677887-000": {
-      "notified_at": "2026-08-11T19:27:01.550104+09:00",
-      "keyword": "분석",
-      "notice_type": "bid",
-      "topic": "and_bid_g_45ec3425c8b02734"
-    },
-    "bid_g_33500a787e27c740:R26BK01677712-000": {
-      "notified_at": "2026-08-11T19:27:01.795971+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "bid_g_33500a787e27c740"
-    },
-    "and_bid_g_33500a787e27c740:R26BK01677712-000": {
-      "notified_at": "2026-08-11T19:27:02.034069+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "and_bid_g_33500a787e27c740"
-    },
-    "bid_g_33500a787e27c740:R26BK01677823-000": {
-      "notified_at": "2026-08-11T19:27:02.350594+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "bid_g_33500a787e27c740"
-    },
-    "and_bid_g_33500a787e27c740:R26BK01677823-000": {
-      "notified_at": "2026-08-11T19:27:02.576765+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "and_bid_g_33500a787e27c740"
-    },
-    "bid_g_33500a787e27c740:R26BK01677839-000": {
-      "notified_at": "2026-08-11T19:27:02.813506+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "bid_g_33500a787e27c740"
-    },
-    "and_bid_g_33500a787e27c740:R26BK01677839-000": {
-      "notified_at": "2026-08-11T19:27:03.059392+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "and_bid_g_33500a787e27c740"
-    },
-    "bid_g_33500a787e27c740:R26BK01677887-000": {
-      "notified_at": "2026-08-11T19:27:03.360126+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "bid_g_33500a787e27c740"
-    },
-    "and_bid_g_33500a787e27c740:R26BK01677887-000": {
-      "notified_at": "2026-08-11T19:27:03.603647+09:00",
-      "keyword": "구매",
-      "notice_type": "bid",
-      "topic": "and_bid_g_33500a787e27c740"
-    },
-    "bid_g_02cb09e20c94f203:R26BK01677712-000": {
-      "notified_at": "2026-08-11T19:27:03.865947+09:00",
-      "keyword": "차량",
-      "notice_type": "bid",
-      "topic": "bid_g_02cb09e20c94f203"
-    },
-    "and_bid_g_02cb09e20c94f203:R26BK01677712-000": {
-      "notified_at": "2026-08-11T19:27:04.205711+09:00",
-      "keyword": "차량",
-      "notice_type": "bid",
-      "topic": "and_bid_g_02cb09e20c94f203"
-    },
     "bid_s_32e83e92d45d71f6:R26BK01677929-000": {
       "notified_at": "2026-08-11T20:23:23.228622+09:00",
       "keyword": "AI",
@@ -280236,6 +279888,318 @@
       "keyword": "환경",
       "notice_type": "bid",
       "topic": "and_bid_g_5d36e09c3271e0e7"
+    },
+    "bid_s_4a827e33535875aa:R26BK01724318-000": {
+      "notified_at": "2026-09-10T20:10:37.929155+09:00",
+      "keyword": "설계",
+      "notice_type": "bid",
+      "topic": "bid_s_4a827e33535875aa"
+    },
+    "and_bid_s_4a827e33535875aa:R26BK01724318-000": {
+      "notified_at": "2026-09-10T20:10:38.158082+09:00",
+      "keyword": "설계",
+      "notice_type": "bid",
+      "topic": "and_bid_s_4a827e33535875aa"
+    },
+    "bid_s_4a827e33535875aa:R26BK01724297-000": {
+      "notified_at": "2026-09-10T20:10:38.426508+09:00",
+      "keyword": "설계",
+      "notice_type": "bid",
+      "topic": "bid_s_4a827e33535875aa"
+    },
+    "and_bid_s_4a827e33535875aa:R26BK01724297-000": {
+      "notified_at": "2026-09-10T20:10:38.782630+09:00",
+      "keyword": "설계",
+      "notice_type": "bid",
+      "topic": "and_bid_s_4a827e33535875aa"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01706213-000": {
+      "notified_at": "2026-09-10T20:10:39.039323+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01706213-000": {
+      "notified_at": "2026-09-10T20:10:39.310028+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01724318-000": {
+      "notified_at": "2026-09-10T20:10:39.548599+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01724318-000": {
+      "notified_at": "2026-09-10T20:10:39.762094+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01724322-000": {
+      "notified_at": "2026-09-10T20:10:40.004892+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01724322-000": {
+      "notified_at": "2026-09-10T20:10:40.222967+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01724308-000": {
+      "notified_at": "2026-09-10T20:10:40.431923+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01724308-000": {
+      "notified_at": "2026-09-10T20:10:40.783940+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01724289-000": {
+      "notified_at": "2026-09-10T20:10:40.999309+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01724289-000": {
+      "notified_at": "2026-09-10T20:10:41.251204+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01724224-001": {
+      "notified_at": "2026-09-10T20:10:41.460749+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01724224-001": {
+      "notified_at": "2026-09-10T20:10:41.696897+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01724297-000": {
+      "notified_at": "2026-09-10T20:10:41.947420+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01724297-000": {
+      "notified_at": "2026-09-10T20:10:42.245466+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01724304-000": {
+      "notified_at": "2026-09-10T20:10:42.464053+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01724304-000": {
+      "notified_at": "2026-09-10T20:10:42.700561+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_4da9a75910ede3ad:R26BK01724308-000": {
+      "notified_at": "2026-09-10T20:10:43.043143+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "bid_s_4da9a75910ede3ad"
+    },
+    "and_bid_s_4da9a75910ede3ad:R26BK01724308-000": {
+      "notified_at": "2026-09-10T20:10:43.259473+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "and_bid_s_4da9a75910ede3ad"
+    },
+    "bid_s_5d36e09c3271e0e7:R26BK01724304-000": {
+      "notified_at": "2026-09-10T20:10:43.584164+09:00",
+      "keyword": "환경",
+      "notice_type": "bid",
+      "topic": "bid_s_5d36e09c3271e0e7"
+    },
+    "and_bid_s_5d36e09c3271e0e7:R26BK01724304-000": {
+      "notified_at": "2026-09-10T20:10:43.829959+09:00",
+      "keyword": "환경",
+      "notice_type": "bid",
+      "topic": "and_bid_s_5d36e09c3271e0e7"
+    },
+    "bid_c_56190b5df1537d36:R26BK01723944-000": {
+      "notified_at": "2026-09-10T20:10:48.140244+09:00",
+      "keyword": "시설물",
+      "notice_type": "bid",
+      "topic": "bid_c_56190b5df1537d36"
+    },
+    "and_bid_c_56190b5df1537d36:R26BK01723944-000": {
+      "notified_at": "2026-09-10T20:10:48.369182+09:00",
+      "keyword": "시설물",
+      "notice_type": "bid",
+      "topic": "and_bid_c_56190b5df1537d36"
+    },
+    "bid_c_60982a61e50d3bea:R26BK01724203-000": {
+      "notified_at": "2026-09-10T20:10:48.623037+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "bid_c_60982a61e50d3bea"
+    },
+    "and_bid_c_60982a61e50d3bea:R26BK01724203-000": {
+      "notified_at": "2026-09-10T20:10:48.869382+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "and_bid_c_60982a61e50d3bea"
+    },
+    "bid_c_23500ebf6fdd8df1:R26BK01724285-000": {
+      "notified_at": "2026-09-10T20:10:49.165354+09:00",
+      "keyword": "소방",
+      "notice_type": "bid",
+      "topic": "bid_c_23500ebf6fdd8df1"
+    },
+    "and_bid_c_23500ebf6fdd8df1:R26BK01724285-000": {
+      "notified_at": "2026-09-10T20:10:49.390590+09:00",
+      "keyword": "소방",
+      "notice_type": "bid",
+      "topic": "and_bid_c_23500ebf6fdd8df1"
+    },
+    "bid_c_44b99c9a1fc2e9b2:R26BK01724295-000": {
+      "notified_at": "2026-09-10T20:10:49.606320+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "bid_c_44b99c9a1fc2e9b2"
+    },
+    "and_bid_c_44b99c9a1fc2e9b2:R26BK01724295-000": {
+      "notified_at": "2026-09-10T20:10:49.880841+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "and_bid_c_44b99c9a1fc2e9b2"
+    },
+    "bid_c_44b99c9a1fc2e9b2:R26BK01724310-000": {
+      "notified_at": "2026-09-10T20:10:50.097937+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "bid_c_44b99c9a1fc2e9b2"
+    },
+    "and_bid_c_44b99c9a1fc2e9b2:R26BK01724310-000": {
+      "notified_at": "2026-09-10T20:10:50.322642+09:00",
+      "keyword": "통신",
+      "notice_type": "bid",
+      "topic": "and_bid_c_44b99c9a1fc2e9b2"
+    },
+    "bid_g_60982a61e50d3bea:R26BK01718612-000": {
+      "notified_at": "2026-09-10T20:10:52.325158+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "bid_g_60982a61e50d3bea"
+    },
+    "and_bid_g_60982a61e50d3bea:R26BK01718612-000": {
+      "notified_at": "2026-09-10T20:10:52.562651+09:00",
+      "keyword": "도로",
+      "notice_type": "bid",
+      "topic": "and_bid_g_60982a61e50d3bea"
+    },
+    "bid_g_45ec3425c8b02734:R26BK01715146-000": {
+      "notified_at": "2026-09-10T20:10:52.811898+09:00",
+      "keyword": "분석",
+      "notice_type": "bid",
+      "topic": "bid_g_45ec3425c8b02734"
+    },
+    "and_bid_g_45ec3425c8b02734:R26BK01715146-000": {
+      "notified_at": "2026-09-10T20:10:53.020798+09:00",
+      "keyword": "분석",
+      "notice_type": "bid",
+      "topic": "and_bid_g_45ec3425c8b02734"
+    },
+    "bid_g_45ec3425c8b02734:R26BK01715149-000": {
+      "notified_at": "2026-09-10T20:10:53.383789+09:00",
+      "keyword": "분석",
+      "notice_type": "bid",
+      "topic": "bid_g_45ec3425c8b02734"
+    },
+    "and_bid_g_45ec3425c8b02734:R26BK01715149-000": {
+      "notified_at": "2026-09-10T20:10:53.611803+09:00",
+      "keyword": "분석",
+      "notice_type": "bid",
+      "topic": "and_bid_g_45ec3425c8b02734"
+    },
+    "bid_g_33500a787e27c740:R26BK01724266-000": {
+      "notified_at": "2026-09-10T20:10:54.039034+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01724266-000": {
+      "notified_at": "2026-09-10T20:10:54.297268+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_g_33500a787e27c740:R26BK01715146-000": {
+      "notified_at": "2026-09-10T20:10:54.593187+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01715146-000": {
+      "notified_at": "2026-09-10T20:10:54.851712+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_g_33500a787e27c740:R26BK01718612-000": {
+      "notified_at": "2026-09-10T20:10:55.235871+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01718612-000": {
+      "notified_at": "2026-09-10T20:10:55.475073+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_g_33500a787e27c740:R26BK01715149-000": {
+      "notified_at": "2026-09-10T20:10:55.823823+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01715149-000": {
+      "notified_at": "2026-09-10T20:10:56.057505+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_g_33500a787e27c740:R26BK01723946-000": {
+      "notified_at": "2026-09-10T20:10:56.667987+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01723946-000": {
+      "notified_at": "2026-09-10T20:10:56.879179+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_g_33500a787e27c740:R26BK01724300-000": {
+      "notified_at": "2026-09-10T20:10:57.178186+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01724300-000": {
+      "notified_at": "2026-09-10T20:10:57.519698+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
@@ -347834,6 +347798,90 @@
       "keyword": "환경",
       "notice_type": "prebid",
       "topic": "and_pre_g_5d36e09c3271e0e7"
+    },
+    "pre_s_4a827e33535875aa:R26BD00273634": {
+      "notified_at": "2026-09-10T20:10:44.973321+09:00",
+      "keyword": "설계",
+      "notice_type": "prebid",
+      "topic": "pre_s_4a827e33535875aa"
+    },
+    "and_pre_s_4a827e33535875aa:R26BD00273634": {
+      "notified_at": "2026-09-10T20:10:45.183306+09:00",
+      "keyword": "설계",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_4a827e33535875aa"
+    },
+    "pre_s_5f66b02e337d9504:R26BD00273632": {
+      "notified_at": "2026-09-10T20:10:45.460326+09:00",
+      "keyword": "측량",
+      "notice_type": "prebid",
+      "topic": "pre_s_5f66b02e337d9504"
+    },
+    "and_pre_s_5f66b02e337d9504:R26BD00273632": {
+      "notified_at": "2026-09-10T20:10:45.676228+09:00",
+      "keyword": "측량",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_5f66b02e337d9504"
+    },
+    "pre_s_2ee07ef88e18cae0:R26BD00273632": {
+      "notified_at": "2026-09-10T20:10:45.892692+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "pre_s_2ee07ef88e18cae0"
+    },
+    "and_pre_s_2ee07ef88e18cae0:R26BD00273632": {
+      "notified_at": "2026-09-10T20:10:46.156243+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_2ee07ef88e18cae0"
+    },
+    "pre_s_2ee07ef88e18cae0:R26BD00273634": {
+      "notified_at": "2026-09-10T20:10:46.360845+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "pre_s_2ee07ef88e18cae0"
+    },
+    "and_pre_s_2ee07ef88e18cae0:R26BD00273634": {
+      "notified_at": "2026-09-10T20:10:46.574631+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_2ee07ef88e18cae0"
+    },
+    "pre_g_a0dd6366c7a962c1:R26BD00273630": {
+      "notified_at": "2026-09-10T20:10:58.689186+09:00",
+      "keyword": "신축",
+      "notice_type": "prebid",
+      "topic": "pre_g_a0dd6366c7a962c1"
+    },
+    "and_pre_g_a0dd6366c7a962c1:R26BD00273630": {
+      "notified_at": "2026-09-10T20:10:58.897689+09:00",
+      "keyword": "신축",
+      "notice_type": "prebid",
+      "topic": "and_pre_g_a0dd6366c7a962c1"
+    },
+    "pre_g_33500a787e27c740:R26BD00273628": {
+      "notified_at": "2026-09-10T20:10:59.171223+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "pre_g_33500a787e27c740"
+    },
+    "and_pre_g_33500a787e27c740:R26BD00273628": {
+      "notified_at": "2026-09-10T20:10:59.372187+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "and_pre_g_33500a787e27c740"
+    },
+    "pre_g_33500a787e27c740:R26BD00273630": {
+      "notified_at": "2026-09-10T20:10:59.682101+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "pre_g_33500a787e27c740"
+    },
+    "and_pre_g_33500a787e27c740:R26BD00273630": {
+      "notified_at": "2026-09-10T20:10:59.892818+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "and_pre_g_33500a787e27c740"
     }
   }
 }
