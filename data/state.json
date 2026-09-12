@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-13T03:21:49.425793+09:00",
+  "last_check": "2026-09-13T07:12:46.367101+09:00",
   "notified_bids": {
     "bid_c_8e9cd60504b1a092:R26BK01679788-000": {
       "notified_at": "2026-08-14T07:56:59.190419+09:00",
@@ -260832,6 +260832,42 @@
       "keyword": "건축",
       "notice_type": "bid",
       "topic": "and_bid_s_8e9cd60504b1a092"
+    },
+    "bid_g_4da9a75910ede3ad:R26BK01726270-000": {
+      "notified_at": "2026-09-13T07:12:43.953092+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "bid_g_4da9a75910ede3ad"
+    },
+    "and_bid_g_4da9a75910ede3ad:R26BK01726270-000": {
+      "notified_at": "2026-09-13T07:12:44.171959+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "and_bid_g_4da9a75910ede3ad"
+    },
+    "bid_g_7d585c3842de4e43:R26BK01726270-000": {
+      "notified_at": "2026-09-13T07:12:44.605799+09:00",
+      "keyword": "서버",
+      "notice_type": "bid",
+      "topic": "bid_g_7d585c3842de4e43"
+    },
+    "and_bid_g_7d585c3842de4e43:R26BK01726270-000": {
+      "notified_at": "2026-09-13T07:12:45.061470+09:00",
+      "keyword": "서버",
+      "notice_type": "bid",
+      "topic": "and_bid_g_7d585c3842de4e43"
+    },
+    "bid_g_33500a787e27c740:R26BK01726270-000": {
+      "notified_at": "2026-09-13T07:12:45.419991+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01726270-000": {
+      "notified_at": "2026-09-13T07:12:45.791453+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
