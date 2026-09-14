@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-09-15T02:03:12.887143+09:00",
+  "last_check": "2026-09-15T05:54:38.293581+09:00",
   "notified_bids": {
     "bid_g_33500a787e27c740:R26BK01684287-000": {
       "notified_at": "2026-08-16T10:53:38.259356+09:00",
@@ -320651,6 +320651,18 @@
     },
     "and_pre_g_33500a787e27c740:R26BD00274353": {
       "notified_at": "2026-09-14T13:56:33.054640+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "and_pre_g_33500a787e27c740"
+    },
+    "pre_g_33500a787e27c740:R26BD00274658": {
+      "notified_at": "2026-09-15T05:54:38.127280+09:00",
+      "keyword": "구매",
+      "notice_type": "prebid",
+      "topic": "pre_g_33500a787e27c740"
+    },
+    "and_pre_g_33500a787e27c740:R26BD00274658": {
+      "notified_at": "2026-09-15T05:54:38.293354+09:00",
       "keyword": "구매",
       "notice_type": "prebid",
       "topic": "and_pre_g_33500a787e27c740"
