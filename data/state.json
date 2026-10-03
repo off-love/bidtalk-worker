@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-10-03T05:42:29.979569+09:00",
+  "last_check": "2026-10-03T10:06:22.776475+09:00",
   "notified_bids": {
     "bid_s_465f222a27475e7f:R26BK01711764-000": {
       "notified_at": "2026-09-03T13:56:04.663678+09:00",
@@ -349934,6 +349934,30 @@
       "keyword": "환경",
       "notice_type": "prebid",
       "topic": "and_pre_g_5d36e09c3271e0e7"
+    },
+    "pre_s_b29dbba57df61de7:R26BD00281079": {
+      "notified_at": "2026-10-03T10:06:18.593555+09:00",
+      "keyword": "CCTV",
+      "notice_type": "prebid",
+      "topic": "pre_s_b29dbba57df61de7"
+    },
+    "and_pre_s_b29dbba57df61de7:R26BD00281079": {
+      "notified_at": "2026-10-03T10:06:18.781008+09:00",
+      "keyword": "CCTV",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_b29dbba57df61de7"
+    },
+    "pre_s_2ee07ef88e18cae0:R26BD00281080": {
+      "notified_at": "2026-10-03T10:06:18.968231+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "pre_s_2ee07ef88e18cae0"
+    },
+    "and_pre_s_2ee07ef88e18cae0:R26BD00281080": {
+      "notified_at": "2026-10-03T10:06:19.183634+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_2ee07ef88e18cae0"
     }
   }
 }
