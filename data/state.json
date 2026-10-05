@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-10-05T07:30:04.438763+09:00",
+  "last_check": "2026-10-05T10:14:25.958611+09:00",
   "notified_bids": {
     "bid_s_8e9cd60504b1a092:R26BK01696627-001": {
       "notified_at": "2026-09-05T13:17:50.188777+09:00",
@@ -255105,6 +255105,54 @@
     },
     "and_bid_g_33500a787e27c740:R26BK01756148-000": {
       "notified_at": "2026-10-05T07:17:43.729123+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01750186-000": {
+      "notified_at": "2026-10-05T10:14:21.936358+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01750186-000": {
+      "notified_at": "2026-10-05T10:14:22.253585+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01756153-000": {
+      "notified_at": "2026-10-05T10:14:22.494959+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01756153-000": {
+      "notified_at": "2026-10-05T10:14:22.752437+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_182d2f97e9825c56:R26BK01756153-000": {
+      "notified_at": "2026-10-05T10:14:23.003379+09:00",
+      "keyword": "의료",
+      "notice_type": "bid",
+      "topic": "bid_s_182d2f97e9825c56"
+    },
+    "and_bid_s_182d2f97e9825c56:R26BK01756153-000": {
+      "notified_at": "2026-10-05T10:14:23.279417+09:00",
+      "keyword": "의료",
+      "notice_type": "bid",
+      "topic": "and_bid_s_182d2f97e9825c56"
+    },
+    "bid_g_33500a787e27c740:R26BK01756150-000": {
+      "notified_at": "2026-10-05T10:14:25.701980+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01756150-000": {
+      "notified_at": "2026-10-05T10:14:25.958309+09:00",
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
