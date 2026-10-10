@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-10-11T03:30:05.725079+09:00",
+  "last_check": "2026-10-11T08:28:55.540650+09:00",
   "notified_bids": {
     "bid_s_1f592922614ca38c:R26BK01725052-000": {
       "notified_at": "2026-09-11T13:19:58.125784+09:00",
@@ -273600,6 +273600,18 @@
       "keyword": "분석",
       "notice_type": "bid",
       "topic": "and_bid_g_45ec3425c8b02734"
+    },
+    "bid_g_33500a787e27c740:R26BK01761777-000": {
+      "notified_at": "2026-10-11T08:28:54.106681+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01761777-000": {
+      "notified_at": "2026-10-11T08:28:54.325053+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
