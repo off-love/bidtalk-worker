@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-10-20T02:42:08.131278+09:00",
+  "last_check": "2026-10-20T07:17:16.440315+09:00",
   "notified_bids": {
     "bid_s_a0dd6366c7a962c1:R26BK01737773-000": {
       "notified_at": "2026-09-20T13:47:07.554208+09:00",
@@ -322632,6 +322632,30 @@
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01779810-000": {
+      "notified_at": "2026-10-20T07:17:09.999430+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01779810-000": {
+      "notified_at": "2026-10-20T07:17:10.231307+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01779811-000": {
+      "notified_at": "2026-10-20T07:17:10.439681+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01779811-000": {
+      "notified_at": "2026-10-20T07:17:10.661663+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
     }
   },
   "notified_prebids": {
@@ -415838,6 +415862,42 @@
       "keyword": "환경",
       "notice_type": "prebid",
       "topic": "and_pre_g_5d36e09c3271e0e7"
+    },
+    "pre_s_1f592922614ca38c:R26BD00287180": {
+      "notified_at": "2026-10-20T07:17:11.572333+09:00",
+      "keyword": "정보시스템",
+      "notice_type": "prebid",
+      "topic": "pre_s_1f592922614ca38c"
+    },
+    "and_pre_s_1f592922614ca38c:R26BD00287180": {
+      "notified_at": "2026-10-20T07:17:11.834366+09:00",
+      "keyword": "정보시스템",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_1f592922614ca38c"
+    },
+    "pre_s_2ee07ef88e18cae0:R26BD00287180": {
+      "notified_at": "2026-10-20T07:17:12.048202+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "pre_s_2ee07ef88e18cae0"
+    },
+    "and_pre_s_2ee07ef88e18cae0:R26BD00287180": {
+      "notified_at": "2026-10-20T07:17:12.263519+09:00",
+      "keyword": "용역",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_2ee07ef88e18cae0"
+    },
+    "pre_s_f1d9444fc1f85128:R26BD00287180": {
+      "notified_at": "2026-10-20T07:17:12.508792+09:00",
+      "keyword": "유지보수",
+      "notice_type": "prebid",
+      "topic": "pre_s_f1d9444fc1f85128"
+    },
+    "and_pre_s_f1d9444fc1f85128:R26BD00287180": {
+      "notified_at": "2026-10-20T07:17:12.722589+09:00",
+      "keyword": "유지보수",
+      "notice_type": "prebid",
+      "topic": "and_pre_s_f1d9444fc1f85128"
     }
   }
 }
