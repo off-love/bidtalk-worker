@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-10-22T00:31:28.616913+09:00",
+  "last_check": "2026-10-22T03:33:19.707622+09:00",
   "notified_bids": {
     "bid_s_4a827e33535875aa:R26BK01739950-000": {
       "notified_at": "2026-09-22T09:02:38.206967+09:00",
@@ -344976,6 +344976,30 @@
       "keyword": "건축",
       "notice_type": "bid",
       "topic": "and_bid_g_8e9cd60504b1a092"
+    },
+    "bid_c_23500ebf6fdd8df1:R26BK01784892-001": {
+      "notified_at": "2026-10-22T03:33:16.948784+09:00",
+      "keyword": "소방",
+      "notice_type": "bid",
+      "topic": "bid_c_23500ebf6fdd8df1"
+    },
+    "and_bid_c_23500ebf6fdd8df1:R26BK01784892-001": {
+      "notified_at": "2026-10-22T03:33:17.210009+09:00",
+      "keyword": "소방",
+      "notice_type": "bid",
+      "topic": "and_bid_c_23500ebf6fdd8df1"
+    },
+    "bid_c_5d36e09c3271e0e7:R26BK01784892-001": {
+      "notified_at": "2026-10-22T03:33:17.496794+09:00",
+      "keyword": "환경",
+      "notice_type": "bid",
+      "topic": "bid_c_5d36e09c3271e0e7"
+    },
+    "and_bid_c_5d36e09c3271e0e7:R26BK01784892-001": {
+      "notified_at": "2026-10-22T03:33:17.751589+09:00",
+      "keyword": "환경",
+      "notice_type": "bid",
+      "topic": "and_bid_c_5d36e09c3271e0e7"
     }
   },
   "notified_prebids": {
