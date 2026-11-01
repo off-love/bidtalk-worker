@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-11-01T22:11:28.103405+09:00",
+  "last_check": "2026-11-02T03:52:31.644307+09:00",
   "notified_bids": {
     "bid_s_2ee07ef88e18cae0:R26BK01754518-000": {
       "notified_at": "2026-10-03T14:09:53.456124+09:00",
@@ -365589,6 +365589,66 @@
     },
     "and_bid_g_33500a787e27c740:R26BK01802293-000": {
       "notified_at": "2026-11-01T22:11:23.634785+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
+    },
+    "bid_s_2ee07ef88e18cae0:R26BK01801629-000": {
+      "notified_at": "2026-11-02T03:52:23.582988+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "bid_s_2ee07ef88e18cae0"
+    },
+    "and_bid_s_2ee07ef88e18cae0:R26BK01801629-000": {
+      "notified_at": "2026-11-02T03:52:23.763626+09:00",
+      "keyword": "용역",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2ee07ef88e18cae0"
+    },
+    "bid_s_2dc1a67f5ea0fdcf:R26BK01802386-000": {
+      "notified_at": "2026-11-02T03:52:23.958111+09:00",
+      "keyword": "컨설팅",
+      "notice_type": "bid",
+      "topic": "bid_s_2dc1a67f5ea0fdcf"
+    },
+    "and_bid_s_2dc1a67f5ea0fdcf:R26BK01802386-000": {
+      "notified_at": "2026-11-02T03:52:24.131190+09:00",
+      "keyword": "컨설팅",
+      "notice_type": "bid",
+      "topic": "and_bid_s_2dc1a67f5ea0fdcf"
+    },
+    "bid_s_4da9a75910ede3ad:R26BK01801629-000": {
+      "notified_at": "2026-11-02T03:52:24.362874+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "bid_s_4da9a75910ede3ad"
+    },
+    "and_bid_s_4da9a75910ede3ad:R26BK01801629-000": {
+      "notified_at": "2026-11-02T03:52:24.599164+09:00",
+      "keyword": "교육",
+      "notice_type": "bid",
+      "topic": "and_bid_s_4da9a75910ede3ad"
+    },
+    "bid_s_a5ac2b7251f6a58b:R26BK01801629-000": {
+      "notified_at": "2026-11-02T03:52:24.840068+09:00",
+      "keyword": "개발",
+      "notice_type": "bid",
+      "topic": "bid_s_a5ac2b7251f6a58b"
+    },
+    "and_bid_s_a5ac2b7251f6a58b:R26BK01801629-000": {
+      "notified_at": "2026-11-02T03:52:25.084466+09:00",
+      "keyword": "개발",
+      "notice_type": "bid",
+      "topic": "and_bid_s_a5ac2b7251f6a58b"
+    },
+    "bid_g_33500a787e27c740:R26BK01802392-000": {
+      "notified_at": "2026-11-02T03:52:30.421842+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01802392-000": {
+      "notified_at": "2026-11-02T03:52:30.702578+09:00",
       "keyword": "구매",
       "notice_type": "bid",
       "topic": "and_bid_g_33500a787e27c740"
