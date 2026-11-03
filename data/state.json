@@ -1,5 +1,5 @@
 {
-  "last_check": "2026-11-04T00:11:03.035493+09:00",
+  "last_check": "2026-11-04T00:26:13.515273+09:00",
   "notified_bids": {
     "bid_g_3ac16375aaf1de63:R26BK01756148-000": {
       "notified_at": "2026-10-05T07:17:43.113301+09:00",
@@ -412476,6 +412476,18 @@
       "keyword": "환경",
       "notice_type": "bid",
       "topic": "and_bid_g_5d36e09c3271e0e7"
+    },
+    "bid_g_33500a787e27c740:R26BK01808301-000": {
+      "notified_at": "2026-11-04T00:26:13.267434+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "bid_g_33500a787e27c740"
+    },
+    "and_bid_g_33500a787e27c740:R26BK01808301-000": {
+      "notified_at": "2026-11-04T00:26:13.514921+09:00",
+      "keyword": "구매",
+      "notice_type": "bid",
+      "topic": "and_bid_g_33500a787e27c740"
     }
   },
   "notified_prebids": {
